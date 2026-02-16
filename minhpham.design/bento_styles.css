@@ -1,0 +1,272 @@
+/* Bento Grid Layout - Premium Dark Aesthetic */
+.video_bento_grid {
+    display: flex;
+    gap: 16px;
+    /* Increased gap for better separation */
+    padding: 0 15px;
+    width: 100%;
+    max-width: 1728px;
+    margin: 0 auto;
+    aspect-ratio: 21/9;
+
+    /* Scroll Animation Initial State */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.video_bento_grid.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Main Stage */
+.bento_main_stage {
+    flex: 2;
+    position: relative;
+    border-radius: 12px;
+    /* Smoother radius */
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    /* Deeper shadow */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Very subtle border */
+    cursor: pointer;
+    /* Indicate clickable */
+}
+
+.bento_main_stage video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Play Button Overlay */
+.bento_play_btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    color: #fff;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: auto;
+    /* Allow clicks */
+    cursor: pointer;
+    z-index: 10;
+}
+
+.bento_main_stage:hover .bento_play_btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Sidebar Grid */
+.bento_sidebar {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    /* Consistency */
+}
+
+/* Individual Bento Item */
+.bento_item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: none;
+    /* Custom cursor takes over */
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    /* Elegant easing */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Scroll Animation Initial State */
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.8s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+}
+
+.video_bento_grid.in-view .bento_sidebar .bento_item {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger Delays */
+.video_bento_grid.in-view .bento_sidebar .bento_item:nth-child(1) {
+    transition-delay: 0.2s;
+}
+
+.video_bento_grid.in-view .bento_sidebar .bento_item:nth-child(2) {
+    transition-delay: 0.3s;
+}
+
+.video_bento_grid.in-view .bento_sidebar .bento_item:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.video_bento_grid.in-view .bento_sidebar .bento_item:nth-child(4) {
+    transition-delay: 0.5s;
+}
+
+
+/* Video inside Item */
+.bento_item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.bento_item:hover video {
+    transform: scale(1.08);
+    /* Cinematic slow zoom */
+}
+
+/* Content Overlay (Glassmorphism) */
+.bento_content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+    z-index: 2;
+    opacity: 0;
+    /* Hidden by default */
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none;
+    /* Let clicks pass through */
+}
+
+.bento_item:hover .bento_content,
+.bento_item.is-active .bento_content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Category Tag */
+.bento_category {
+    display: inline-block;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+}
+
+/* Title */
+.bento_title {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+/* Active State Indicator */
+.bento_item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #fff;
+    /* Pristine white active line */
+    transition: width 0.4s ease;
+    z-index: 3;
+}
+
+.bento_item.is-active::after {
+    width: 100%;
+}
+
+.bento_item.is-active {
+    border-color: rgba(255, 255, 255, 0.8);
+    opacity: 1;
+    /* Keep it fully visible */
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.bento_item.is-active video {
+    opacity: 0.5;
+    /* Dim the video slightly to show it's 'playing elsewhere' */
+}
+
+/* Hover Effects */
+.bento_item:hover {
+    transform: translateY(-4px);
+    /* Lift up */
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    z-index: 5;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 991px) {
+    .video_bento_grid {
+        flex-direction: column;
+        aspect-ratio: auto;
+        gap: 15px;
+    }
+
+    .bento_main_stage {
+        aspect-ratio: 16/9;
+        margin-bottom: 0;
+    }
+
+    .bento_sidebar {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .bento_sidebar .bento_item {
+        aspect-ratio: 16/9;
+    }
+
+    /* Always show content on mobile for better usability */
+    .bento_content {
+        opacity: 1;
+        transform: translateY(0);
+        padding: 12px;
+    }
+
+    .bento_title {
+        font-size: 14px;
+    }
+
+    .bento_category {
+        font-size: 8px;
+        padding: 2px 6px;
+    }
+
+    .bento_play_btn {
+        opacity: 1;
+        /* Always visible on mobile if needed, or hide if preferred */
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}

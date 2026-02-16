@@ -1,0 +1,1 @@
+chrome-extension://c5e3632f-8911-4c0b-b80d-0c562cb45605/rule_resources/redirects/google-analytics_analytics.js
