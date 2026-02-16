@@ -11338,3 +11338,45 @@ select.form_input option {
         object-position: 30% center;
     }
 }
+
+/* Theme CSS Variables */
+:root {
+    --bg-color: #0d0d0d;
+    --text-color: #fff;
+    --text-secondary: #b7ab98;
+    --red-accent: #eb5939;
+}
+
+.light-theme {
+    --bg-color: #ffffff;
+    --text-color: #0d0d0d;
+    --text-secondary: #5a5a5a;
+    --red-accent: #ff6b4a;
+}
+
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-theme body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Mobile Red Layer Alignment Fixes */
+@media(max-width: 1023px) {
+    /* Adjust testimonials spacing for mobile */
+    .testimonials.testimonials__red {
+        margin-top: -100px !important;
+    }
+    
+    /* Adjust client spacing for mobile */
+    .client.client__red {
+        margin-top: 30px !important;
+    }
+    
+    /* Adjust motto wrapper spacing for mobile */
+    .motto-red-wrapper {
+        margin-top: 150px !important;
+    }
+}
