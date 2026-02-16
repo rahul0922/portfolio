@@ -11331,3 +11331,10 @@ select.form_input option {
 .object-fit-cover {
     object-fit: cover;
 }
+
+/* Mobile experience section image positioning */
+@media(max-width:1023px) {
+    .work_bg .image__object-fit img {
+        object-position: 30% center;
+    }
+}
