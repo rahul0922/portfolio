@@ -6641,7 +6641,16 @@ span.icon {
 }
 
 .is-touch .vj-cursor {
-    display: none !important
+    display: flex !important;
+    --size: 5rem;
+    /* Smaller for mobile */
+}
+
+/* Ensure the red circle is visible on touch */
+.vj-cursor.vj-cursor__red {
+    background: radial-gradient(circle, rgba(235, 89, 57, 0.4) 0%, rgba(235, 89, 57, 0) 70%);
+    border: 2px solid #eb5939;
+    border-radius: 50%;
 }
 
 .is-touch .videoPlayer_inner {
@@ -11335,7 +11344,7 @@ select.form_input option {
 /* Mobile experience section image positioning */
 @media(max-width:1023px) {
     .work_bg .image__object-fit img {
-        object-position: 30% center;
+        object-position: 60% center;
     }
 }
 
@@ -11365,16 +11374,17 @@ html {
 
 /* Mobile Red Layer Alignment Fixes */
 @media(max-width: 1023px) {
+
     /* Adjust testimonials spacing for mobile */
     .testimonials.testimonials__red {
         margin-top: -100px !important;
     }
-    
+
     /* Adjust client spacing for mobile */
     .client.client__red {
         margin-top: 30px !important;
     }
-    
+
     /* Adjust motto wrapper spacing for mobile */
     .motto-red-wrapper {
         margin-top: 150px !important;
