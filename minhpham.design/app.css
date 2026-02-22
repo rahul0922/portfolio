@@ -5845,6 +5845,10 @@ canvas.three-app {
     }
 }
 
+.about.about__red {
+    margin-top: -54px !important;
+}
+
 .about__red .about_content {
     max-width: unset
 }
@@ -6011,6 +6015,7 @@ canvas.three-app {
 }
 
 .work__red .work_experience {
+    margin-top: 100px !important;
     margin-bottom: .1875rem
 }
 
