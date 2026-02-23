@@ -44,11 +44,10 @@
         content="Expert 3D product ads, cinematic video editing, motion graphics, color grading, and VFX services for global startups and brands. Elevate your visual storytelling with Rahul.">
     <meta name="twitter:image" content="https://rahulfx3d.studio/assets/images/screenshot.jpg">
     <link rel="shortlink" href="https://rahulfx3d.studio">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/logo.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
-    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#0d0d0d">
+    <link rel="mask-icon" href="assets/icons/logo.svg" color="#0d0d0d">
     <meta name="msapplication-TileColor" content="#0d0d0d">
     <meta name="theme-color" content="#0d0d0d">
     <script>/* <![CDATA[ */
@@ -156,10 +155,10 @@
                 width="270" height="270" viewBox="0 0 270 270" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="136" cy="136" r="132" stroke="#B7AB98" />
             </svg>
-            <div class="page-loading_logo"><img id="page-loading_logo" src="assets/images/logo.gif" width="64px"
-                    height="64px" alt="logo"></div><button id="js-page-loading_start"
-                class="body-text page-loading_start">Start</button> <span id="js-page-loading_text"
-                class="page-loading_text"><b class="js-loading_text">00</b>%</span>
+            <div class="page-loading_logo"><img id="page-loading_logo" src="assets/icons/logo.svg" width="64px"
+                    height="64px" alt="logo" style="filter: brightness(0) invert(1);"></div><button
+                id="js-page-loading_start" class="body-text page-loading_start">Start</button> <span
+                id="js-page-loading_text" class="page-loading_text"><b class="js-loading_text">00</b>%</span>
         </div>
     </div>
     <header class="header js-header">
@@ -190,7 +189,7 @@
                 <div id="about">
                     <div class="hero">
                         <div class="hero_bg" data-lenis-parallax=".5">
-                            <div class="w-100 h-100 js-anim--scale" data-screen-offset="0.3"><video id="hero-bg-video"
+                            <div class="w-100 h-100 js-anim--scale" data-screen-offset="0.3"><video preload="none" id="hero-bg-video"
                                     autoplay muted playsinline loop preload="none" data-pc="assets/video/hero.mp4"
                                     data-mobile="assets/video/hero_mobile.mp4"></video></div>
                         </div>
@@ -209,6 +208,14 @@
                                             class="btn-aesthetic js-cursor-contract">
                                             <span>Book a Strategy Call</span>
                                         </a>
+                                        <p class="mt-3 text-white"
+                                            style="font-size: 0.95rem; opacity: 0.8; letter-spacing: 0.5px; font-weight: 300;">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                style="margin-right: 5px; margin-top: -2px;">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>Helping brands increase ad ROI by 40%+
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -589,7 +596,7 @@
                         <div class="client_list">
                             <div class="client_list_3d" data-lenis-speed=".1">
                                 <div class="js-client_list_3d client_list_3d_inner"></div>
-                                <div class="client_list_3d_image"><img src="assets/images/planet-1-1.png" alt="planet">
+                                <div class="client_list_3d_image"><img loading="lazy" src="assets/images/planet-1-1.png" alt="planet">
                                 </div>
                             </div>
                             <div class="client_list_inner">
@@ -790,7 +797,7 @@
                     <div class="video" id="video">
                         <div class="video_bento_grid">
                             <div class="bento_main_stage">
-                                <video id="mainVideo" playsinline muted loop preload="auto"
+                                <video preload="none" id="mainVideo" playsinline muted loop preload="auto"
                                     data-poster="assets/images/reel-poster.jpg"
                                     src="assets/images/Twenty_Seconds_Of_Blue_Clock_0996.mp4" width="1920"
                                     height="1080"></video>
@@ -831,7 +838,7 @@
                             <div class="bento_sidebar">
                                 <div class="bento_item js-cursor-contract"
                                     data-src="assets/images/Twenty_Seconds_Of_Blue_Clock_0996.mp4">
-                                    <video muted loop playsinline
+                                    <video preload="none" muted loop playsinline
                                         src="assets/images/Twenty_Seconds_Of_Blue_Clock_0996.mp4"></video>
                                     <div class="bento_content">
                                         <span class="bento_category">Cinematography</span>
@@ -839,21 +846,21 @@
                                     </div>
                                 </div>
                                 <div class="bento_item js-cursor-contract" data-src="assets/images/Instagram.mp4">
-                                    <video muted loop playsinline src="assets/images/Instagram.mp4"></video>
+                                    <video preload="none" muted loop playsinline src="assets/images/Instagram.mp4"></video>
                                     <div class="bento_content">
                                         <span class="bento_category">Social Media</span>
                                         <h3 class="bento_title">Instagram Reel</h3>
                                     </div>
                                 </div>
                                 <div class="bento_item js-cursor-contract" data-src="assets/images/Instagram (1).mp4">
-                                    <video muted loop playsinline src="assets/images/Instagram (1).mp4"></video>
+                                    <video preload="none" muted loop playsinline src="assets/images/Instagram (1).mp4"></video>
                                     <div class="bento_content">
                                         <span class="bento_category">Social Media</span>
                                         <h3 class="bento_title">Instagram Content</h3>
                                     </div>
                                 </div>
                                 <div class="bento_item js-cursor-contract" data-src="assets/video/reel.mp4">
-                                    <video muted loop playsinline src="assets/video/reel.mp4"></video>
+                                    <video preload="none" muted loop playsinline src="assets/video/reel.mp4"></video>
                                     <div class="bento_content">
                                         <span class="bento_category">Highlights</span>
                                         <h3 class="bento_title">2024 Showreel</h3>
@@ -1464,7 +1471,7 @@
             <div class="frame-mobile"></div><button id="js-btn_clipPath" class="btn_clipPath"><span
                     class="btn_clipPath_inner"><span class="btn_clipPath_image btn_clipPath_image__ring"><img
                             src="assets/icons/ic-text-ring.svg" alt="ic-text-ring"> </span><span
-                        class="btn_clipPath_image btn_clipPath_image__touch"><img src="assets/icons/ic-touch.svg"
+                        class="btn_clipPath_image btn_clipPath_image__touch"><img loading="lazy" src="assets/icons/ic-touch.svg"
                             alt="ic-touch"></span></span></button>
         </div>
         <div class="layer layer__red js-masker">
@@ -2010,7 +2017,7 @@
                 </div>
                 <div class="video video__red">
                     <div class="videoPlayer op-0">
-                        <div class="videoPlayer_inner videoPlayer_inner__red js-videoPlayer_inner__red"><video
+                        <div class="videoPlayer_inner videoPlayer_inner__red js-videoPlayer_inner__red"><video preload="none"
                                 id="videoPlayer_red" playsinline muted loop preload="none" width="1920"
                                 height="1080"></video><button class="js-btnBigPlay videoPlayer_btn"><img
                                     src="assets/icons/ic-play.svg" alt="icon-play"></button></div>
@@ -2443,7 +2450,7 @@
         <ul class="footer_socials ul__reset">
             <li class="social js-social"><a class="social_link social_link__instagram"
                     href="https://www.instagram.com/its_rahul_fr/" target="_blank"
-                    aria-label="Visit my Instagram profile"><img src="assets/icons/ic-ig.svg" class="svg"
+                    aria-label="Visit my Instagram profile"><img loading="lazy" src="assets/icons/ic-ig.svg" class="svg"
                         alt="Instagram icon"></a></li>
             <li class="social js-social">
                 <button class="theme-toggle social_link" aria-label="Toggle theme"
