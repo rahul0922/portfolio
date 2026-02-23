@@ -56,6 +56,54 @@
         /* ]]> */</script>
     <script src="assets/js/caching.js?v=1.0.0.3"></script>
     <style>
+        .btn-aesthetic {
+            display: inline-block;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0d0d0d;
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+
+        .btn-aesthetic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff4757, #ff6b6b);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .btn-aesthetic:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(255, 71, 87, 0.4);
+            color: #fff;
+        }
+
+        .btn-aesthetic:hover::before {
+            opacity: 1;
+        }
+
+        .btn-aesthetic:active {
+            transform: translateY(1px);
+            box-shadow: 0 5px 10px rgba(255, 71, 87, 0.3);
+        }
+
         body:not(.site__template-mobile) .is-animation-loading {
             opacity: 0;
         }
@@ -156,8 +204,9 @@
                                         High-Impact <strong>3D Ads</strong> <br>& Cinematic <strong>Video
                                             Editing</strong> <br>since 2023
                                     </h1>
-                                    <div class="text-center mt-4">
-                                        <a href="#calendly" class="btn btn__primary js-cursor-contract">
+                                    <div class="text-center position-relative" style="z-index: 50; margin-top: 100px;">
+                                        <a href="mailto:rahul@rahulfx3d.studio"
+                                            class="btn-aesthetic js-cursor-contract">
                                             <span>Book a Strategy Call</span>
                                         </a>
                                     </div>
