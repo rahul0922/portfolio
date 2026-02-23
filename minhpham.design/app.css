@@ -5846,7 +5846,8 @@ canvas.three-app {
 }
 
 .about.about__red {
-    margin-top: 300px !important;
+    margin-top: -154px !important;
+    margin-bottom: 100px !important;
 }
 
 .about__red .about_content {
