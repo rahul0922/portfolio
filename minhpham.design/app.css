@@ -11406,17 +11406,18 @@ html {
 .header_logo:hover img {
     transform: rotate(120deg);
 }
-
-/* Force bridge for the red layer gap */
-.about.about__red::before {
+/* Fix vertical gap between hero__red and about__red on resize natively */
+.hero__red {
+    position: relative;
+}
+.hero__red::after {
     content: "";
     position: absolute;
-    top: -500px;
+    bottom: -150px;
     left: 0;
     width: 100%;
-    height: 600px;
+    height: 150px;
     background-color: #fca08d;
-    /* Matches the site's default red layer color */
-    z-index: -1;
+    z-index: 1; /* Sits behind text safely */
     pointer-events: none;
 }
