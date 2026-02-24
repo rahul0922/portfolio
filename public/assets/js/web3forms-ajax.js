@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const forms = document.querySelectorAll('form[action="https://api.web3forms.com/submit"]');
+    const modal = document.getElementById('aesthetic-modal');
+    const modalCloseBtn = document.getElementById('aesthetic-modal_close');
+
+    if (modalCloseBtn && modal) {
+        modalCloseBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+    }
 
     forms.forEach(form => {
         form.addEventListener('submit', function (e) {
@@ -27,7 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (response.status == 200) {
                         submitBtn.innerHTML = '<span class="btn_text">Message Sent! ✓</span>';
                         form.reset();
-                        alert("Message Sent successfully! We will get back to you soon.");
+
+                        // Show aesthetic modal
+                        if (modal) {
+                            modal.classList.add('show');
+                            // Auto close after 5 seconds
+                            setTimeout(() => {
+                                modal.classList.remove('show');
+                            }, 5000);
+                        }
+
                         setTimeout(() => {
                             submitBtn.innerHTML = originalBtnText;
                             submitBtn.disabled = false;
