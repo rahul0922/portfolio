@@ -155,10 +155,77 @@
                 width="270" height="270" viewBox="0 0 270 270" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="136" cy="136" r="132" stroke="#B7AB98" />
             </svg>
-            <div class="page-loading_logo"><img id="page-loading_logo" src="assets/icons/logo-animated.svg" width="64px"
-                    height="64px" alt="logo"></div><button id="js-page-loading_start"
-                class="body-text page-loading_start">Start</button> <span id="js-page-loading_text"
-                class="page-loading_text"><b class="js-loading_text">00</b>%</span>
+            <div class="page-loading_logo"><svg id="page-loading_logo" width="64px" height="64px" viewBox="0 0 100 100"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <style>
+                        .outer-shards {
+                            transform-origin: 50px 50px;
+                            animation: spin 3s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+                        }
+
+                        .inner-shards {
+                            transform-origin: 50px 50px;
+                            animation: spin-internal 3s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+                        }
+
+                        .center-dot {
+                            transform-origin: 50px 50px;
+                            animation: pulse 1.5s ease-in-out infinite alternate;
+                        }
+
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg) scale(1);
+                            }
+
+                            50% {
+                                transform: rotate(180deg) scale(1.15);
+                            }
+
+                            100% {
+                                transform: rotate(360deg) scale(1);
+                            }
+                        }
+
+                        @keyframes spin-internal {
+                            0% {
+                                transform: rotate(0deg) scale(1);
+                            }
+
+                            50% {
+                                transform: rotate(-120deg) scale(0.85);
+                            }
+
+                            100% {
+                                transform: rotate(-360deg) scale(1);
+                            }
+                        }
+
+                        @keyframes pulse {
+                            0% {
+                                transform: scale(0.6);
+                                opacity: 0.5;
+                            }
+
+                            100% {
+                                transform: scale(1.4);
+                                opacity: 1;
+                            }
+                        }
+                    </style>
+                    <g fill="#B7AB98" class="outer-shards">
+                        <path d="M 50 10 A 50 50 0 0 1 85 30 L 50 50 Z" />
+                        <path d="M 50 10 A 50 50 0 0 1 85 30 L 50 50 Z" transform="rotate(120 50 50)" />
+                        <path d="M 50 10 A 50 50 0 0 1 85 30 L 50 50 Z" transform="rotate(240 50 50)" />
+                    </g>
+                    <g fill="#0d0d0d" class="inner-shards">
+                        <polygon points="50,50 85,25 75,10" />
+                        <polygon points="50,50 85,25 75,10" transform="rotate(120 50 50)" />
+                        <polygon points="50,50 85,25 75,10" transform="rotate(240 50 50)" />
+                    </g>
+                    <circle cx="50" cy="50" r="6" fill="#B7AB98" class="center-dot" />
+                </svg></div><button id="js-page-loading_start" class="body-text page-loading_start">Start</button> <span
+                id="js-page-loading_text" class="page-loading_text"><b class="js-loading_text">00</b>%</span>
         </div>
     </div>
     <header class="header js-header">
