@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/minhpham.design/$1"
+      "destination": "/public/$1"
     }
   ]
 }
