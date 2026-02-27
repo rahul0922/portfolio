@@ -11379,20 +11379,52 @@ html {
     color: var(--text-color);
 }
 
-/* Mobile Red Layer Alignment Fixes */
-@media(max-width: 1023px) {
+/* ===== Red Layer Alignment — Responsive Scaling ===== */
 
-    /* Adjust testimonials spacing for mobile */
-    .testimonials.testimonials__red {
-        margin-top: -100px !important;
+/* Spacer above testimonials in red layer */
+.red-spacer-testimonials {
+    margin-top: -26vh;
+}
+
+/* Client section red layer spacing */
+.client.client__red {
+    margin-top: 8.3vh;
+}
+
+/* Motto wrapper red layer spacing */
+.motto-red-wrapper {
+    margin-top: 62vh;
+}
+
+/* Tablet adjustments (768px – 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .red-spacer-testimonials {
+        margin-top: -18vh;
     }
 
-    /* Adjust client spacing for mobile */
+    .client.client__red {
+        margin-top: 5vh;
+    }
+
+    .motto-red-wrapper {
+        margin-top: 50vh;
+    }
+}
+
+/* Mobile adjustments (below 768px) */
+@media (max-width: 767px) {
+    .red-spacer-testimonials {
+        margin-top: -12vh;
+    }
+
     .client.client__red {
         margin-top: 30px !important;
     }
 
-    /* Adjust motto wrapper spacing for mobile */
+    .testimonials.testimonials__red {
+        margin-top: -100px !important;
+    }
+
     .motto-red-wrapper {
         margin-top: 150px !important;
     }
