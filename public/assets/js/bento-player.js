@@ -1,5 +1,5 @@
 /**
- * Professional Bento Box Video Player Logic
+ * Professional Bento Box Video Player with Info Bar
  */
 (function () {
     'use strict';
@@ -22,15 +22,50 @@
         const fullscreenBtn = document.querySelector('.bento_fullscreen_btn');
         const bentoItems = document.querySelectorAll('.bento_item');
 
+        // Info bar elements
+        const infoProjectName = document.getElementById('infoProjectName');
+        const infoProjectType = document.getElementById('infoProjectType');
+        const infoClient = document.getElementById('infoClient');
+        const infoCountry = document.getElementById('infoCountry');
+        const infoDuration = document.getElementById('infoDuration');
+        const infoBudget = document.getElementById('infoBudget');
+        const infoTools = document.getElementById('infoTools');
+
         if (!mainVideo) return;
+
+        // --- Info Bar Update ---
+        function updateInfoBar(item) {
+            if (!item || !infoProjectName) return;
+
+            const statValues = document.querySelectorAll('.video_info_stat_value');
+
+            // Fade out all values
+            statValues.forEach(v => v.classList.add('is-changing'));
+            infoProjectName.style.opacity = '0';
+            infoProjectType.style.opacity = '0';
+
+            // Update after fade-out
+            setTimeout(() => {
+                infoProjectName.textContent = item.getAttribute('data-title') || '—';
+                infoProjectType.textContent = item.getAttribute('data-type') || '—';
+                infoClient.textContent = item.getAttribute('data-client') || '—';
+                infoCountry.textContent = item.getAttribute('data-country') || '—';
+                infoDuration.textContent = item.getAttribute('data-duration') || '—';
+                infoBudget.textContent = item.getAttribute('data-budget') || '—';
+                infoTools.textContent = item.getAttribute('data-tools') || '—';
+
+                // Fade in
+                statValues.forEach(v => v.classList.remove('is-changing'));
+                infoProjectName.style.opacity = '1';
+                infoProjectType.style.opacity = '1';
+            }, 250);
+        }
 
         // --- Playback Logic ---
         function togglePlay() {
             if (mainVideo.paused) {
-                // Auto-unmute when clicking play to ensure BGM pauses correctly
                 mainVideo.muted = false;
                 updateMuteUI();
-
                 mainVideo.play();
                 bentoStage.classList.add('is-playing');
                 playIcon.style.display = 'none';
@@ -114,6 +149,7 @@
                     playIcon.style.display = 'none';
                     pauseIcon.style.display = 'block';
                     updateActiveState(newSrc);
+                    updateInfoBar(this);
                 }
             });
 
@@ -130,16 +166,26 @@
             }
         });
 
-        // Initialize
-        updateActiveState(mainVideo.getAttribute('src'));
+        // Initialize with first sidebar item's info
+        const firstItem = document.querySelector('.bento_item');
+        if (firstItem) {
+            updateActiveState(mainVideo.getAttribute('src'));
+            // Set initial info bar from first active item or first item
+            const activeItem = document.querySelector('.bento_item.is-active') || firstItem;
+            updateInfoBar(activeItem);
+        }
 
         // --- Scroll Animation Observer ---
         const bentoGrid = document.querySelector('.video_bento_grid');
+        const infoBar = document.querySelector('.video_info_bar');
         if (bentoGrid) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         bentoGrid.classList.add('in-view');
+                        if (infoBar) {
+                            setTimeout(() => infoBar.classList.add('in-view'), 600);
+                        }
                         observer.unobserve(entry.target);
                     }
                 });
@@ -148,7 +194,6 @@
         }
     }
 
-    // Run on init
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initBentoPlayer);
     } else {
