@@ -11383,7 +11383,7 @@ html {
 
 /* Spacer above testimonials in red layer */
 .red-spacer-testimonials {
-    margin-top: -26vh;
+    margin-top: -6vh;
 }
 
 /* Client section red layer spacing */
@@ -11393,13 +11393,13 @@ html {
 
 /* Motto wrapper red layer spacing */
 .motto-red-wrapper {
-    margin-top: 62vh;
+    margin-top: 65vh;
 }
 
 /* Tablet adjustments (768px – 1199px) */
 @media (min-width: 768px) and (max-width: 1199px) {
     .red-spacer-testimonials {
-        margin-top: -18vh;
+        margin-top: 0vh;
     }
 
     .client.client__red {
@@ -11407,14 +11407,14 @@ html {
     }
 
     .motto-red-wrapper {
-        margin-top: 50vh;
+        margin-top: 53vh;
     }
 }
 
 /* Mobile adjustments (below 768px) */
 @media (max-width: 767px) {
     .red-spacer-testimonials {
-        margin-top: -12vh;
+        margin-top: 2vh;
     }
 
     .client.client__red {
@@ -11426,7 +11426,7 @@ html {
     }
 
     .motto-red-wrapper {
-        margin-top: 150px !important;
+        margin-top: 180px !important;
     }
 }
 
