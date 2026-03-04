@@ -162,6 +162,8 @@
                 item.addEventListener('mouseleave', () => {
                     smallVideo.pause();
                     smallVideo.currentTime = 0;
+                    // Reload video to force poster/thumbnail to show again
+                    smallVideo.load();
                 });
             }
         });
