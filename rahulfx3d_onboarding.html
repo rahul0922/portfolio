@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RahulFX3D Studio — Client Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f7f5f0;
+    --ash: #b8b4ac;
+    --line: #e2dfd8;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --white: #ffffff;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px;
+    background: rgba(247, 245, 240, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-tabs {
+    display: flex; gap: 4px;
+    background: var(--line);
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  .tab-btn {
+    background: none; border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ash);
+    padding: 8px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tab-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding-top: 100px; min-height: 100vh; }
+  .panel.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 48px 48px;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--ash);
+    line-height: 2;
+    max-width: 480px;
+    border-left: 1px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 0 48px 80px;
+    max-width: 900px;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--gold);
+  }
+
+  /* ── CONTRACT ── */
+  .contract-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    margin-bottom: 48px;
+    border: 1px solid var(--line);
+  }
+
+  .contract-field {
+    background: var(--paper);
+    padding: 20px 24px;
+  }
+
+  .contract-field:nth-child(odd) { background: var(--white); }
+
+  .field-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 8px;
+  }
+
+  .field-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    font-weight: 400;
+    border: none;
+    background: none;
+    width: 100%;
+    outline: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
+    transition: border-color 0.2s;
+  }
+
+  .field-value:focus { border-color: var(--gold); }
+  .field-value::placeholder { color: var(--line); }
+
+  .clauses { display: flex; flex-direction: column; gap: 0; }
+
+  .clause {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 24px;
+    align-items: start;
+    cursor: pointer;
+  }
+
+  .clause:last-child { border-bottom: none; }
+
+  .clause-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    padding-top: 2px;
+  }
+
+  .clause-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  .clause-body {
+    font-size: 0.72rem;
+    color: var(--ash);
+    line-height: 2;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .clause.open .clause-body { max-height: 200px; opacity: 1; }
+
+  .clause-toggle {
+    font-size: 0.6rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    display: inline-block;
+    transition: opacity 0.2s;
+  }
+
+  .sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--line);
+  }
+
+  .sig-block .sig-line {
+    width: 100%;
+    height: 1px;
+    background: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .sig-block .sig-name {
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+
+  /* ── INVOICE ── */
+  .invoice-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .invoice-from .studio-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .invoice-from .studio-sub {
+    font-size: 0.62rem;
+    color: var(--ash);
+    letter-spacing: 0.1em;
+  }
+
+  .invoice-meta { text-align: right; }
+
+  .invoice-no {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .invoice-meta-row {
+    font-size: 0.62rem;
+    color: var(--ash);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    display: flex; gap: 12px; justify-content: flex-end; align-items: center;
+  }
+
+  .invoice-meta-row strong { color: var(--ink); font-weight: 400; }
+
+  .invoice-billto {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px; margin-bottom: 48px;
+  }
+
+  .bill-block .bill-label {
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+
+  .bill-input {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    border: none; background: none; outline: none;
+    border-bottom: 1px solid var(--line);
+    width: 100%; padding: 6px 0; margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+
+  .bill-input:focus { border-color: var(--gold); }
+  .bill-input::placeholder { color: var(--line); font-style: italic; }
+
+  .line-items { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+
+  .line-items thead tr {
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .line-items th {
+    font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ash); font-weight: 400; padding: 0 0 12px; text-align: left;
+  }
+
+  .line-items th:last-child { text-align: right; }
+
+  .line-items td {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.75rem; color: var(--ink); vertical-align: middle;
+  }
+
+  .line-items td:last-child { text-align: right; }
+
+  .item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: var(--ink); font-weight: 400;
+  }
+
+  .item-desc { font-size: 0.62rem; color: var(--ash); margin-top: 2px; }
+
+  .totals-block {
+    display: flex; flex-direction: column; align-items: flex-end;
+    padding-top: 24px; gap: 10px;
+  }
+
+  .total-row {
+    display: flex; gap: 48px; justify-content: flex-end; align-items: center;
+    font-size: 0.65rem; color: var(--ash); letter-spacing: 0.06em;
+    width: 280px;
+  }
+
+  .total-row span:last-child { min-width: 80px; text-align: right; color: var(--ink); }
+
+  .total-row.grand {
+    border-top: 1px solid var(--ink); padding-top: 12px; margin-top: 4px;
+    font-size: 0.72rem; color: var(--ink);
+  }
+
+  .total-row.grand span:last-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--gold);
+  }
+
+  /* ── CHECKLIST ── */
+  .phase-block { margin-bottom: 0; }
+
+  .phase-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+  }
+
+  .phase-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .phase-title .phase-num {
+    font-size: 0.65rem; color: var(--gold);
+    letter-spacing: 0.1em; font-family: 'DM Mono', monospace;
+    font-weight: 300;
+  }
+
+  .phase-count {
+    font-size: 0.58rem; color: var(--ash); letter-spacing: 0.1em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .phase-tasks {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+  }
+
+  .phase-block.open .phase-tasks { max-height: 1200px; }
+
+  .task-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 80px;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    transition: background 0.15s;
+  }
+
+  .task-row:last-child { border-bottom: none; }
+
+  .task-check {
+    width: 18px; height: 18px;
+    border: 1px solid var(--ash);
+    border-radius: 2px;
+    cursor: pointer; appearance: none;
+    transition: all 0.2s;
+    position: relative; flex-shrink: 0;
+  }
+
+  .task-check:checked {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .task-check:checked::after {
+    content: '';
+    position: absolute; top: 3px; left: 6px;
+    width: 4px; height: 8px;
+    border: 1px solid white; border-top: none; border-left: none;
+    transform: rotate(45deg);
+  }
+
+  .task-label {
+    font-size: 0.72rem; color: var(--ink); line-height: 1.6;
+    transition: color 0.2s;
+  }
+
+  .task-row:has(.task-check:checked) .task-label {
+    color: var(--ash);
+    text-decoration: line-through;
+    text-decoration-color: var(--gold);
+  }
+
+  .task-owner {
+    font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ash); text-align: right;
+  }
+
+  .task-owner.owner-rahul { color: var(--gold); }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    height: 1px; background: var(--line); width: 100%; margin: 32px 0 48px;
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    height: 100%; background: var(--gold);
+    transition: width 0.5s ease;
+  }
+
+  .progress-label {
+    position: absolute; right: 0; top: -20px;
+    font-size: 0.58rem; color: var(--gold); letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.6rem; color: var(--ash); letter-spacing: 0.1em;
+  }
+
+  footer .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem; color: var(--ink); font-weight: 600;
+  }
+
+  footer .footer-logo span { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel.active > * {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .panel.active > *:nth-child(2) { animation-delay: 0.05s; }
+  .panel.active > *:nth-child(3) { animation-delay: 0.1s; }
+  .panel.active > *:nth-child(4) { animation-delay: 0.15s; }
+
+  /* print btn */
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink); border: 1px solid var(--line);
+    background: none; padding: 10px 20px; cursor: pointer;
+    border-radius: 2px; transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .actions { padding: 0 48px 32px; display: flex; gap: 12px; }
+
+  @media print {
+    nav, .actions, footer { display: none; }
+    .panel { padding-top: 0; }
+    body { background: white; }
+  }
+
+  select.field-value { cursor: pointer; }
+  option { font-family: 'DM Mono', monospace; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Rahul<span>FX3D</span> Studio</div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('contract')">Contract</button>
+    <button class="tab-btn" onclick="switchTab('invoice')">Invoice</button>
+    <button class="tab-btn" onclick="switchTab('checklist')">Checklist</button>
+  </div>
+</nav>
+
+<!-- ══════════════════ CONTRACT ══════════════════ -->
+<div id="panel-contract" class="panel active">
+  <div class="hero">
+    <div class="hero-eyebrow">Freelance Services Agreement</div>
+    <h1>Client<br><em>Contract</em></h1>
+    <p class="hero-sub">Fill in the project details below. Share with your client before any work begins.</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-ghost" onclick="window.print()">↓ Print / Export PDF</button>
+  </div>
+
+  <div class="section">
+    <div class="section-label">
+      <span>Project Information</span>
+      <span class="section-num">01</span>
+    </div>
+
+    <div class="contract-grid">
+      <div class="contract-field">
+        <div class="field-label">Client Name</div>
+        <input class="field-value" placeholder="Full name" />
+      </div>
+      <div class="contract-field">
+        <div class="field-label">Company / Brand</div>
+        <input class="field-value" placeholder="Company name" />
+      </div>
+      <div class="contract-field">
+        <div class="field-label">Project Title</div>
+        <input class="field-value" placeholder="e.g. Product CGI Ad — Q1 Campaign" />
+      </div>
+      <div class="contract-field">
+        <div class="field-label">Service Type</div>
+        <select class="field-value">
+          <option value="">Select service</option>
+          <option>3D Product Ad</option>
+          <option>Social Media CGI Ad</option>
+          <option>Motion Graphics</option>
+          <option>Full Brand Commercial</option>
+          <option>Multiple Services</option>
+        </select>
+      </div>
+      <div class="contract-field">
+        <div class="field-label">Project Start Date</div>
+        <input class="field-value" type="date" />
+      </div>
+      <div class="contract-field">
+        <div class="field-label">Delivery Deadline</div>
+        <input class="field-value" type="date" />
+      </div>
+      <div class="contract-field">
+        <div class="field-label">Total Project Value (USD)</div>
+        <input class="field-value" placeholder="$ 0.00" />
+      </div>
+      <div class="contract-field">
+        <div class="field-label">Deposit Required</div>
+        <input class="field-value" value="50% upfront — non-refundable" readonly style="color: var(--ash)" />
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 48px;">
+      <span>Terms & Conditions</span>
+      <span class="section-num">02</span>
+    </div>
+
+    <div class="clauses">
+      <div class="clause" onclick="toggleClause(this)">
+        <div class="clause-num">01</div>
+        <div>
+          <div class="clause-title">Scope of Work</div>
+          <div class="clause-body">RahulFX3D Studio agrees to deliver the creative services as outlined during the project briefing. Exact deliverables, formats, and timelines will be confirmed in writing before work commences. Any work outside the original scope will be quoted separately and requires written approval before proceeding.</div>
+          <span class="clause-toggle">Read more ↓</span>
+        </div>
+      </div>
+      <div class="clause" onclick="toggleClause(this)">
+        <div class="clause-num">02</div>
+        <div>
+          <div class="clause-title">Payment Terms</div>
+          <div class="clause-body">A non-refundable deposit of 50% is required before work begins. The remaining 50% is due upon delivery of final files. Final deliverables will not be released until full payment is received. Accepted via bank transfer, PayPal, or Wise.</div>
+          <span class="clause-toggle">Read more ↓</span>
+        </div>
+      </div>
+      <div class="clause" onclick="toggleClause(this)">
+        <div class="clause-num">03</div>
+        <div>
+          <div class="clause-title">Revisions</div>
+          <div class="clause-body">Up to 2 rounds of revisions are included within the agreed scope. Each revision must be submitted as a consolidated list. Additional revisions are charged at $50 USD per round. Revisions that fundamentally change creative direction are treated as a new project.</div>
+          <span class="clause-toggle">Read more ↓</span>
+        </div>
+      </div>
+      <div class="clause" onclick="toggleClause(this)">
+        <div class="clause-num">04</div>
+        <div>
+          <div class="clause-title">Delivery & Timelines</div>
+          <div class="clause-body">Timelines are contingent on the client providing all assets, feedback, and approvals on time. Delays caused by late client feedback will extend the delivery date. Rush delivery within 48 hours is available at a 30% surcharge.</div>
+          <span class="clause-toggle">Read more ↓</span>
+        </div>
+      </div>
+      <div class="clause" onclick="toggleClause(this)">
+        <div class="clause-num">05</div>
+        <div>
+          <div class="clause-title">Intellectual Property & Usage Rights</div>
+          <div class="clause-body">Upon full payment, the client receives full commercial usage rights to the final delivered files. RahulFX3D Studio retains the right to display the work in its portfolio unless requested otherwise in writing. Raw source files remain the property of RahulFX3D Studio.</div>
+          <span class="clause-toggle">Read more ↓</span>
+        </div>
+      </div>
+      <div class="clause" onclick="toggleClause(this)">
+        <div class="clause-num">06</div>
+        <div>
+          <div class="clause-title">Cancellation Policy</div>
+          <div class="clause-body">If the client cancels after work commences, the deposit is non-refundable. If cancelled after 50% or more of work is complete, 75% of the total fee is due. If Rahul cannot complete the project, a full refund of payments for undelivered work will be issued.</div>
+          <span class="clause-toggle">Read more ↓</span>
+        </div>
+      </div>
+      <div class="clause" onclick="toggleClause(this)">
+        <div class="clause-num">07</div>
+        <div>
+          <div class="clause-title">Confidentiality</div>
+          <div class="clause-body">Both parties agree to keep the terms of this agreement and any proprietary business information shared during the project confidential. This obligation continues after completion or termination of the agreement.</div>
+          <span class="clause-toggle">Read more ↓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sig-row">
+      <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-name">Rahul — RahulFX3D Studio</div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-name">Client / Authorised Representative</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ INVOICE ══════════════════ -->
+<div id="panel-invoice" class="panel">
+  <div class="hero">
+    <div class="hero-eyebrow">Billing Document</div>
+    <h1>Invoice</h1>
+    <p class="hero-sub">Fill in client and project details. All amounts in USD.</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-ghost" onclick="window.print()">↓ Print / Export PDF</button>
+    <button class="btn-ghost" onclick="calcTotal()">↻ Calculate Total</button>
+  </div>
+
+  <div class="section">
+    <div class="invoice-header">
+      <div class="invoice-from">
+        <div class="studio-name">RahulFX3D Studio</div>
+        <div class="studio-sub">3D Animation · CGI Ads · Motion Graphics</div>
+        <div class="studio-sub" style="margin-top: 4px;">rahul@rahulfx3d.studio</div>
+      </div>
+      <div class="invoice-meta">
+        <div class="invoice-no">INV–<span id="inv-num-display">0001</span></div>
+        <div class="invoice-meta-row">Invoice No <strong><input id="inv-num" style="background:none;border:none;border-bottom:1px solid var(--line);font-family:inherit;font-size:inherit;color:var(--ink);width:60px;text-align:right;outline:none;" value="0001" oninput="document.getElementById('inv-num-display').textContent=this.value" /></strong></div>
+        <div class="invoice-meta-row">Date <strong><input type="date" style="background:none;border:none;border-bottom:1px solid var(--line);font-family:inherit;font-size:inherit;color:var(--ink);outline:none;text-align:right;" /></strong></div>
+        <div class="invoice-meta-row">Due <strong><input type="date" style="background:none;border:none;border-bottom:1px solid var(--line);font-family:inherit;font-size:inherit;color:var(--ink);outline:none;text-align:right;" /></strong></div>
+      </div>
+    </div>
+
+    <div class="invoice-billto">
+      <div class="bill-block">
+        <div class="bill-label">Bill To</div>
+        <input class="bill-input" placeholder="Client name" />
+        <input class="bill-input" placeholder="Company / Brand" />
+        <input class="bill-input" placeholder="Email address" />
+        <input class="bill-input" placeholder="Country" />
+      </div>
+      <div class="bill-block">
+        <div class="bill-label">Project</div>
+        <input class="bill-input" placeholder="Project title" />
+        <input class="bill-input" placeholder="Service type" />
+        <input class="bill-input" placeholder="Delivery date" type="date" />
+      </div>
+    </div>
+
+    <table class="line-items">
+      <thead>
+        <tr>
+          <th style="width:50%">Description</th>
+          <th style="width:10%;text-align:center">Qty</th>
+          <th style="width:20%;text-align:right">Unit Price</th>
+          <th style="width:20%;text-align:right">Amount</th>
+        </tr>
+      </thead>
+      <tbody id="line-items-body">
+        <tr class="task-row" style="display:grid;grid-template-columns:1fr 60px 120px 120px;gap:0;">
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="line-items" id="invoice-table">
+      <tbody>
+        <tr>
+          <td><div class="item-name">3D Product Ad</div><div class="item-desc">High-end CGI product advertisement</div></td>
+          <td style="text-align:center"><input class="bill-input" style="width:40px;text-align:center" value="1" id="q1" oninput="calcTotal()" /></td>
+          <td style="text-align:right"><input class="bill-input" style="width:90px;text-align:right" placeholder="0.00" id="p1" oninput="calcTotal()" /></td>
+          <td style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:1rem;" id="a1">—</td>
+        </tr>
+        <tr>
+          <td><div class="item-name">Social Media CGI Ad</div><div class="item-desc">15–30 second scroll-stopping visual ad</div></td>
+          <td style="text-align:center"><input class="bill-input" style="width:40px;text-align:center" value="1" id="q2" oninput="calcTotal()" /></td>
+          <td style="text-align:right"><input class="bill-input" style="width:90px;text-align:right" placeholder="0.00" id="p2" oninput="calcTotal()" /></td>
+          <td style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:1rem;" id="a2">—</td>
+        </tr>
+        <tr>
+          <td><div class="item-name">Motion Graphics Package</div><div class="item-desc">Animated visuals for marketing use</div></td>
+          <td style="text-align:center"><input class="bill-input" style="width:40px;text-align:center" value="1" id="q3" oninput="calcTotal()" /></td>
+          <td style="text-align:right"><input class="bill-input" style="width:90px;text-align:right" placeholder="0.00" id="p3" oninput="calcTotal()" /></td>
+          <td style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:1rem;" id="a3">—</td>
+        </tr>
+        <tr>
+          <td><div class="item-name">Full Brand Commercial</div><div class="item-desc">Cinematic brand video production</div></td>
+          <td style="text-align:center"><input class="bill-input" style="width:40px;text-align:center" value="1" id="q4" oninput="calcTotal()" /></td>
+          <td style="text-align:right"><input class="bill-input" style="width:90px;text-align:right" placeholder="0.00" id="p4" oninput="calcTotal()" /></td>
+          <td style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:1rem;" id="a4">—</td>
+        </tr>
+        <tr>
+          <td><div class="item-name">Additional Revisions</div><div class="item-desc">Beyond 2 included rounds — $50 each</div></td>
+          <td style="text-align:center"><input class="bill-input" style="width:40px;text-align:center" value="0" id="q5" oninput="calcTotal()" /></td>
+          <td style="text-align:right"><input class="bill-input" style="width:90px;text-align:right" value="50.00" id="p5" oninput="calcTotal()" /></td>
+          <td style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:1rem;" id="a5">—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals-block">
+      <div class="total-row"><span>Subtotal</span><span id="subtotal">$ 0.00</span></div>
+      <div class="total-row"><span>Discount</span><span>$ 0.00</span></div>
+      <div class="total-row"><span>Tax</span><span>$ 0.00</span></div>
+      <div class="total-row grand"><span>Total Due</span><span id="total-due">$ 0.00</span></div>
+    </div>
+
+    <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line);">
+      <div class="section-label" style="margin-bottom: 20px;"><span>Payment Details</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div>
+          <div class="field-label" style="margin-bottom:10px;">Bank Transfer / Wise</div>
+          <div style="font-size:0.72rem;color:var(--ash);line-height:2.2;">
+            Account Name: Rahul Meena<br>
+            rahul@rahulfx3d.studio<br>
+            <span style="font-size:0.6rem;font-style:italic;">Include invoice number in reference</span>
+          </div>
+        </div>
+        <div>
+          <div class="field-label" style="margin-bottom:10px;">PayPal</div>
+          <div style="font-size:0.72rem;color:var(--ash);line-height:2.2;">
+            rahul@rahulfx3d.studio<br>
+            <span style="font-size:0.6rem;font-style:italic;">Send as Friends & Family or add 4.4% fee</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ CHECKLIST ══════════════════ -->
+<div id="panel-checklist" class="panel">
+  <div class="hero">
+    <div class="hero-eyebrow">Project Management</div>
+    <h1>Project<br><em>Checklist</em></h1>
+    <p class="hero-sub">Track every step from first contact to final delivery. Click to expand each phase.</p>
+  </div>
+
+  <div class="section">
+    <div class="contract-grid" style="grid-template-columns:1fr 1fr;margin-bottom:32px;">
+      <div class="contract-field"><div class="field-label">Client</div><input class="field-value" placeholder="Client name" /></div>
+      <div class="contract-field"><div class="field-label">Project</div><input class="field-value" placeholder="Project title" /></div>
+      <div class="contract-field"><div class="field-label">Start Date</div><input class="field-value" type="date" /></div>
+      <div class="contract-field"><div class="field-label">Deadline</div><input class="field-value" type="date" /></div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <span class="progress-label" id="progress-label">0 / 28 complete</span>
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <div class="section-label">
+      <span>All Phases</span>
+      <span class="section-num">05</span>
+    </div>
+
+    <div id="phases">
+
+      <div class="phase-block" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-title"><span class="phase-num">Phase 01</span> Onboarding</div>
+          <div class="phase-count">7 tasks</div>
+        </div>
+        <div class="phase-tasks">
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Send welcome email with next steps and timeline</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Share contract and get client signature</div><div class="task-owner">Both</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Send deposit invoice — 50% upfront</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Confirm deposit payment received</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Send project brief / creative questionnaire</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Receive completed project brief from client</div><div class="task-owner">Client</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Receive all client assets — logo, brand kit, references</div><div class="task-owner">Client</div></div>
+        </div>
+      </div>
+
+      <div class="phase-block" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-title"><span class="phase-num">Phase 02</span> Pre-Production</div>
+          <div class="phase-count">6 tasks</div>
+        </div>
+        <div class="phase-tasks">
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Review brief and all client assets thoroughly</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Create mood board and style reference deck</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Write script or storyboard if applicable</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Client approves mood board and creative direction</div><div class="task-owner">Client</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Set up project folder and file structure</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Confirm delivery format, resolution, and aspect ratio</div><div class="task-owner">Both</div></div>
+        </div>
+      </div>
+
+      <div class="phase-block" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-title"><span class="phase-num">Phase 03</span> Production</div>
+          <div class="phase-count">7 tasks</div>
+        </div>
+        <div class="phase-tasks">
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Begin 3D modelling and scene setup in Blender</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Apply textures, materials, and lighting</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Create animation and motion sequences</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Render low-res preview draft for internal review</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Apply motion graphics and VFX in After Effects</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Add music, sound effects, or voiceover if agreed</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Complete first full draft video</div><div class="task-owner owner-rahul">Rahul</div></div>
+        </div>
+      </div>
+
+      <div class="phase-block" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-title"><span class="phase-num">Phase 04</span> Revisions</div>
+          <div class="phase-count">5 tasks</div>
+        </div>
+        <div class="phase-tasks">
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Send Draft 1 to client for review</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Client provides consolidated Revision 1 feedback</div><div class="task-owner">Client</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Apply Revision 1 and send Draft 2</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Client provides Revision 2 feedback if needed</div><div class="task-owner">Client</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Client signs off on final version</div><div class="task-owner">Client</div></div>
+        </div>
+      </div>
+
+      <div class="phase-block" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-title"><span class="phase-num">Phase 05</span> Delivery & Close</div>
+          <div class="phase-count">7 tasks</div>
+        </div>
+        <div class="phase-tasks">
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Send final invoice — remaining 50% balance</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Confirm final payment received</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Export final files in agreed formats — MP4, MOV</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Deliver files via Google Drive or WeTransfer</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Send delivery confirmation and usage rights note</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Request client testimonial or Google review</div><div class="task-owner owner-rahul">Rahul</div></div>
+          <div class="task-row"><input type="checkbox" class="task-check" onclick="updateProgress(event)" /><div class="task-label">Archive project files and close project folder</div><div class="task-owner owner-rahul">Rahul</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Rahul<span>FX3D</span> Studio</div>
+  <div>rahul@rahulfx3d.studio</div>
+  <div>rahulfx3d.studio</div>
+</footer>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function toggleClause(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.clause').forEach(c => {
+      c.classList.remove('open');
+      c.querySelector('.clause-toggle').textContent = 'Read more ↓';
+    });
+    if (!isOpen) {
+      el.classList.add('open');
+      el.querySelector('.clause-toggle').textContent = 'Close ↑';
+    }
+  }
+
+  function togglePhase(el) {
+    el.classList.toggle('open');
+    event.stopPropagation();
+  }
+
+  function calcTotal() {
+    let subtotal = 0;
+    for (let i = 1; i <= 5; i++) {
+      const q = parseFloat(document.getElementById('q' + i).value) || 0;
+      const p = parseFloat(document.getElementById('p' + i).value) || 0;
+      const amount = q * p;
+      subtotal += amount;
+      document.getElementById('a' + i).textContent = amount > 0 ? '$ ' + amount.toFixed(2) : '—';
+    }
+    document.getElementById('subtotal').textContent = '$ ' + subtotal.toFixed(2);
+    document.getElementById('total-due').textContent = '$ ' + subtotal.toFixed(2);
+  }
+
+  function updateProgress(e) {
+    e.stopPropagation();
+    const total = document.querySelectorAll('.task-check').length;
+    const done = document.querySelectorAll('.task-check:checked').length;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = done + ' / ' + total + ' complete';
+  }
+</script>
+</body>
+</html>
