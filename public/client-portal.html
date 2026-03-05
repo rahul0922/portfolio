@@ -1416,6 +1416,328 @@
             letter-spacing: .1em
         }
 
+        /* TOAST NOTIFICATIONS */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .toast {
+            background: var(--raise);
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: .74rem;
+            color: var(--ink);
+            letter-spacing: .04em;
+            transform: translateX(120%);
+            opacity: 0;
+            transition: all .3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .3)
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1
+        }
+
+        .toast-icon {
+            color: var(--gold);
+            font-size: 1rem
+        }
+
+        /* LOGOUT BUTTON */
+        .btn-logout {
+            background: none;
+            border: 1px solid var(--line);
+            color: var(--dim);
+            font-family: 'DM Mono', monospace;
+            font-size: .58rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: all .2s
+        }
+
+        .btn-logout:hover {
+            border-color: #c94c4c;
+            color: #c94c4c
+        }
+
+        /* CLIENT NOTES */
+        .client-notes {
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid var(--line)
+        }
+
+        .client-notes label {
+            display: block;
+            font-size: .6rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px
+        }
+
+        .notes-area {
+            width: 100%;
+            min-height: 100px;
+            background: var(--raise);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 14px 18px;
+            font-family: 'DM Mono', monospace;
+            font-size: .82rem;
+            color: var(--ink);
+            line-height: 1.8;
+            resize: vertical;
+            outline: none;
+            transition: border-color .2s
+        }
+
+        .notes-area::placeholder {
+            color: var(--dim)
+        }
+
+        .notes-area:focus {
+            border-color: var(--gold)
+        }
+
+        /* PHASE COMPLETION DATE */
+        .phase-date {
+            font-size: .58rem;
+            color: var(--green);
+            letter-spacing: .08em;
+            margin-left: 12px;
+            display: none
+        }
+
+        .phase.done .phase-date {
+            display: inline
+        }
+
+        /* TIMELINE VIEW */
+        .timeline-toggle {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px
+        }
+
+        .tl-btn {
+            background: none;
+            border: 1px solid var(--line);
+            color: var(--dim);
+            font-family: 'DM Mono', monospace;
+            font-size: .62rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 7px 14px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .tl-btn.active {
+            background: var(--gold);
+            color: #0c0c0b;
+            border-color: var(--gold);
+            font-weight: 500
+        }
+
+        .tl-btn:hover {
+            border-color: var(--gold)
+        }
+
+        .timeline-view {
+            display: none;
+            margin-bottom: 40px
+        }
+
+        .timeline-view.active {
+            display: block
+        }
+
+        .tl-phase {
+            margin-bottom: 16px
+        }
+
+        .tl-label {
+            font-size: .68rem;
+            color: var(--dim);
+            letter-spacing: .06em;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .tl-label-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--ink)
+        }
+
+        .tl-bar-wrap {
+            height: 8px;
+            background: var(--line);
+            border-radius: 4px;
+            overflow: hidden
+        }
+
+        .tl-bar {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 4px;
+            transition: width .5s
+        }
+
+        .tl-bar.complete {
+            background: var(--green)
+        }
+
+        .tl-pct {
+            font-size: .62rem;
+            font-weight: 400
+        }
+
+        .checklist-view {
+            display: block
+        }
+
+        .checklist-view.hidden {
+            display: none
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width:700px) {
+            nav {
+                padding: 12px 16px;
+                flex-wrap: wrap;
+                gap: 8px
+            }
+
+            .tabs {
+                width: 100%;
+                overflow-x: auto;
+                justify-content: flex-start
+            }
+
+            .tab {
+                font-size: .58rem;
+                padding: 7px 12px;
+                white-space: nowrap
+            }
+
+            .logo {
+                font-size: 1rem
+            }
+
+            .wrap {
+                padding: 24px 16px 60px
+            }
+
+            .hero h1 {
+                font-size: 1.8rem
+            }
+
+            .hero-note {
+                font-size: .74rem
+            }
+
+            .g2 {
+                grid-template-columns: 1fr
+            }
+
+            .sig-row,
+            .snr,
+            .brow {
+                grid-template-columns: 1fr
+            }
+
+            .itop {
+                flex-direction: column;
+                gap: 20px
+            }
+
+            .imeta {
+                text-align: left
+            }
+
+            .ino {
+                justify-content: flex-start
+            }
+
+            .irow {
+                justify-content: flex-start
+            }
+
+            .task {
+                grid-template-columns: 24px 1fr 60px;
+                gap: 10px;
+                font-size: .76rem
+            }
+
+            .status-banner {
+                padding: 10px 16px;
+                top: 58px
+            }
+
+            .panel {
+                padding-top: 110px
+            }
+
+            .client-grid {
+                grid-template-columns: 1fr
+            }
+
+            .admin-dashboard {
+                padding: 70px 16px 40px
+            }
+
+            .ar {
+                flex-direction: column
+            }
+
+            .ar .btn {
+                width: 100%;
+                justify-content: center
+            }
+
+            .pms {
+                grid-template-columns: 1fr
+            }
+
+            footer {
+                padding: 16px;
+                flex-direction: column;
+                gap: 8px;
+                text-align: center
+            }
+
+            .btn-back {
+                font-size: .56rem;
+                padding: 5px 10px
+            }
+
+            .toast-container {
+                bottom: 12px;
+                right: 12px;
+                left: 12px
+            }
+        }
+
         /* PRINT / EXPORT PDF */
         @media print {
 
@@ -1618,6 +1940,7 @@
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"
                 title="Toggle light/dark mode">☀</button>
             <button class="btn-back" id="btnBack" onclick="backToDash()">← Dashboard</button>
+            <button class="btn-logout" id="btnLogout" onclick="logout()" style="display:none">⏻ Logout</button>
         </nav>
 
         <!-- ADMIN DASHBOARD -->
@@ -1673,7 +1996,8 @@
                     </div>
                     <div class="f"><label>Delivery Deadline</label><input id="c-deadline" type="date"
                             oninput="syncFields()" /></div>
-                    <div class="f"><label>Total Project Value (USD)</label><input placeholder="$ 0.00" /></div>
+                    <div class="f"><label>Total Project Value (USD)</label><input id="c-total" placeholder="$ 0.00"
+                            oninput="syncFields()" /></div>
                     <div class="f"><label>Deposit Required</label><input value="50% upfront — non-refundable" readonly
                             style="color:var(--dim)" /></div>
                 </div>
@@ -1955,210 +2279,229 @@
 
                 <div class="divider">All Phases <span>05</span></div>
 
-                <div class="phase" onclick="tP(event,this)">
-                    <div class="phd">
-                        <div class="phl">
-                            <div class="phb">01</div>
-                            <div class="phn">Onboarding</div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:16px">
-                            <div class="phm">7 tasks</div>
-                            <div class="pha">↓</div>
-                        </div>
-                    </div>
-                    <div class="pht">
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Send welcome email with next steps and timeline</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Share contract and get client signature</div>
-                            <div class="to">Both</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Send deposit invoice — 50% upfront</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Confirm deposit payment received</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Send project brief and creative questionnaire to client</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Receive completed project brief from client</div>
-                            <div class="to">Client</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Receive all client assets — logo, brand kit, references</div>
-                            <div class="to">Client</div>
-                        </div>
-                    </div>
+                <div class="timeline-toggle">
+                    <button class="tl-btn active" onclick="toggleView('checklist',this)">☰ Checklist</button>
+                    <button class="tl-btn" onclick="toggleView('timeline',this)">▐ Timeline</button>
                 </div>
 
-                <div class="phase" onclick="tP(event,this)">
-                    <div class="phd">
-                        <div class="phl">
-                            <div class="phb">02</div>
-                            <div class="phn">Pre-Production</div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:16px">
-                            <div class="phm">6 tasks</div>
-                            <div class="pha">↓</div>
-                        </div>
-                    </div>
-                    <div class="pht">
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Review brief and all client assets thoroughly</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Create mood board and style reference for client approval</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Write script or storyboard if applicable</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Client approves mood board and creative direction</div>
-                            <div class="to">Client</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Set up project folder and file structure</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Confirm final delivery format, resolution, and aspect ratio</div>
-                            <div class="to">Both</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="timeline-view" id="timelineView"></div>
 
-                <div class="phase" onclick="tP(event,this)">
-                    <div class="phd">
-                        <div class="phl">
-                            <div class="phb">03</div>
-                            <div class="phn">Production</div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:16px">
-                            <div class="phm">7 tasks</div>
-                            <div class="pha">↓</div>
-                        </div>
-                    </div>
-                    <div class="pht">
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Begin 3D modelling and scene setup in Blender</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Apply textures, materials, and lighting to scene</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Create animation and motion sequences</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Render low-res preview draft for internal review</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Apply motion graphics and VFX in After Effects</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Add music, sound effects, or voiceover if agreed</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Complete first full draft video</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="checklist-view" id="checklistView">
 
-                <div class="phase" onclick="tP(event,this)">
-                    <div class="phd">
-                        <div class="phl">
-                            <div class="phb">04</div>
-                            <div class="phn">Review &amp; Revisions</div>
+                    <div class="phase" onclick="tP(event,this)">
+                        <div class="phd">
+                            <div class="phl">
+                                <div class="phb">01</div>
+                                <div class="phn">Onboarding</div><span class="phase-date" id="pd-1"></span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:16px">
+                                <div class="phm">7 tasks</div>
+                                <div class="pha">↓</div>
+                            </div>
                         </div>
-                        <div style="display:flex;align-items:center;gap:16px">
-                            <div class="phm">5 tasks</div>
-                            <div class="pha">↓</div>
+                        <div class="pht">
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Send welcome email with next steps and timeline</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Share contract and get client signature</div>
+                                <div class="to">Both</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Send deposit invoice — 50% upfront</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Confirm deposit payment received</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Send project brief and creative questionnaire to client</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Receive completed project brief from client</div>
+                                <div class="to">Client</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Receive all client assets — logo, brand kit, references</div>
+                                <div class="to">Client</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="pht">
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Send Draft 1 to client for review</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Client provides consolidated Revision 1 feedback</div>
-                            <div class="to">Client</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Apply Revision 1 changes and send Draft 2</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Client provides Revision 2 feedback if needed</div>
-                            <div class="to">Client</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Client signs off on final approved version</div>
-                            <div class="to">Client</div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="phase" onclick="tP(event,this)">
-                    <div class="phd">
-                        <div class="phl">
-                            <div class="phb">05</div>
-                            <div class="phn">Delivery &amp; Close</div>
+                    <div class="phase" onclick="tP(event,this)">
+                        <div class="phd">
+                            <div class="phl">
+                                <div class="phb">02</div>
+                                <div class="phn">Pre-Production</div><span class="phase-date" id="pd-2"></span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:16px">
+                                <div class="phm">6 tasks</div>
+                                <div class="pha">↓</div>
+                            </div>
                         </div>
-                        <div style="display:flex;align-items:center;gap:16px">
-                            <div class="phm">7 tasks</div>
-                            <div class="pha">↓</div>
+                        <div class="pht">
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Review brief and all client assets thoroughly</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Create mood board and style reference for client approval</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Write script or storyboard if applicable</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Client approves mood board and creative direction</div>
+                                <div class="to">Client</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Set up project folder and file structure</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Confirm final delivery format, resolution, and aspect ratio</div>
+                                <div class="to">Both</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="pht">
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Send final invoice — remaining 50% balance</div>
-                            <div class="to y">Rahul</div>
+
+                    <div class="phase" onclick="tP(event,this)">
+                        <div class="phd">
+                            <div class="phl">
+                                <div class="phb">03</div>
+                                <div class="phn">Production</div><span class="phase-date" id="pd-3"></span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:16px">
+                                <div class="phm">7 tasks</div>
+                                <div class="pha">↓</div>
+                            </div>
                         </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Confirm final payment received</div>
-                            <div class="to y">Rahul</div>
+                        <div class="pht">
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Begin 3D modelling and scene setup in Blender</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Apply textures, materials, and lighting to scene</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Create animation and motion sequences</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Render low-res preview draft for internal review</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Apply motion graphics and VFX in After Effects</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Add music, sound effects, or voiceover if agreed</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Complete first full draft video</div>
+                                <div class="to y">Rahul</div>
+                            </div>
                         </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Export final files in agreed formats — MP4, MOV</div>
-                            <div class="to y">Rahul</div>
+                    </div>
+
+                    <div class="phase" onclick="tP(event,this)">
+                        <div class="phd">
+                            <div class="phl">
+                                <div class="phb">04</div>
+                                <div class="phn">Review &amp; Revisions</div><span class="phase-date" id="pd-4"></span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:16px">
+                                <div class="phm">5 tasks</div>
+                                <div class="pha">↓</div>
+                            </div>
                         </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Deliver files via Google Drive or WeTransfer</div>
-                            <div class="to y">Rahul</div>
+                        <div class="pht">
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Send Draft 1 to client for review</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Client provides consolidated Revision 1 feedback</div>
+                                <div class="to">Client</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Apply Revision 1 changes and send Draft 2</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Client provides Revision 2 feedback if needed</div>
+                                <div class="to">Client</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Client signs off on final approved version</div>
+                                <div class="to">Client</div>
+                            </div>
                         </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Send delivery confirmation and usage rights note</div>
-                            <div class="to y">Rahul</div>
+                    </div>
+
+                    <div class="phase" onclick="tP(event,this)">
+                        <div class="phd">
+                            <div class="phl">
+                                <div class="phb">05</div>
+                                <div class="phn">Delivery &amp; Close</div><span class="phase-date" id="pd-5"></span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:16px">
+                                <div class="phm">7 tasks</div>
+                                <div class="pha">↓</div>
+                            </div>
                         </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Request client testimonial or Google review</div>
-                            <div class="to y">Rahul</div>
-                        </div>
-                        <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
-                            <div class="tt">Archive project files and close project folder</div>
-                            <div class="to y">Rahul</div>
+                        <div class="pht">
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Send final invoice — remaining 50% balance</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Confirm final payment received</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Export final files in agreed formats — MP4, MOV</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Deliver files via Google Drive or WeTransfer</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Send delivery confirmation and usage rights note</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Request client testimonial or Google review</div>
+                                <div class="to y">Rahul</div>
+                            </div>
+                            <div class="task" onclick="tT(event,this)"><input type="checkbox" class="ck" />
+                                <div class="tt">Archive project files and close project folder</div>
+                                <div class="to y">Rahul</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div><!-- end checklist-view -->
+
+            <div class="client-notes" id="clientNotes">
+                <label>Admin Notes</label>
+                <textarea class="notes-area" id="notesArea"
+                    placeholder="Leave notes for this client... e.g. Waiting on brand assets, client prefers warm tones"
+                    oninput="saveNotes()"></textarea>
             </div>
         </div>
+
+        <div class="toast-container" id="toastContainer"></div>
 
         <footer>
             <div class="fl">Rahul<em>FX3D</em> Studio</div>
@@ -2242,14 +2585,12 @@
             document.querySelector('nav').appendChild(badge);
 
             if (role === 'admin') {
-                // Show dashboard, hide portal panels
                 renderDashboard();
                 document.getElementById('adminDash').classList.add('active');
                 document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
                 document.getElementById('statusBanner').style.display = 'none';
                 document.body.classList.remove('client-mode');
             } else {
-                // Client: show portal directly, hide dashboard
                 document.getElementById('adminDash').classList.remove('active');
                 document.getElementById('statusBanner').style.display = '';
                 document.body.classList.add('client-mode');
@@ -2258,19 +2599,24 @@
                     if (owner && owner.classList.contains('y')) task.classList.add('locked');
                 });
                 if (client) prefillClient(client);
+                loadProgress();
+                loadPhaseDates();
+                loadNotes();
             }
+            document.getElementById('btnLogout').style.display = 'inline-flex';
         }
 
         function openClient(client) {
             currentClient = client;
-            // Hide dashboard, show portal panels
             document.getElementById('adminDash').classList.remove('active');
             document.querySelectorAll('.panel').forEach(p => p.style.display = '');
             document.querySelector('.panel.active') || document.getElementById('panel-contract').classList.add('active');
             document.getElementById('statusBanner').style.display = '';
             document.getElementById('btnBack').classList.add('show');
-            // Pre-fill client data
             prefillClient(client);
+            loadProgress();
+            loadPhaseDates();
+            loadNotes();
             window.scrollTo(0, 0);
         }
 
@@ -2301,6 +2647,9 @@
             document.getElementById('p-deadline').value = deadline;
             // → Signature name
             document.getElementById('cname').placeholder = name || 'Type full name to confirm';
+            // → Contract total to invoice first line item
+            const total = document.getElementById('c-total').value.replace(/[^0-9.]/g, '');
+            if (total) document.getElementById('p1').value = total;
         }
 
         function backToDash() {
@@ -2368,10 +2717,169 @@
 
         function tP(e, el) { if (e.target.closest('.task')) return; el.classList.toggle('open') }
 
-        function tT(e, el) { e.stopPropagation(); const cb = el.querySelector('.ck'); cb.checked = !cb.checked; upd() }
+        function tT(e, el) {
+            e.stopPropagation();
+            const cb = el.querySelector('.ck');
+            cb.checked = !cb.checked;
+            const taskName = el.querySelector('.tt').textContent;
+            showToast(cb.checked ? '✓ ' + taskName : '○ ' + taskName);
+            upd();
+            saveProgress();
+        }
 
-        function upd() { const all = document.querySelectorAll('.ck'); const done = document.querySelectorAll('.ck:checked'); const pct = Math.round(done.length / all.length * 100); document.getElementById('pd').textContent = done.length; document.getElementById('ptot').textContent = all.length; document.getElementById('ppc').textContent = pct + '%'; document.getElementById('pfi').style.width = pct + '%'; document.querySelectorAll('.phase').forEach(ph => { const t = ph.querySelectorAll('.ck'), c = ph.querySelectorAll('.ck:checked'); ph.classList.toggle('done', t.length > 0 && t.length === c.length) }); updateStatusBanner() }
-        function updateStatusBanner() { const phases = document.querySelectorAll('.phase'); let current = 'All Complete'; let phaseNum = '05'; phases.forEach((ph, i) => { const t = ph.querySelectorAll('.ck'), c = ph.querySelectorAll('.ck:checked'); if (t.length !== c.length && current === 'All Complete') { current = ph.querySelector('.phn').textContent; phaseNum = String(i + 1).padStart(2, '0'); } }); const all = document.querySelectorAll('.ck'); const done = document.querySelectorAll('.ck:checked'); const pct = Math.round(done.length / all.length * 100); document.getElementById('statusText').textContent = pct === 100 ? '✓ Project Complete' : 'Phase ' + phaseNum + ' — ' + current; document.getElementById('statusCount').textContent = done.length + ' / ' + all.length + ' tasks'; document.getElementById('statusPct').textContent = pct + '%'; document.getElementById('statusBanner').style.setProperty('--progress', pct + '%'); if (pct === 100) { document.querySelector('.status-dot').style.background = '#4a9268'; document.querySelector('.status-dot').style.boxShadow = '0 0 8px rgba(74,146,104,.5)'; } }
+        function upd() {
+            const all = document.querySelectorAll('.ck');
+            const done = document.querySelectorAll('.ck:checked');
+            const pct = Math.round(done.length / all.length * 100);
+            document.getElementById('pd').textContent = done.length;
+            document.getElementById('ptot').textContent = all.length;
+            document.getElementById('ppc').textContent = pct + '%';
+            document.getElementById('pfi').style.width = pct + '%';
+            document.querySelectorAll('.phase').forEach((ph, i) => {
+                const t = ph.querySelectorAll('.ck'), c = ph.querySelectorAll('.ck:checked');
+                const wasDone = ph.classList.contains('done');
+                const isDone = t.length > 0 && t.length === c.length;
+                ph.classList.toggle('done', isDone);
+                if (isDone && !wasDone) updatePhaseDate(i + 1);
+            });
+            updateStatusBanner();
+            renderTimeline();
+        }
+
+        function updateStatusBanner() {
+            const phases = document.querySelectorAll('.phase');
+            let current = 'All Complete', phaseNum = '05';
+            phases.forEach((ph, i) => {
+                const t = ph.querySelectorAll('.ck'), c = ph.querySelectorAll('.ck:checked');
+                if (t.length !== c.length && current === 'All Complete') {
+                    current = ph.querySelector('.phn').textContent;
+                    phaseNum = String(i + 1).padStart(2, '0');
+                }
+            });
+            const all = document.querySelectorAll('.ck');
+            const done = document.querySelectorAll('.ck:checked');
+            const pct = Math.round(done.length / all.length * 100);
+            document.getElementById('statusText').textContent = pct === 100 ? '✓ Project Complete' : 'Phase ' + phaseNum + ' — ' + current;
+            document.getElementById('statusCount').textContent = done.length + ' / ' + all.length + ' tasks';
+            document.getElementById('statusPct').textContent = pct + '%';
+            document.getElementById('statusBanner').style.setProperty('--progress', pct + '%');
+            if (pct === 100) {
+                document.querySelector('.status-dot').style.background = '#4a9268';
+                document.querySelector('.status-dot').style.boxShadow = '0 0 8px rgba(74,146,104,.5)';
+            }
+        }
+
+        // ═══ LOGOUT ═══
+        function logout() {
+            sessionStorage.removeItem('portal-auth');
+            sessionStorage.removeItem('portal-client');
+            location.reload();
+        }
+
+        // ═══ TOAST NOTIFICATIONS ═══
+        function showToast(msg) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = '<span class="toast-icon">◆</span>' + msg;
+            container.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.add('show'));
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // ═══ SAVE / LOAD PROGRESS (localStorage per client) ═══
+        function getStorageKey() {
+            const cid = currentClient ? currentClient.id : 'default';
+            return 'portal-progress-' + cid;
+        }
+
+        function saveProgress() {
+            const checks = [];
+            document.querySelectorAll('.ck').forEach(cb => checks.push(cb.checked));
+            localStorage.setItem(getStorageKey(), JSON.stringify(checks));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem(getStorageKey());
+            if (!saved) return;
+            const checks = JSON.parse(saved);
+            document.querySelectorAll('.ck').forEach((cb, i) => {
+                if (checks[i] !== undefined) cb.checked = checks[i];
+            });
+            upd();
+        }
+
+        // ═══ PHASE COMPLETION DATES ═══
+        const phaseDates = {};
+        function updatePhaseDate(num) {
+            const key = getStorageKey() + '-phase-' + num;
+            if (!phaseDates[num]) {
+                const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+                phaseDates[num] = now;
+                localStorage.setItem(key, now);
+            }
+            const el = document.getElementById('pd-' + num);
+            if (el) el.textContent = '✓ ' + phaseDates[num];
+        }
+
+        function loadPhaseDates() {
+            for (let i = 1; i <= 5; i++) {
+                const key = getStorageKey() + '-phase-' + i;
+                const saved = localStorage.getItem(key);
+                if (saved) {
+                    phaseDates[i] = saved;
+                    const el = document.getElementById('pd-' + i);
+                    if (el) el.textContent = '✓ ' + saved;
+                }
+            }
+        }
+
+        // ═══ TIMELINE / GANTT VIEW ═══
+        function renderTimeline() {
+            const container = document.getElementById('timelineView');
+            if (!container) return;
+            const phases = document.querySelectorAll('.phase');
+            let html = '';
+            phases.forEach((ph, i) => {
+                const t = ph.querySelectorAll('.ck').length;
+                const c = ph.querySelectorAll('.ck:checked').length;
+                const pct = t > 0 ? Math.round(c / t * 100) : 0;
+                const name = ph.querySelector('.phn').textContent;
+                const complete = pct === 100;
+                html += '<div class="tl-phase">';
+                html += '<div class="tl-label"><span class="tl-label-name">' + name + '</span><span class="tl-pct">' + c + '/' + t + ' · ' + pct + '%</span></div>';
+                html += '<div class="tl-bar-wrap"><div class="tl-bar' + (complete ? ' complete' : '') + '" style="width:' + pct + '%"></div></div>';
+                html += '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        function toggleView(view, btn) {
+            document.querySelectorAll('.tl-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('checklistView').classList.toggle('hidden', view !== 'checklist');
+            document.getElementById('timelineView').classList.toggle('active', view === 'timeline');
+            if (view === 'timeline') renderTimeline();
+        }
+
+        // ═══ CLIENT NOTES ═══
+        function saveNotes() {
+            const key = 'portal-notes-' + (currentClient ? currentClient.id : 'default');
+            localStorage.setItem(key, document.getElementById('notesArea').value);
+        }
+
+        function loadNotes() {
+            const key = 'portal-notes-' + (currentClient ? currentClient.id : 'default');
+            const saved = localStorage.getItem(key);
+            if (saved) document.getElementById('notesArea').value = saved;
+            else document.getElementById('notesArea').value = '';
+            // Hide notes for client mode
+            const notesEl = document.getElementById('clientNotes');
+            if (notesEl) notesEl.style.display = currentRole === 'client' ? 'none' : '';
+        }
     </script>
 </body>
 
