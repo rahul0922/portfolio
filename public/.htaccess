@@ -1,7 +1,6 @@
 RewriteEngine On
 
-RewriteCond %{HTTP_HOST} ^www\.rahulfx3d\.studio [NC]
-RewriteRule ^(.*)$ https://rahulfx3d.studio/$1 [L,R=301]
-
+# Single redirect: any www OR http → https://rahulfx3d.studio (avoids redirect chains)
+RewriteCond %{HTTP_HOST} ^www\. [NC,OR]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://rahulfx3d.studio/$1 [L,R=301]
