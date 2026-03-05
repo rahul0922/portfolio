@@ -1268,6 +1268,153 @@
         .panel {
             padding-top: 118px
         }
+
+        /* ADMIN DASHBOARD */
+        .admin-dashboard {
+            display: none;
+            padding: 80px 48px 60px;
+            max-width: 960px;
+            margin: 0 auto;
+            animation: fadeUp .3s ease both
+        }
+
+        .admin-dashboard.active {
+            display: block
+        }
+
+        .dash-header {
+            margin-bottom: 40px
+        }
+
+        .dash-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            margin-bottom: 8px
+        }
+
+        .dash-header h1 em {
+            color: var(--gold);
+            font-style: italic
+        }
+
+        .dash-sub {
+            font-size: .78rem;
+            color: var(--dim);
+            letter-spacing: .06em
+        }
+
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px
+        }
+
+        .client-card {
+            background: var(--surf);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all .2s;
+            position: relative
+        }
+
+        .client-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px)
+        }
+
+        .client-card-id {
+            font-size: .58rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 12px
+        }
+
+        .client-card-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-bottom: 4px
+        }
+
+        .client-card-company {
+            font-size: .74rem;
+            color: var(--dim);
+            margin-bottom: 14px
+        }
+
+        .client-card-project {
+            font-size: .72rem;
+            color: var(--gold);
+            padding: 6px 10px;
+            background: rgba(201, 168, 76, .08);
+            border-radius: 2px;
+            display: inline-block
+        }
+
+        .client-card-pass {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: .58rem;
+            color: var(--dim);
+            background: var(--raise);
+            padding: 3px 8px;
+            border-radius: 2px;
+            letter-spacing: .08em
+        }
+
+        .btn-back {
+            background: none;
+            border: 1px solid var(--line);
+            color: var(--dim);
+            font-family: 'DM Mono', monospace;
+            font-size: .62rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 7px 14px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 12px;
+            transition: all .2s;
+            display: none
+        }
+
+        .btn-back:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        .btn-back.show {
+            display: inline-flex
+        }
+
+        .add-client-card {
+            background: var(--surf);
+            border: 2px dashed var(--line);
+            border-radius: 4px;
+            padding: 24px;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--dim);
+            min-height: 160px
+        }
+
+        .add-client-icon {
+            font-size: 1.4rem;
+            opacity: .5
+        }
+
+        .add-client-text {
+            font-size: .68rem;
+            letter-spacing: .1em
+        }
     </style>
 </head>
 
@@ -1300,7 +1447,17 @@
             </div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"
                 title="Toggle light/dark mode">☀</button>
+            <button class="btn-back" id="btnBack" onclick="backToDash()">← Dashboard</button>
         </nav>
+
+        <!-- ADMIN DASHBOARD -->
+        <div class="admin-dashboard" id="adminDash">
+            <div class="dash-header">
+                <h1>Client <em>Dashboard</em></h1>
+                <div class="dash-sub">Select a client to view their portal</div>
+            </div>
+            <div class="client-grid" id="clientGrid"></div>
+        </div>
 
         <!-- STATUS BANNER -->
         <div class="status-banner" id="statusBanner">
@@ -1835,54 +1992,137 @@
     </div><!-- end portal-content -->
 
     <script>
-        // Role-based access — auto-detect from password
-        const PASSWORDS = { admin: 'rahulfx3d', client: 'client' };
+        // ═══ CLIENT REGISTRY ═══
+        const ADMIN_PASS = 'rahulfx3d';
+        const CLIENTS = [
+            { id: 'client001', name: 'Client 001', company: '', password: 'client001', project: '' }
+        ];
+
+        let currentRole = null;
+        let currentClient = null;
+
+        // Build dashboard cards
+        function renderDashboard() {
+            const grid = document.getElementById('clientGrid');
+            grid.innerHTML = '';
+            CLIENTS.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'client-card';
+                card.onclick = () => openClient(c);
+                card.innerHTML = `
+                    <div class="client-card-id">${c.id}</div>
+                    <div class="client-card-name">${c.name || 'Unnamed'}</div>
+                    <div class="client-card-company">${c.company || '—'}</div>
+                    <div class="client-card-project">${c.project || 'No project set'}</div>
+                    <div class="client-card-pass">${c.password}</div>`;
+                grid.appendChild(card);
+            });
+            // Add "Add Client" placeholder card
+            const add = document.createElement('div');
+            add.className = 'add-client-card';
+            add.innerHTML = '<div class="add-client-icon">+</div><div class="add-client-text">Add client in JS array</div>';
+            grid.appendChild(add);
+        }
 
         function checkGate() {
             const input = document.getElementById('gatePass');
             const val = input.value;
-            let role = null;
-            if (val === PASSWORDS.admin) role = 'admin';
-            else if (val === PASSWORDS.client) role = 'client';
-            if (role) {
-                sessionStorage.setItem('portal-auth', role);
-                unlockPortal(role);
-            } else {
-                document.getElementById('gateError').textContent = 'Invalid access code. Please try again.';
-                input.value = '';
-                input.focus();
-                input.style.borderColor = '#c94c4c';
-                setTimeout(() => input.style.borderColor = '', 1500);
+            // Check admin
+            if (val === ADMIN_PASS) {
+                currentRole = 'admin';
+                sessionStorage.setItem('portal-auth', 'admin');
+                sessionStorage.removeItem('portal-client');
+                unlockPortal('admin');
+                return;
             }
+            // Check client passwords
+            const client = CLIENTS.find(c => c.password === val);
+            if (client) {
+                currentRole = 'client';
+                currentClient = client;
+                sessionStorage.setItem('portal-auth', 'client');
+                sessionStorage.setItem('portal-client', client.id);
+                unlockPortal('client', client);
+                return;
+            }
+            // Invalid
+            document.getElementById('gateError').textContent = 'Invalid access code. Please try again.';
+            input.value = '';
+            input.focus();
+            input.style.borderColor = '#c94c4c';
+            setTimeout(() => input.style.borderColor = '', 1500);
         }
 
-        function unlockPortal(role) {
+        function unlockPortal(role, client) {
             document.getElementById('adminGate').classList.add('hidden');
             document.getElementById('portalContent').classList.add('unlocked');
+            // Badge
             const existing = document.querySelector('.role-badge');
             if (existing) existing.remove();
             const badge = document.createElement('span');
             badge.className = 'role-badge ' + role;
-            badge.textContent = role === 'admin' ? '✓ Admin' : '◎ View Only';
+            badge.textContent = role === 'admin' ? '✓ Admin' : '◎ ' + (client ? client.name : 'Client');
             document.querySelector('nav').appendChild(badge);
-            if (role === 'client') {
+
+            if (role === 'admin') {
+                // Show dashboard, hide portal panels
+                renderDashboard();
+                document.getElementById('adminDash').classList.add('active');
+                document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+                document.getElementById('statusBanner').style.display = 'none';
+                document.body.classList.remove('client-mode');
+            } else {
+                // Client: show portal directly, hide dashboard
+                document.getElementById('adminDash').classList.remove('active');
+                document.getElementById('statusBanner').style.display = '';
                 document.body.classList.add('client-mode');
-                // Lock only Rahul's tasks, allow Client/Both tasks
                 document.querySelectorAll('.task').forEach(task => {
                     const owner = task.querySelector('.to');
-                    if (owner && owner.classList.contains('y')) {
-                        task.classList.add('locked');
-                    }
+                    if (owner && owner.classList.contains('y')) task.classList.add('locked');
                 });
-            } else {
-                document.body.classList.remove('client-mode');
+                if (client) prefillClient(client);
             }
+        }
+
+        function openClient(client) {
+            currentClient = client;
+            // Hide dashboard, show portal panels
+            document.getElementById('adminDash').classList.remove('active');
+            document.querySelectorAll('.panel').forEach(p => p.style.display = '');
+            document.querySelector('.panel.active') || document.getElementById('panel-contract').classList.add('active');
+            document.getElementById('statusBanner').style.display = '';
+            document.getElementById('btnBack').classList.add('show');
+            // Pre-fill client data
+            prefillClient(client);
+            window.scrollTo(0, 0);
+        }
+
+        function prefillClient(client) {
+            // Pre-fill contract fields
+            const fields = document.querySelectorAll('.g2 .f input');
+            if (fields[0] && client.name) fields[0].value = client.name;
+            if (fields[1] && client.company) fields[1].value = client.company;
+            if (fields[2] && client.project) fields[2].value = client.project;
+        }
+
+        function backToDash() {
+            document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+            document.getElementById('adminDash').classList.add('active');
+            document.getElementById('statusBanner').style.display = 'none';
+            document.getElementById('btnBack').classList.remove('show');
+            window.scrollTo(0, 0);
         }
 
         // Auto-unlock if already authenticated this session
         const savedRole = sessionStorage.getItem('portal-auth');
         if (savedRole) {
-            unlockPortal(savedRole);
+            if (savedRole === 'client') {
+                const savedId = sessionStorage.getItem('portal-client');
+                const client = CLIENTS.find(c => c.id === savedId);
+                unlockPortal('client', client);
+            } else {
+                unlockPortal('admin');
+            }
         }
 
         // Theme toggle
