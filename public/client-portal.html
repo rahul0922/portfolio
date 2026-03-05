@@ -1415,6 +1415,176 @@
             font-size: .68rem;
             letter-spacing: .1em
         }
+
+        /* PRINT / EXPORT PDF */
+        @media print {
+
+            *,
+            *::before,
+            *::after {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact
+            }
+
+            :root {
+                --ink: #0d0d0d;
+                --dim: #555;
+                --bg: #fff;
+                --surf: #f8f8f6;
+                --raise: #f0ede8;
+                --line: #ddd;
+                --gold: #b8922e
+            }
+
+            html {
+                color-scheme: light;
+                font-size: 14px
+            }
+
+            body {
+                background: #fff;
+                color: #0d0d0d
+            }
+
+            /* Hide UI elements */
+            nav,
+            footer,
+            .admin-gate,
+            .admin-dashboard,
+            .status-banner,
+            .ar,
+            .btn-back,
+            .role-badge,
+            .theme-toggle,
+            .portal-content:not(.unlocked),
+            .hero,
+            .sig-sec,
+            .psec,
+            .badge {
+                display: none !important
+            }
+
+            /* Show only the active panel */
+            .portal-content {
+                display: block !important
+            }
+
+            .panel {
+                display: none !important;
+                padding-top: 0 !important;
+                min-height: auto !important
+            }
+
+            .panel.active {
+                display: block !important
+            }
+
+            .wrap {
+                padding: 0;
+                max-width: 100%
+            }
+
+            /* Expand all contract clauses */
+            .cb,
+            .cb2 {
+                max-height: none !important;
+                padding-bottom: 14px !important;
+                overflow: visible !important
+            }
+
+            .ca {
+                display: none !important
+            }
+
+            /* Clean up form fields for print */
+            .g2 {
+                background: none;
+                border: 1px solid #ddd
+            }
+
+            .f {
+                border-bottom: 1px solid #eee
+            }
+
+            .f input,
+            .f select {
+                border: none;
+                border-bottom: 1px solid #ccc;
+                font-size: .9rem
+            }
+
+            /* Invoice table */
+            table.it {
+                font-size: .85rem
+            }
+
+            .ni {
+                border: none;
+                border-bottom: 1px solid #ccc
+            }
+
+            /* Progress - expand all phases */
+            .pht {
+                max-height: none !important;
+                overflow: visible !important
+            }
+
+            .pha {
+                display: none !important
+            }
+
+            .ck {
+                border: 1.5px solid #999
+            }
+
+            .ck:checked {
+                background: #b8922e;
+                border-color: #b8922e
+            }
+
+            /* Page settings */
+            @page {
+                size: A4;
+                margin: 20mm 15mm 25mm 15mm;
+            }
+
+            /* Printed header */
+            .panel.active::before {
+                content: 'RahulFX3D Studio';
+                display: block;
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 18pt;
+                font-weight: 600;
+                letter-spacing: .04em;
+                margin-bottom: 4px;
+                padding-bottom: 12px;
+                border-bottom: 2px solid #b8922e;
+                color: #0d0d0d;
+            }
+
+            /* Printed footer */
+            .panel.active::after {
+                content: 'RahulFX3D Studio  ·  rahul@rahulfx3d.studio  ·  rahulfx3d.studio  ·  Confidential';
+                display: block;
+                text-align: center;
+                font-size: 8pt;
+                color: #999;
+                margin-top: 40px;
+                padding-top: 14px;
+                border-top: 1px solid #ddd;
+                font-family: 'DM Mono', monospace;
+                letter-spacing: .08em;
+            }
+
+            /* Avoid page breaks in bad places */
+            .clause,
+            .task,
+            .tots,
+            .brow,
+            .g2 {
+                page-break-inside: avoid
+            }
+        }
     </style>
 </head>
 
