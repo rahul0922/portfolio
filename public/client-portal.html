@@ -1484,11 +1484,14 @@
 
                 <div class="divider">Project Details <span>01</span></div>
                 <div class="g2">
-                    <div class="f"><label>Client Full Name</label><input placeholder="e.g. John Smith" /></div>
-                    <div class="f"><label>Company / Brand</label><input placeholder="e.g. Acme Inc." /></div>
-                    <div class="f"><label>Project Title</label><input placeholder="e.g. Product CGI Ad — Q1 2026" />
+                    <div class="f"><label>Client Full Name</label><input id="c-name" placeholder="e.g. John Smith"
+                            oninput="syncFields()" /></div>
+                    <div class="f"><label>Company / Brand</label><input id="c-company" placeholder="e.g. Acme Inc."
+                            oninput="syncFields()" /></div>
+                    <div class="f"><label>Project Title</label><input id="c-project"
+                            placeholder="e.g. Product CGI Ad — Q1 2026" oninput="syncFields()" />
                     </div>
-                    <div class="f"><label>Service Type</label><select>
+                    <div class="f"><label>Service Type</label><select id="c-service" onchange="syncFields()">
                             <option value="">Select service...</option>
                             <option>3D Product Ad</option>
                             <option>Social Media CGI Ad</option>
@@ -1496,8 +1499,10 @@
                             <option>Full Brand Commercial</option>
                             <option>Multiple Services</option>
                         </select></div>
-                    <div class="f"><label>Start Date</label><input type="date" /></div>
-                    <div class="f"><label>Delivery Deadline</label><input type="date" /></div>
+                    <div class="f"><label>Start Date</label><input id="c-start" type="date" oninput="syncFields()" />
+                    </div>
+                    <div class="f"><label>Delivery Deadline</label><input id="c-deadline" type="date"
+                            oninput="syncFields()" /></div>
                     <div class="f"><label>Total Project Value (USD)</label><input placeholder="$ 0.00" /></div>
                     <div class="f"><label>Deposit Required</label><input value="50% upfront — non-refundable" readonly
                             style="color:var(--dim)" /></div>
@@ -1643,12 +1648,14 @@
                 </div>
 
                 <div class="brow">
-                    <div class="bblk"><label>Bill To</label><input class="bi" placeholder="Client name" /><input
-                            class="bi" placeholder="Company / Brand" /><input class="bi"
+                    <div class="bblk"><label>Bill To</label><input class="bi" id="i-name"
+                            placeholder="Client name" /><input class="bi" id="i-company"
+                            placeholder="Company / Brand" /><input class="bi" id="i-email"
                             placeholder="Email address" /><input class="bi" placeholder="Country" /></div>
-                    <div class="bblk"><label>Project</label><input class="bi" placeholder="Project title" /><input
-                            class="bi" placeholder="Service type" /><input class="bi" type="date" /><input class="bi"
-                            placeholder="Notes (optional)" /></div>
+                    <div class="bblk"><label>Project</label><input class="bi" id="i-project"
+                            placeholder="Project title" /><input class="bi" id="i-service"
+                            placeholder="Service type" /><input class="bi" id="i-delivery" type="date" /><input
+                            class="bi" placeholder="Notes (optional)" /></div>
                 </div>
 
                 <table class="it">
@@ -1757,10 +1764,10 @@
                 </div>
 
                 <div class="g2" style="margin-bottom:44px">
-                    <div class="f"><label>Client</label><input placeholder="Client name" /></div>
-                    <div class="f"><label>Project</label><input placeholder="Project title" /></div>
-                    <div class="f"><label>Start Date</label><input type="date" /></div>
-                    <div class="f"><label>Deadline</label><input type="date" /></div>
+                    <div class="f"><label>Client</label><input id="p-name" placeholder="Client name" /></div>
+                    <div class="f"><label>Project</label><input id="p-project" placeholder="Project title" /></div>
+                    <div class="f"><label>Start Date</label><input id="p-start" type="date" /></div>
+                    <div class="f"><label>Deadline</label><input id="p-deadline" type="date" /></div>
                 </div>
 
                 <div class="prog">
@@ -2098,11 +2105,32 @@
         }
 
         function prefillClient(client) {
-            // Pre-fill contract fields
-            const fields = document.querySelectorAll('.g2 .f input');
-            if (fields[0] && client.name) fields[0].value = client.name;
-            if (fields[1] && client.company) fields[1].value = client.company;
-            if (fields[2] && client.project) fields[2].value = client.project;
+            if (client.name) document.getElementById('c-name').value = client.name;
+            if (client.company) document.getElementById('c-company').value = client.company;
+            if (client.project) document.getElementById('c-project').value = client.project;
+            syncFields();
+        }
+
+        function syncFields() {
+            const name = document.getElementById('c-name').value;
+            const company = document.getElementById('c-company').value;
+            const project = document.getElementById('c-project').value;
+            const service = document.getElementById('c-service').value;
+            const start = document.getElementById('c-start').value;
+            const deadline = document.getElementById('c-deadline').value;
+            // → Invoice
+            document.getElementById('i-name').value = name;
+            document.getElementById('i-company').value = company;
+            document.getElementById('i-project').value = project;
+            document.getElementById('i-service').value = service;
+            document.getElementById('i-delivery').value = deadline;
+            // → Progress
+            document.getElementById('p-name').value = name;
+            document.getElementById('p-project').value = project;
+            document.getElementById('p-start').value = start;
+            document.getElementById('p-deadline').value = deadline;
+            // → Signature name
+            document.getElementById('cname').placeholder = name || 'Type full name to confirm';
         }
 
         function backToDash() {
