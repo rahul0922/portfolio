@@ -1416,6 +1416,97 @@
             letter-spacing: .1em
         }
 
+        .add-client-card {
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .add-client-card:hover {
+            border-color: var(--gold)
+        }
+
+        /* ADD CLIENT MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .7);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px)
+        }
+
+        .modal-overlay.show {
+            display: flex
+        }
+
+        .modal-card {
+            background: var(--surf);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 32px;
+            width: 400px;
+            max-width: 90vw;
+            animation: fadeUp .3s ease
+        }
+
+        .modal-card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 20px
+        }
+
+        .modal-card h2 em {
+            color: var(--gold);
+            font-style: italic
+        }
+
+        .modal-field {
+            margin-bottom: 14px
+        }
+
+        .modal-field label {
+            display: block;
+            font-size: .58rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 6px
+        }
+
+        .modal-field input {
+            width: 100%;
+            background: var(--raise);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 10px 14px;
+            font-family: 'DM Mono', monospace;
+            font-size: .82rem;
+            color: var(--ink);
+            outline: none;
+            transition: border-color .2s
+        }
+
+        .modal-field input:focus {
+            border-color: var(--gold)
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+            justify-content: center
+        }
+
         /* TOAST NOTIFICATIONS */
         .toast-container {
             position: fixed;
@@ -2517,6 +2608,15 @@
         const CLIENTS = [
             { id: 'client001', name: 'Client 001', company: '', password: 'client001', project: '' }
         ];
+        // Load any saved clients from localStorage
+        (function () {
+            const saved = localStorage.getItem('portal-clients');
+            if (saved) {
+                const arr = JSON.parse(saved);
+                CLIENTS.length = 0;
+                arr.forEach(c => CLIENTS.push(c));
+            }
+        })();
 
         let currentRole = null;
         let currentClient = null;
@@ -2540,7 +2640,9 @@
             // Add "Add Client" placeholder card
             const add = document.createElement('div');
             add.className = 'add-client-card';
-            add.innerHTML = '<div class="add-client-icon">+</div><div class="add-client-text">Add client in JS array</div>';
+            add.innerHTML = '<div class="add-client-icon">+</div><div class="add-client-text">Add new client</div>';
+            add.style.cursor = 'pointer';
+            add.onclick = () => showAddClientModal();
             grid.appendChild(add);
         }
 
@@ -2650,6 +2752,59 @@
             // → Contract total to invoice first line item
             const total = document.getElementById('c-total').value.replace(/[^0-9.]/g, '');
             if (total) document.getElementById('p1').value = total;
+        }
+
+        // ═══ ADD CLIENT MODAL ═══
+        function showAddClientModal() {
+            let overlay = document.getElementById('addClientModal');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'modal-overlay';
+                overlay.id = 'addClientModal';
+                overlay.innerHTML = `
+                    <div class="modal-card">
+                        <h2>Add <em>Client</em></h2>
+                        <div class="modal-field"><label>Client Name</label><input id="nc-name" placeholder="e.g. John Smith" /></div>
+                        <div class="modal-field"><label>Company / Brand</label><input id="nc-company" placeholder="e.g. Acme Inc." /></div>
+                        <div class="modal-field"><label>Project Title</label><input id="nc-project" placeholder="e.g. Product CGI Ad" /></div>
+                        <div class="modal-field"><label>Password</label><input id="nc-pass" placeholder="Auto-generated" /></div>
+                        <div class="modal-actions">
+                            <button class="btn bo" onclick="closeAddClientModal()">Cancel</button>
+                            <button class="btn bg" onclick="addNewClient()">+ Add Client</button>
+                        </div>
+                    </div>`;
+                overlay.addEventListener('click', e => { if (e.target === overlay) closeAddClientModal(); });
+                document.body.appendChild(overlay);
+            }
+            // Auto-generate password
+            const nextNum = String(CLIENTS.length + 1).padStart(3, '0');
+            document.getElementById('nc-pass').value = 'client' + nextNum;
+            document.getElementById('nc-name').value = '';
+            document.getElementById('nc-company').value = '';
+            document.getElementById('nc-project').value = '';
+            overlay.classList.add('show');
+            setTimeout(() => document.getElementById('nc-name').focus(), 100);
+        }
+
+        function closeAddClientModal() {
+            document.getElementById('addClientModal').classList.remove('show');
+        }
+
+        function addNewClient() {
+            const name = document.getElementById('nc-name').value.trim();
+            const company = document.getElementById('nc-company').value.trim();
+            const project = document.getElementById('nc-project').value.trim();
+            const pass = document.getElementById('nc-pass').value.trim();
+            if (!name) { document.getElementById('nc-name').style.borderColor = '#c94c4c'; return; }
+            if (!pass) { document.getElementById('nc-pass').style.borderColor = '#c94c4c'; return; }
+            const id = 'client' + String(CLIENTS.length + 1).padStart(3, '0');
+            const newClient = { id, name, company, password: pass, project };
+            CLIENTS.push(newClient);
+            // Save to localStorage
+            localStorage.setItem('portal-clients', JSON.stringify(CLIENTS));
+            closeAddClientModal();
+            renderDashboard();
+            showToast('✓ Added ' + name);
         }
 
         function backToDash() {
