@@ -44,19 +44,10 @@
     box-shadow: 0 0 15px rgba(235, 89, 57, 0.2);
 }
 
-/* Override parent elements that restrict position: sticky */
-html,
-body,
-#main,
-.main,
-.work,
-.layer,
-.layer__dark,
-.container,
+/* Override parent overflow only for the video bento section */
 .video,
 .videoPlayer {
     overflow: visible !important;
-    overflow-x: clip !important;
 }
 
 /* Bento Layout - Unlimited Scroll Design */
@@ -82,14 +73,11 @@ body,
     transform: translateY(0) scale(1);
 }
 
-/* Main Stage — Sticky */
+/* Main Stage */
 .bento_main_stage {
     flex: 1.5;
     /* Takes up 60% of the width */
-    position: -webkit-sticky;
-    position: sticky;
-    top: 100px;
-    /* How far from top it sticks */
+    position: relative;
     border-radius: 12px;
     overflow: hidden;
     background: #000;
@@ -97,7 +85,6 @@ body,
     border: 1px solid rgba(255, 255, 255, 0.06);
     cursor: pointer;
     aspect-ratio: 16/9;
-    /* Restoring aspect ratio just for the player */
     z-index: 20;
 }
 
