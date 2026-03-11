@@ -207,33 +207,40 @@
                     });
 
                     setTimeout(() => {
-                        // Remove all items from sidebars
-                        bentoSidebar.innerHTML = '';
-                        if (bentoSidebarRed) bentoSidebarRed.innerHTML = '';
-
-                        // Add back only the matching items
+                        // Use class-based grid positioning instead of removing DOM nodes (avoids video blackouts)
                         let firstVisibleItem = null;
 
-                        allItems.forEach(item => {
-                            const itemCategory = item.getAttribute('data-category');
-                            if (filterValue === 'all' || itemCategory === filterValue) {
-                                // determine which sidebar this belongs to
-                                const isRedLayer = item.querySelector('h3.text-dark') !== null;
+                        function updateGridPositions(sidebarContainer) {
+                            if (!sidebarContainer) return null;
+                            let pos = 1;
+                            let first = null;
+                            const items = sidebarContainer.querySelectorAll('.bento_item');
+                            items.forEach(item => {
+                                // remove all old pos- classes
+                                for (let i = 1; i <= 10; i++) item.classList.remove('pos-' + i);
 
-                                if (isRedLayer && bentoSidebarRed) {
-                                    bentoSidebarRed.appendChild(item);
+                                const itemCategory = item.getAttribute('data-category');
+                                if (filterValue === 'all' || itemCategory === filterValue) {
+                                    item.style.display = '';
+                                    item.classList.add('pos-' + pos);
+                                    if (!first) first = item;
+                                    pos++;
+
+                                    // Let CSS take over
+                                    setTimeout(() => {
+                                        item.style.opacity = '';
+                                        item.style.transform = '';
+                                    }, 50);
                                 } else {
-                                    bentoSidebar.appendChild(item);
-                                    if (!firstVisibleItem) firstVisibleItem = item;
+                                    item.style.display = 'none';
                                 }
+                            });
+                            return first;
+                        }
 
-                                // Reset inline styles so CSS classes take over, but timeout to allow reflow
-                                setTimeout(() => {
-                                    item.style.opacity = '';
-                                    item.style.transform = '';
-                                }, 50);
-                            }
-                        });
+                        firstVisibleItem = updateGridPositions(bentoSidebar);
+                        updateGridPositions(bentoSidebarRed);
+
 
                         // Automatically snap the main stage to the first item of the newly selected category
                         const mainVideoRed = document.getElementById('mainVideo_red');
@@ -267,6 +274,17 @@
         // Initialize with first sidebar item's info
         const firstItem = document.querySelector('.bento_item');
         if (firstItem) {
+            // Setup initial grid classes
+            const setupInitialPositions = (sidebarContainer) => {
+                if (!sidebarContainer) return;
+                let pos = 1;
+                sidebarContainer.querySelectorAll('.bento_item').forEach(item => {
+                    item.classList.add('pos-' + pos++);
+                });
+            };
+            setupInitialPositions(bentoSidebar);
+            setupInitialPositions(document.getElementById('bento_sidebar_red'));
+
             updateActiveState(mainVideo.getAttribute('src'));
             // Set initial info bar from first active item or first item
             const activeItem = document.querySelector('.bento_item.is-active') || firstItem;
