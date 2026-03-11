@@ -167,6 +167,72 @@
                 });
             }
         });
+        // --- Portfolio Category Filtering ---
+        const filterTabs = document.querySelectorAll('.portfolio-tab');
+        const bentoSidebar = document.querySelector('.bento_sidebar');
+
+        if (filterTabs.length > 0 && bentoSidebar) {
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active tab state
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const filterValue = tab.getAttribute('data-filter');
+
+                    // Filter items
+                    const allItems = Array.from(bentoItems);
+
+                    // First temporarily scale down all items for a smooth exit transition
+                    allItems.forEach(item => {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                    });
+
+                    setTimeout(() => {
+                        // Remove all items from sidebar
+                        bentoSidebar.innerHTML = '';
+
+                        // Add back only the matching items
+                        let firstVisibleItem = null;
+
+                        allItems.forEach(item => {
+                            const itemCategory = item.getAttribute('data-category');
+                            if (filterValue === 'all' || itemCategory === filterValue) {
+                                bentoSidebar.appendChild(item);
+                                if (!firstVisibleItem) firstVisibleItem = item;
+
+                                // Reset inline styles so CSS classes take over, but timeout to allow reflow
+                                setTimeout(() => {
+                                    item.style.opacity = '';
+                                    item.style.transform = '';
+                                }, 50);
+                            }
+                        });
+
+                        // Automatically snap the main stage to the first item of the newly selected category
+                        if (firstVisibleItem) {
+                            const newSrc = firstVisibleItem.getAttribute('data-src');
+                            if (newSrc && mainVideo.getAttribute('src') !== newSrc) {
+                                mainVideo.src = newSrc;
+                                mainVideo.play();
+                                bentoStage.classList.add('is-playing');
+                                playIcon.style.display = 'none';
+                                pauseIcon.style.display = 'block';
+                                updateInfoBar(firstVisibleItem);
+
+                                bentoItems.forEach(i => i.classList.remove('is-active'));
+                                firstVisibleItem.classList.add('is-active');
+                            } else if (newSrc === mainVideo.getAttribute('src')) {
+                                bentoItems.forEach(i => i.classList.remove('is-active'));
+                                firstVisibleItem.classList.add('is-active');
+                                updateInfoBar(firstVisibleItem);
+                            }
+                        }
+                    }, 300);
+                });
+            });
+        }
 
         // Initialize with first sidebar item's info
         const firstItem = document.querySelector('.bento_item');
