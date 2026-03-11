@@ -4,12 +4,11 @@
     justify-content: center;
     gap: 15px;
     margin-bottom: 30px;
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: translateY(0);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.video_bento_grid.in-view~.portfolio-filter-tabs,
 .portfolio-filter-tabs.in-view {
     opacity: 1;
     transform: translateY(0);

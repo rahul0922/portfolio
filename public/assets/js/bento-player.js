@@ -158,30 +158,47 @@
             if (smallVideo) {
                 item.addEventListener('mouseenter', () => {
                     smallVideo.play().catch(() => { });
+                    // Sync the play on the red layer version too since it ignores pointer events
+                    const itemSrc = item.getAttribute('data-src');
+                    const redVideos = document.querySelectorAll(`#bento_sidebar_red .bento_item[data-src="${itemSrc}"] video`);
+                    redVideos.forEach(v => v.play().catch(() => { }));
                 });
                 item.addEventListener('mouseleave', () => {
                     smallVideo.pause();
                     smallVideo.currentTime = 0;
-                    // Reload video to force poster/thumbnail to show again
                     smallVideo.load();
+                    // Sync the pause on the red layer version too
+                    const itemSrc = item.getAttribute('data-src');
+                    const redVideos = document.querySelectorAll(`#bento_sidebar_red .bento_item[data-src="${itemSrc}"] video`);
+                    redVideos.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                        v.load();
+                    });
                 });
             }
         });
         // --- Portfolio Category Filtering ---
         const filterTabs = document.querySelectorAll('.portfolio-tab');
         const bentoSidebar = document.querySelector('.bento_sidebar');
+        const bentoSidebarRed = document.getElementById('bento_sidebar_red');
+
+        // Only get the base bentoItems to track filtering
+        const baseBentoItems = Array.from(document.querySelectorAll('.bento_sidebar .bento_item'));
 
         if (filterTabs.length > 0 && bentoSidebar) {
             filterTabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    // Update active tab state
-                    filterTabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-
+                    // Update active tab state (for both layers of tabs)
                     const filterValue = tab.getAttribute('data-filter');
 
+                    filterTabs.forEach(t => {
+                        if (t.getAttribute('data-filter') === filterValue) t.classList.add('active');
+                        else t.classList.remove('active');
+                    });
+
                     // Filter items
-                    const allItems = Array.from(bentoItems);
+                    const allItems = Array.from(document.querySelectorAll('.bento_item')); // Gets from both layers
 
                     // First temporarily scale down all items for a smooth exit transition
                     allItems.forEach(item => {
@@ -190,8 +207,9 @@
                     });
 
                     setTimeout(() => {
-                        // Remove all items from sidebar
+                        // Remove all items from sidebars
                         bentoSidebar.innerHTML = '';
+                        if (bentoSidebarRed) bentoSidebarRed.innerHTML = '';
 
                         // Add back only the matching items
                         let firstVisibleItem = null;
@@ -199,8 +217,15 @@
                         allItems.forEach(item => {
                             const itemCategory = item.getAttribute('data-category');
                             if (filterValue === 'all' || itemCategory === filterValue) {
-                                bentoSidebar.appendChild(item);
-                                if (!firstVisibleItem) firstVisibleItem = item;
+                                // determine which sidebar this belongs to
+                                const isRedLayer = item.querySelector('h3.text-dark') !== null;
+
+                                if (isRedLayer && bentoSidebarRed) {
+                                    bentoSidebarRed.appendChild(item);
+                                } else {
+                                    bentoSidebar.appendChild(item);
+                                    if (!firstVisibleItem) firstVisibleItem = item;
+                                }
 
                                 // Reset inline styles so CSS classes take over, but timeout to allow reflow
                                 setTimeout(() => {
@@ -211,21 +236,26 @@
                         });
 
                         // Automatically snap the main stage to the first item of the newly selected category
+                        const mainVideoRed = document.getElementById('mainVideo_red');
                         if (firstVisibleItem) {
                             const newSrc = firstVisibleItem.getAttribute('data-src');
                             if (newSrc && mainVideo.getAttribute('src') !== newSrc) {
                                 mainVideo.src = newSrc;
+                                if (mainVideoRed) mainVideoRed.src = newSrc;
+
                                 mainVideo.play();
                                 bentoStage.classList.add('is-playing');
                                 playIcon.style.display = 'none';
                                 pauseIcon.style.display = 'block';
                                 updateInfoBar(firstVisibleItem);
 
-                                bentoItems.forEach(i => i.classList.remove('is-active'));
-                                firstVisibleItem.classList.add('is-active');
+                                document.querySelectorAll('.bento_item').forEach(i => i.classList.remove('is-active'));
+                                // Add active to the matched items in both bases
+                                document.querySelectorAll(`.bento_item[data-src="${newSrc}"]`).forEach(i => i.classList.add('is-active'));
+
                             } else if (newSrc === mainVideo.getAttribute('src')) {
-                                bentoItems.forEach(i => i.classList.remove('is-active'));
-                                firstVisibleItem.classList.add('is-active');
+                                document.querySelectorAll('.bento_item').forEach(i => i.classList.remove('is-active'));
+                                document.querySelectorAll(`.bento_item[data-src="${newSrc}"]`).forEach(i => i.classList.add('is-active'));
                                 updateInfoBar(firstVisibleItem);
                             }
                         }
