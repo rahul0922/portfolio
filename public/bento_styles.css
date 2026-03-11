@@ -44,6 +44,21 @@
     box-shadow: 0 0 15px rgba(235, 89, 57, 0.2);
 }
 
+/* Override parent elements that restrict position: sticky */
+html,
+body,
+#main,
+.main,
+.work,
+.layer,
+.layer__dark,
+.container,
+.video,
+.videoPlayer {
+    overflow: visible !important;
+    overflow-x: clip !important;
+}
+
 /* Bento Layout - Unlimited Scroll Design */
 .video_bento_grid {
     display: flex;
@@ -71,6 +86,7 @@
 .bento_main_stage {
     flex: 1.5;
     /* Takes up 60% of the width */
+    position: -webkit-sticky;
     position: sticky;
     top: 100px;
     /* How far from top it sticks */
