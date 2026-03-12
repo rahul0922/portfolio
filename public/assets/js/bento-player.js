@@ -150,6 +150,12 @@
                     pauseIcon.style.display = 'block';
                     updateActiveState(newSrc);
                     updateInfoBar(this);
+
+                    // Sync the red layer main video
+                    const mainVideoRed = document.getElementById('mainVideo_red');
+                    if (mainVideoRed) {
+                        mainVideoRed.src = newSrc;
+                    }
                 }
             });
 
