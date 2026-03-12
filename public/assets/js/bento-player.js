@@ -226,7 +226,9 @@
                                 for (let i = 1; i <= 10; i++) item.classList.remove('pos-' + i);
 
                                 const itemCategory = item.getAttribute('data-category');
-                                if (filterValue === 'all' || itemCategory === filterValue) {
+                                const hideInAll = item.classList.contains('hide-in-all');
+                                
+                                if ((filterValue === 'all' && !hideInAll) || itemCategory === filterValue) {
                                     item.style.display = '';
                                     item.classList.add('pos-' + pos);
                                     if (!first) first = item;
