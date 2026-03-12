@@ -287,7 +287,11 @@
                 if (!sidebarContainer) return;
                 let pos = 1;
                 sidebarContainer.querySelectorAll('.bento_item').forEach(item => {
-                    item.classList.add('pos-' + pos++);
+                    if (item.classList.contains('hide-in-all')) {
+                        item.style.display = 'none';
+                    } else {
+                        item.classList.add('pos-' + pos++);
+                    }
                 });
             };
             setupInitialPositions(bentoSidebar);
