@@ -279,28 +279,32 @@
             });
         }
 
-        // Initialize with first sidebar item's info
-        const firstItem = document.querySelector('.bento_item');
-        if (firstItem) {
-            // Setup initial grid classes
-            const setupInitialPositions = (sidebarContainer) => {
+        // Initialize by applying the active tab's filter directly
+        const activeTab = document.querySelector('.portfolio-tab.active[data-filter]');
+        if (activeTab) {
+            const filterValue = activeTab.getAttribute('data-filter');
+
+            function initGridPositions(sidebarContainer) {
                 if (!sidebarContainer) return;
                 let pos = 1;
                 sidebarContainer.querySelectorAll('.bento_item').forEach(item => {
-                    if (item.classList.contains('hide-in-all')) {
-                        item.style.display = 'none';
-                    } else {
+                    for (let i = 1; i <= 10; i++) item.classList.remove('pos-' + i);
+                    const itemCategory = item.getAttribute('data-category');
+                    if (itemCategory === filterValue) {
+                        item.style.display = '';
                         item.classList.add('pos-' + pos++);
+                    } else {
+                        item.style.display = 'none';
                     }
                 });
-            };
-            setupInitialPositions(bentoSidebar);
-            setupInitialPositions(document.getElementById('bento_sidebar_red'));
+            }
 
+            initGridPositions(bentoSidebar);
+            initGridPositions(bentoSidebarRed);
             updateActiveState(mainVideo.getAttribute('src'));
-            // Set initial info bar from first active item or first item
-            const activeItem = document.querySelector('.bento_item.is-active') || firstItem;
-            updateInfoBar(activeItem);
+            const activeItem = document.querySelector('.bento_sidebar .bento_item[data-category="' + filterValue + '"][data-src="' + mainVideo.getAttribute('src') + '"]')
+                || document.querySelector('.bento_sidebar .bento_item[data-category="' + filterValue + '"]');
+            if (activeItem) updateInfoBar(activeItem);
         }
 
         // --- Scroll Animation Observer ---
