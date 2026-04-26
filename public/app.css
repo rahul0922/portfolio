@@ -5847,7 +5847,7 @@ canvas.three-app {
 
 .about.about__red {
     position: relative;
-    margin-top: 96px !important;
+    margin-top: -45px !important;
     margin-bottom: -150px !important;
 }
 
@@ -6017,7 +6017,7 @@ canvas.three-app {
 }
 
 .work__red .work_experience {
-    margin-top: 350px !important;
+    margin-top: 790px !important;
     margin-bottom: .1875rem
 }
 
@@ -11388,12 +11388,12 @@ html {
 
 /* Client section red layer spacing */
 .client.client__red {
-    margin-top: 8.3vh;
+    margin-top: 420px !important;
 }
 
 /* Motto wrapper red layer spacing */
 .motto-red-wrapper {
-    margin-top: 65vh;
+    margin-top: 10vh;
 }
 
 /* Tablet adjustments (768px – 1199px) */
@@ -11403,11 +11403,19 @@ html {
     }
 
     .client.client__red {
-        margin-top: 5vh;
+        margin-top: 300px !important;
     }
 
     .motto-red-wrapper {
-        margin-top: 53vh;
+        margin-top: 8vh;
+    }
+    
+    .work__red .work_experience {
+        margin-top: 600px !important;
+    }
+    
+    .about.about__red {
+        margin-top: -30px !important;
     }
 }
 
@@ -11418,7 +11426,19 @@ html {
     }
 
     .client.client__red {
-        margin-top: 30px !important;
+        margin-top: 250px !important;
+    }
+
+    .motto-red-wrapper {
+        margin-top: 5vh;
+    }
+
+    .work__red .work_experience {
+        margin-top: 450px !important;
+    }
+
+    .about.about__red {
+        margin-top: -15px !important;
     }
 
     .testimonials.testimonials__red {
