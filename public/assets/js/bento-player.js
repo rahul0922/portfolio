@@ -33,6 +33,11 @@
 
         if (!mainVideo) return;
 
+        // Assign view transition names dynamically to all bento items
+        bentoItems.forEach((item, index) => {
+            item.style.viewTransitionName = `bento-item-${index}`;
+        });
+
         // --- Info Bar Update ---
         function updateInfoBar(item) {
             if (!item || !infoProjectName) return;
@@ -159,17 +164,32 @@
                 }
             });
 
-            // Hover preview
+            // Hover preview & Custom Cursor Interaction
             const smallVideo = item.querySelector('video');
-            if (smallVideo) {
-                item.addEventListener('mouseenter', () => {
+            const cursorEl = document.querySelector('.js-vj-cursor');
+
+            item.addEventListener('mouseenter', () => {
+                if (smallVideo) {
                     smallVideo.play().catch(() => { });
                     // Sync the play on the red layer version too since it ignores pointer events
                     const itemSrc = item.getAttribute('data-src');
                     const redVideos = document.querySelectorAll(`#bento_sidebar_red .bento_item[data-src="${itemSrc}"] video`);
                     redVideos.forEach(v => v.play().catch(() => { }));
-                });
-                item.addEventListener('mouseleave', () => {
+                }
+
+                // Show & style custom cursor inside bento area
+                if (cursorEl) {
+                    cursorEl.classList.add('is-hovering-bento');
+                    if (!cursorEl.hasAttribute('data-original-html')) {
+                        cursorEl.setAttribute('data-original-html', cursorEl.innerHTML);
+                    }
+                    const text = item.getAttribute('data-category') === 'motion' ? 'PLAY' : 'VIEW';
+                    cursorEl.innerHTML = `<span><span class="d-block">${text}</span></span>`;
+                }
+            });
+
+            item.addEventListener('mouseleave', () => {
+                if (smallVideo) {
                     smallVideo.pause();
                     smallVideo.currentTime = 0;
                     smallVideo.load();
@@ -181,8 +201,30 @@
                         v.currentTime = 0;
                         v.load();
                     });
-                });
-            }
+                }
+
+                // Reset custom cursor
+                if (cursorEl) {
+                    cursorEl.classList.remove('is-hovering-bento');
+                    const originalHtml = cursorEl.getAttribute('data-original-html');
+                    if (originalHtml) {
+                        cursorEl.innerHTML = originalHtml;
+                    }
+                }
+
+                // Reset 3D tilt smooth transitions
+                item.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                item.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s';
+            });
+
+            // 3D Parallax Tilt Effect
+            item.addEventListener('mousemove', function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                this.style.transform = `perspective(1000px) rotateX(${y * -10}deg) rotateY(${x * 10}deg) scale3d(1.02, 1.02, 1.02)`;
+                this.style.transition = 'transform 0.1s ease-out, border-color 0.4s, box-shadow 0.4s';
+            });
         });
         // --- Portfolio Category Filtering ---
         const filterTabs = document.querySelectorAll('.portfolio-tab');
@@ -195,24 +237,16 @@
         if (filterTabs.length > 0 && bentoSidebar) {
             filterTabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    // Update active tab state (for both layers of tabs)
                     const filterValue = tab.getAttribute('data-filter');
 
-                    filterTabs.forEach(t => {
-                        if (t.getAttribute('data-filter') === filterValue) t.classList.add('active');
-                        else t.classList.remove('active');
-                    });
+                    // Core filtering state logic
+                    const applyFilter = () => {
+                        // Update active tab state (for both layers of tabs)
+                        filterTabs.forEach(t => {
+                            if (t.getAttribute('data-filter') === filterValue) t.classList.add('active');
+                            else t.classList.remove('active');
+                        });
 
-                    // Filter items
-                    const allItems = Array.from(document.querySelectorAll('.bento_item')); // Gets from both layers
-
-                    // First temporarily scale down all items for a smooth exit transition
-                    allItems.forEach(item => {
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.95)';
-                    });
-
-                    setTimeout(() => {
                         // Use class-based grid positioning instead of removing DOM nodes (avoids video blackouts)
                         let firstVisibleItem = null;
 
@@ -233,12 +267,8 @@
                                     item.classList.add('pos-' + pos);
                                     if (!first) first = item;
                                     pos++;
-
-                                    // Let CSS take over
-                                    setTimeout(() => {
-                                        item.style.opacity = '';
-                                        item.style.transform = '';
-                                    }, 50);
+                                    item.style.opacity = '';
+                                    item.style.transform = '';
                                 } else {
                                     item.style.display = 'none';
                                 }
@@ -248,7 +278,6 @@
 
                         firstVisibleItem = updateGridPositions(bentoSidebar);
                         updateGridPositions(bentoSidebarRed);
-
 
                         // Automatically snap the main stage to the first item of the newly selected category
                         const mainVideoRed = document.getElementById('mainVideo_red');
@@ -274,7 +303,24 @@
                                 updateInfoBar(firstVisibleItem);
                             }
                         }
-                    }, 300);
+                    };
+
+                    // Run view transitions if supported
+                    if (document.startViewTransition) {
+                        document.startViewTransition(() => {
+                            applyFilter();
+                        });
+                    } else {
+                        // Fallback transition for older browsers
+                        const allItems = Array.from(document.querySelectorAll('.bento_item'));
+                        allItems.forEach(item => {
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.95)';
+                        });
+                        setTimeout(() => {
+                            applyFilter();
+                        }, 300);
+                    }
                 });
             });
         }

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Animation & Motion Graphics | RahulFX3D Studio</title>
+    <meta name="description" content="Premium SaaS animation, motion graphics, and ad films by RahulFX3D Studio. Scroll-stopping visuals for startups and tech brands.">
+    <meta name="keywords" content="SaaS animation, motion graphics, ad film, brand video, startup animation, product demo video, RahulFX3D">
+    <meta property="og:title" content="SaaS Animation & Motion Graphics | RahulFX3D Studio">
+    <meta property="og:description" content="Premium SaaS animation, motion graphics, and ad films by RahulFX3D Studio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rahulfx3d.studio/saas-animation.html">
+    <link rel="canonical" href="https://rahulfx3d.studio/saas-animation.html">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+    <link rel="stylesheet" href="saas-styles.css">
+</head>
+<body>
+
+<!-- NAV — Matches homepage header -->
+<header class="hp-header">
+    <div class="hp-header_logo"><a href="index.html"><img src="assets/icons/logo.svg" alt="logo"></a></div>
+    <div class="hp-header_menu">
+        <ul class="hp-menu-list">
+            <li class="hp-menu-item"><a href="index.html"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">Home</span><span class="hp-link hp-link__active">Home</span></span></a></li>
+            <li class="hp-menu-item"><a href="#work"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">Work</span><span class="hp-link hp-link__active">Work</span></span></a></li>
+
+            <li class="hp-menu-item is-active"><a href="saas-animation.html"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">SaaS Animation</span><span class="hp-link hp-link__active">SaaS Animation</span></span></a></li>
+            <li class="hp-menu-item"><a href="client-portal.html" onclick="window.location.href='client-portal.html';return false;"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">Client Portal</span><span class="hp-link hp-link__active">Client Portal</span></span></a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- HERO — Full viewport, animated lines -->
+<section class="saas-hero">
+    <div class="saas-bg-word">MOTION</div>
+    <div class="saas-eyebrow">SaaS Animation &amp; Motion Graphics</div>
+    <h1 class="saas-h1">
+        <span class="line">Scroll-stopping</span>
+        <span class="line"><em>SaaS visuals</em></span>
+        <span class="line">that convert.</span>
+    </h1>
+    <p class="saas-hero-body">
+        Motion graphics, ad films, and brand stories crafted for tech startups
+        and SaaS companies. Every frame designed to capture attention and drive action.
+    </p>
+    <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        Scroll to explore
+    </div>
+</section>
+
+<!-- BENTO VIDEO SECTION — Same layout as homepage -->
+<section class="saas-video-section" id="work">
+    <div class="saas-section-header">
+        <div class="saas-grid-label">Portfolio</div>
+        <h2 class="saas-section-title">Motion work <em>&amp; ad films</em></h2>
+    </div>
+
+    <div class="saas-bento-grid">
+        <!-- Main Stage -->
+        <div class="saas-main-stage" id="mainStage">
+            <video preload="auto" id="mainVideo" playsinline muted loop
+                poster="assets/images/thumb-blue-hour.webp"
+                src="assets/images/Video-390.mp4" width="1920" height="1080"></video>
+            <div class="saas-red-overlay"></div>
+            <div class="saas-player-overlay">
+                <div class="saas-play-btn" id="playBtn">
+                    <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </div>
+            </div>
+            <div class="saas-controls-bar">
+                <div class="saas-progress-container" id="progressContainer">
+                    <div class="saas-progress-bar" id="progressBar"></div>
+                </div>
+                <div class="saas-controls-bottom">
+                    <button class="saas-ctrl-btn" id="muteBtn">
+                        <svg class="icon-unmuted" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                        <svg class="icon-muted" viewBox="0 0 24 24" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                    </button>
+                    <button class="saas-ctrl-btn" id="fullscreenBtn">
+                        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Items -->
+        <div class="saas-sidebar">
+            <div class="saas-item is-active"
+                 data-src="assets/images/Video-390.mp4"
+                 data-title="Notion" data-type="3D Ad Film"
+                 data-client="Skyline Studios" data-country="USA"
+                 data-duration="2 Weeks" data-budget="$850"
+                 data-tools="Cinema 4D, After Effects, Octane Render">
+                <video preload="none" muted loop playsinline
+                    poster="assets/images/thumb-blue-hour.webp"
+                    src="assets/images/Video-390.mp4"></video>
+                <div class="saas-item-content">
+                    <span class="saas-item-tag">3D Ad Film</span>
+                    <h3 class="saas-item-title">Notion</h3>
+                </div>
+            </div>
+            <div class="saas-item"
+                 data-src="assets/images/Instagram.mp4"
+                 data-title="Brand Campaign" data-type="Ad Film"
+                 data-client="Luxe Apparel" data-country="USA"
+                 data-duration="2 Weeks" data-budget="$475"
+                 data-tools="Premiere Pro, After Effects">
+                <video preload="none" muted loop playsinline
+                    poster="assets/images/thumb-instagram-reel.webp"
+                    src="assets/images/Instagram.mp4"></video>
+                <div class="saas-item-content">
+                    <span class="saas-item-tag">Ad Film</span>
+                    <h3 class="saas-item-title">Brand Campaign</h3>
+                </div>
+            </div>
+            <div class="saas-item"
+                 data-src="assets/images/Instagram (1).mp4"
+                 data-title="Gemini" data-type="Brand Story"
+                 data-client="Aurora Brands" data-country="UAE"
+                 data-duration="12 Days" data-budget="$620"
+                 data-tools="Premiere Pro, After Effects, Photoshop">
+                <video preload="none" muted loop playsinline
+                    poster="assets/images/thumb-instagram-content.webp"
+                    src="assets/images/Instagram (1).mp4"></video>
+                <div class="saas-item-content">
+                    <span class="saas-item-tag">Brand Story</span>
+                    <h3 class="saas-item-title">Gemini</h3>
+                </div>
+            </div>
+            <div class="saas-item"
+                 data-src="assets/video/reel.mp4"
+                 data-title="2025 Showreel" data-type="Demo Reel"
+                 data-client="RahulFX Studio" data-country="India"
+                 data-duration="3 Weeks" data-budget="$900"
+                 data-tools="After Effects, Cinema 4D, DaVinci Resolve">
+                <video preload="none" muted loop playsinline
+                    poster="assets/images/thumb-showreel.webp"
+                    src="assets/video/reel.mp4"></video>
+                <div class="saas-item-content">
+                    <span class="saas-item-tag">Demo Reel</span>
+                    <h3 class="saas-item-title">2025 Showreel</h3>
+                </div>
+            </div>
+            
+            <!-- NEW 3D Elements -->
+            <div class="saas-item"
+                 data-src="assets/images/Video-390.mp4"
+                 data-title="3D Data Flow" data-type="3D Visualization"
+                 data-client="TechCorp" data-country="UK"
+                 data-duration="10 Days" data-budget="$1,200"
+                 data-tools="Cinema 4D, Redshift, X-Particles">
+                <video preload="none" muted loop playsinline
+                    poster="assets/images/thumb-blue-hour.webp"
+                    src="assets/images/Video-390.mp4"></video>
+                <div class="saas-item-content">
+                    <span class="saas-item-tag">3D Visualization</span>
+                    <h3 class="saas-item-title">3D Data Flow</h3>
+                </div>
+            </div>
+            <div class="saas-item"
+                 data-src="assets/images/Instagram.mp4"
+                 data-title="Abstract Interfaces" data-type="3D Motion Design"
+                 data-client="Nexus App" data-country="Canada"
+                 data-duration="2 Weeks" data-budget="$1,500"
+                 data-tools="Blender, After Effects, Figma">
+                <video preload="none" muted loop playsinline
+                    poster="assets/images/thumb-instagram-reel.webp"
+                    src="assets/images/Instagram.mp4"></video>
+                <div class="saas-item-content">
+                    <span class="saas-item-tag">3D Motion</span>
+                    <h3 class="saas-item-title">Abstract Interfaces</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Info Bar — same as homepage -->
+    <div class="saas-info-bar">
+        <div class="saas-info-inner">
+            <div class="saas-info-project">
+                <div class="saas-info-dot"></div>
+                <div>
+                    <div class="saas-info-name" id="infoName">Notion</div>
+                    <div class="saas-info-type" id="infoType">3D Ad Film</div>
+                </div>
+            </div>
+            <div class="saas-info-stats">
+                <div class="saas-info-stat">
+                    <span class="saas-info-stat-label">Client</span>
+                    <span class="saas-info-stat-value" id="infoClient">Skyline Studios</span>
+                </div>
+                <div class="saas-info-stat">
+                    <span class="saas-info-stat-label">Country</span>
+                    <span class="saas-info-stat-value" id="infoCountry">USA</span>
+                </div>
+                <div class="saas-info-stat">
+                    <span class="saas-info-stat-label">Duration</span>
+                    <span class="saas-info-stat-value" id="infoDuration">2 Weeks</span>
+                </div>
+                <div class="saas-info-stat">
+                    <span class="saas-info-stat-label">Tools</span>
+                    <span class="saas-info-stat-value" id="infoTools">Cinema 4D, After Effects, Octane Render</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT WE MAKE — Service Grid -->
+<section class="services-section">
+    <div class="saas-grid-label">What we make</div>
+    <h2 class="saas-section-title">Not just a screen recording.<br><em>A story about your product.</em></h2>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-card-code">UI</div>
+            <div class="service-card-title">UI Screen Animation</div>
+            <p class="service-card-body">We take your actual product screens and animate them with precision camera moves, smooth transitions, and feature callouts that guide the viewer's eye.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-card-code">MG</div>
+            <div class="service-card-title">Motion Graphics</div>
+            <p class="service-card-body">For products that are harder to show — AI, automation, data — we visualize the concept with kinetic graphics, icons, and type-driven storytelling.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-card-code">SD</div>
+            <div class="service-card-title">Sound Design</div>
+            <p class="service-card-body">Every video ships with a full sound design pass and licensed music bed. The audio is not an afterthought — it's half the experience.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-card-code">VO</div>
+            <div class="service-card-title">Voiceover</div>
+            <p class="service-card-body">We source and direct professional voice talent matching your brand — calm and premium, warm and human, or bold and energetic. Your call.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ANIMATION STYLES — Cards with Text-Reveal Hover -->
+<section class="styles-section">
+    <div class="saas-grid-label">Animation styles</div>
+    <h2 class="saas-section-title">Three directions.<br><em>One right fit for you.</em></h2>
+    <div class="styles-grid">
+        <div class="style-card">
+            <div class="style-card-num">Style 01</div>
+            <div class="style-card-title-wrap">
+                <div class="style-card-title">UI Screen<br>Motion</div>
+                <div class="style-card-title-reveal">UI Screen<br>Motion</div>
+            </div>
+            <p class="style-card-body">We animate your actual product interface — dashboards, flows, feature reveals. Clean, precise, software-native.</p>
+            <div class="style-card-bg-num">01</div>
+        </div>
+        <div class="style-card">
+            <div class="style-card-num">Style 02</div>
+            <div class="style-card-title-wrap">
+                <div class="style-card-title">Motion<br>Graphics</div>
+                <div class="style-card-title-reveal">Motion<br>Graphics</div>
+            </div>
+            <p class="style-card-body">Abstract storytelling using shapes, icons, and kinetic type. Perfect for concept-driven or pre-launch products.</p>
+            <div class="style-card-bg-num">02</div>
+        </div>
+        <div class="style-card">
+            <div class="style-card-num">Style 03</div>
+            <div class="style-card-title-wrap">
+                <div class="style-card-title">Hybrid<br>Cinematic</div>
+                <div class="style-card-title-reveal">Hybrid<br>Cinematic</div>
+            </div>
+            <p class="style-card-body">UI motion fused with cinematic camera work and sound design. The format used by Slack, Notion, Linear.</p>
+            <div class="style-card-bg-num">03</div>
+        </div>
+    </div>
+</section>
+
+<!-- BY THE NUMBERS -->
+<section class="numbers-section">
+    <div class="saas-grid-label">By the numbers</div>
+    <div class="numbers-grid">
+        <div class="number-cell">
+            <div class="number-value">20%+</div>
+            <div class="number-label">Average conversion<br>rate increase</div>
+        </div>
+        <div class="number-cell">
+            <div class="number-value">50–<br>60S</div>
+            <div class="number-label">Optimal video<br>length we produce</div>
+        </div>
+        <div class="number-cell">
+            <div class="number-value">35</div>
+            <div class="number-label">Days from kickoff to<br>delivery</div>
+        </div>
+        <div class="number-cell">
+            <div class="number-value">2+</div>
+            <div class="number-label">Years crafting SaaS<br>visuals</div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- CTA -->
+<section class="saas-cta">
+    <div>
+        <h2>Ready for a<br><em>SaaS video?</em></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+        <a class="btn-primary" href="mailto:rahul@rahulfx3d.studio?subject=SaaS Animation Inquiry">
+            <span>Book a Strategy Call</span>
+        </a>
+        <span style="font-size:11px;color:var(--cream-dim);letter-spacing:0.5px;">
+            rahul@rahulfx3d.studio
+        </span>
+    </div>
+</section>
+
+<div class="saas-footer">&copy; 2024 Rahul Visuals. All rights reserved.</div>
+
+<script>
+(function() {
+    // ─── Scroll Observer for animations ───
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in-view');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.saas-section-header, .saas-bento-grid, .saas-info-bar, .saas-cta, .services-section, .styles-section, .numbers-section')
+        .forEach(el => observer.observe(el));
+
+    // ─── Main Video Player ───
+    const mainStage = document.getElementById('mainStage');
+    const mainVideo = document.getElementById('mainVideo');
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
+    const muteBtn = document.getElementById('muteBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    let isPlaying = false;
+
+    function togglePlay() {
+        if (isPlaying) {
+            mainVideo.pause();
+            mainStage.classList.remove('is-playing');
+            playBtn.querySelector('.icon-play').style.display = '';
+            playBtn.querySelector('.icon-pause').style.display = 'none';
+        } else {
+            mainVideo.play();
+            mainStage.classList.add('is-playing');
+            playBtn.querySelector('.icon-play').style.display = 'none';
+            playBtn.querySelector('.icon-pause').style.display = '';
+        }
+        isPlaying = !isPlaying;
+    }
+
+    mainStage.addEventListener('click', (e) => {
+        if (e.target.closest('.saas-ctrl-btn') || e.target.closest('.saas-progress-container')) return;
+        togglePlay();
+    });
+
+    // Progress bar
+    mainVideo.addEventListener('timeupdate', () => {
+        if (mainVideo.duration) {
+            progressBar.style.width = (mainVideo.currentTime / mainVideo.duration * 100) + '%';
+        }
+    });
+
+    progressContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const rect = progressContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        mainVideo.currentTime = pos * mainVideo.duration;
+    });
+
+    // Mute
+    muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mainVideo.muted = !mainVideo.muted;
+        muteBtn.querySelector('.icon-unmuted').style.display = mainVideo.muted ? 'none' : '';
+        muteBtn.querySelector('.icon-muted').style.display = mainVideo.muted ? '' : 'none';
+    });
+
+    // Fullscreen
+    fullscreenBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mainStage.requestFullscreen) mainStage.requestFullscreen();
+        else if (mainStage.webkitRequestFullscreen) mainStage.webkitRequestFullscreen();
+    });
+
+    // ─── Sidebar Items — click to load + hover to preview ───
+    const items = document.querySelectorAll('.saas-item');
+
+    items.forEach(item => {
+        const vid = item.querySelector('video');
+
+        item.addEventListener('mouseenter', () => {
+            if (!item.classList.contains('is-active')) {
+                vid.currentTime = 0;
+                vid.play().catch(() => {});
+            }
+        });
+
+        item.addEventListener('mouseleave', () => {
+            if (!item.classList.contains('is-active')) {
+                vid.pause();
+            }
+        });
+
+        item.addEventListener('click', () => {
+            if (item.classList.contains('is-active')) return;
+
+            // Remove active from all
+            items.forEach(i => i.classList.remove('is-active'));
+            item.classList.add('is-active');
+
+            // Load into main stage
+            const src = item.dataset.src;
+            mainVideo.src = src;
+            mainVideo.load();
+            mainVideo.play();
+            isPlaying = true;
+            mainStage.classList.add('is-playing');
+            playBtn.querySelector('.icon-play').style.display = 'none';
+            playBtn.querySelector('.icon-pause').style.display = '';
+
+            // Update info bar
+            document.getElementById('infoName').textContent = item.dataset.title;
+            document.getElementById('infoType').textContent = item.dataset.type;
+            document.getElementById('infoClient').textContent = item.dataset.client;
+            document.getElementById('infoCountry').textContent = item.dataset.country;
+            document.getElementById('infoDuration').textContent = item.dataset.duration;
+            document.getElementById('infoTools').textContent = item.dataset.tools;
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

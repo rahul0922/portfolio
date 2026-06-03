@@ -1,2 +1,5 @@
 .DS_Store
 node_modules
+temp_profile*
+diff_app.txt
+

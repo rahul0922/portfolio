@@ -11393,7 +11393,7 @@ html {
 
 /* Motto wrapper red layer spacing */
 .motto-red-wrapper {
-    margin-top: 10vh;
+    margin-top: calc(10vh - 450px);
 }
 
 /* Tablet adjustments (768px – 1199px) */
@@ -11407,7 +11407,7 @@ html {
     }
 
     .motto-red-wrapper {
-        margin-top: 8vh;
+        margin-top: calc(8vh - 450px);
     }
     
     .work__red .work_experience {
@@ -11430,7 +11430,7 @@ html {
     }
 
     .motto-red-wrapper {
-        margin-top: 5vh;
+        margin-top: calc(5vh - 450px);
     }
 
     .work__red .work_experience {
@@ -11446,7 +11446,7 @@ html {
     }
 
     .motto-red-wrapper {
-        margin-top: 180px !important;
+        margin-top: -270px !important;
     }
 }
 
@@ -11475,4 +11475,13 @@ html {
     z-index: 1;
     /* Sits behind text safely */
     pointer-events: none;
+}
+
+/* Make red layer client and testimonials sections completely invisible to prevent text/lines showing in custom cursor */
+.client__red,
+.client__red *,
+.testimonials__red,
+.testimonials__red * {
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
