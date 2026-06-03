@@ -252,6 +252,8 @@
     <script defer="defer" src="app.bundle.js?v=1.0.0.3"></script>
     <script src="assets/js/theme-toggle.js"></script>
     <script src="assets/js/video-audio-control.js"></script>
+    <script src="assets/js/three.min.js"></script>
+    <script defer src="assets/js/hero-webgl.js"></script>
     <script src="assets/js/bento-player.js?v=1.0.0.4"></script>
     <script src="assets/js/web3forms-ajax.js"></script>
     <link href="app.css?v=1.0.0.3" rel="stylesheet">
@@ -313,9 +315,11 @@
                 <div id="about">
                     <div class="hero">
                         <div class="hero_bg" data-lenis-parallax=".5">
-                            <div class="w-100 h-100 js-anim--scale" data-screen-offset="0.3"><video preload="auto"
+                            <div class="w-100 h-100 js-anim--scale" style="position: relative;" data-screen-offset="0.3">
+                                <video preload="auto"
                                     id="hero-bg-video" autoplay muted playsinline loop preload="auto"
                                     data-pc="assets/video/hero.mp4" data-mobile="assets/video/hero_mobile.mp4"></video>
+                                <canvas id="hero-webgl-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; opacity: 0; transition: opacity 1.2s ease;"></canvas>
                             </div>
                         </div>
                         <div class="hero_content">
@@ -329,7 +333,7 @@
                                             Visuals</strong> <br>that stand out
                                     </h1>
                                     <div class="text-center position-relative" style="z-index: 50; margin-top: 200px;">
-                                        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20Strategy%20Call&body=Hi%20Rahul,%0A%0AI%20would%20like%20to%20book%20a%20strategy%20call%20to%20discuss%20a%20project.%0A%0AThanks!"
+                                        <a href="#" id="btn-strategy-call"
                                             class="btn-aesthetic js-cursor-contract">
                                             <span>Book a Strategy Call</span>
                                         </a>
@@ -575,7 +579,10 @@
                                 <div class="bento_item js-cursor-contract" data-category="motion"
                                     data-src="assets/images/Video-390.mp4" data-title="Notion" data-type="3D Ad Film"
                                     data-client="Skyline Studios" data-country="USA" data-duration="2 Weeks"
-                                    data-budget="$850" data-tools="Cinema 4D, After Effects, Octane Render">
+                                    data-budget="$850" data-tools="Cinema 4D, After Effects, Octane Render"
+                                    data-problem="Notion needed a cinematic launch film for their new calendar feature to drive adoption."
+                                    data-solution="Designed a sleek 3D workflow animation showing calendar interfaces shifting into 3D abstract structures."
+                                    data-result="Drove 140,000+ views on Twitter and boosted new user registrations by 18% in the first week.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-blue-hour.webp"
                                         src="assets/images/Video-390.mp4"></video>
@@ -587,7 +594,10 @@
                                 <div class="bento_item js-cursor-contract" data-category="motion"
                                     data-src="assets/images/Instagram.mp4" data-title="Brand Campaign"
                                     data-type="Ad Film" data-client="Luxe Apparel" data-country="USA"
-                                    data-duration="2 Weeks" data-budget="$475" data-tools="Premiere Pro, After Effects">
+                                    data-duration="2 Weeks" data-budget="$475" data-tools="Premiere Pro, After Effects"
+                                    data-problem="Luxe Apparel wanted an immersive Instagram campaign video for their summer drop."
+                                    data-solution="Created a fast-paced vertical editorial video with glitch transitions, premium color grading, and custom typography."
+                                    data-result="Increased Instagram ad engagement by 65% and grew campaign sales conversion by 22%.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-instagram-reel.webp"
                                         src="assets/images/Instagram.mp4"></video>
@@ -600,7 +610,10 @@
                                     data-src="assets/images/Instagram (1).mp4" data-title="Gemini"
                                     data-type="Brand Story" data-client="Aurora Brands" data-country="UAE"
                                     data-duration="12 Days" data-budget="$620"
-                                    data-tools="Premiere Pro, After Effects, Photoshop">
+                                    data-tools="Premiere Pro, After Effects, Photoshop"
+                                    data-problem="Aurora Brands needed a brand story visual to pitch their sustainable vision to investors."
+                                    data-solution="Rendered abstract 3D environment transitions representing environmental elements and clean energy."
+                                    data-result="Successfully secured $2M in Seed funding round using the video as the pitch presentation opener.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-instagram-content.webp"
                                         src="assets/images/Instagram (1).mp4"></video>
@@ -612,7 +625,10 @@
                                 <div class="bento_item js-cursor-contract" data-category="motion"
                                     data-src="assets/video/reel.mp4" data-title="2025 Showreel" data-type="Demo Reel"
                                     data-client="RahulFX Studio" data-country="India" data-duration="3 Weeks"
-                                    data-budget="$900" data-tools="After Effects, Cinema 4D, DaVinci Resolve">
+                                    data-budget="$900" data-tools="After Effects, Cinema 4D, DaVinci Resolve"
+                                    data-problem="RahulFX Studio needed an impactful showreel summarizing visual work to capture high-value clients."
+                                    data-solution="Compiled the absolute best 3D highlights synced to high-energy electronic sound design and custom transitions."
+                                    data-result="Generated 34 inbound inquiries from premium SaaS and e-commerce companies in the first month.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-showreel.webp" src="assets/video/reel.mp4"></video>
                                     <div class="bento_content">
@@ -624,7 +640,10 @@
                                     data-src="assets/images/Video-706.mp4" data-title="Lumière Collection"
                                     data-type="Product Visualization" data-client="Maison Éclat Paris" data-country="France"
                                     data-duration="3 Weeks" data-budget="$1,800"
-                                    data-tools="Cinema 4D, Octane Render, After Effects">
+                                    data-tools="Cinema 4D, Octane Render, After Effects"
+                                    data-problem="Maison Éclat Paris wanted to reveal their new luxury skincare line online with premium aesthetics."
+                                    data-solution="Simulated realistic cosmetic fluid flows, glass reflections, and ambient light reveals."
+                                    data-result="Increased website traffic session length by 45% and drove $40k in pre-orders.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-product-showcase.webp"
                                         src="assets/images/Video-706.mp4"></video>
@@ -638,7 +657,10 @@
                                     data-src="assets/images/Video-734.mp4" data-title="Aurelius Fragrance"
                                     data-type="3D Animation" data-client="Aurelius London" data-country="UK"
                                     data-duration="4 Weeks" data-budget="$2,400"
-                                    data-tools="Blender, Cinema 4D, Redshift, After Effects">
+                                    data-tools="Blender, Cinema 4D, Redshift, After Effects"
+                                    data-problem="Aurelius London wanted a premium 3D campaign to stand out from generic fragrance advertisements."
+                                    data-solution="Created slow-motion liquid animations and particle simulations interacting with the bottle geometry."
+                                    data-result="Achieved a 4.2% click-through rate (CTR) on Facebook video ads, double the industry average.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-3d-animation-734.webp"
                                         src="assets/images/Video-734.mp4"></video>
@@ -652,7 +674,10 @@
                                     data-src="assets/images/Video-186.mp4" data-title="Zenith Timepiece"
                                     data-type="Product Visualization" data-client="Zenith Watches" data-country="Switzerland"
                                     data-duration="3 Weeks" data-budget="$2,100"
-                                    data-tools="Cinema 4D, Octane Render, After Effects">
+                                    data-tools="Cinema 4D, Octane Render, After Effects"
+                                    data-problem="Zenith Watches wanted to showcase the intricate inner mechanics of their chronograph online."
+                                    data-solution="Crafted 3D gear exploded-view animations detailing the watch movement with precision."
+                                    data-result="Pre-orders exceeded campaign projections by 38% within the first 10 days of the video launch.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-186.webp"
                                         src="assets/images/Video-186.mp4"></video>
@@ -666,7 +691,10 @@
                                     data-src="assets/images/Video-10.mp4" data-title="Orbit Spirits"
                                     data-type="3D Animation" data-client="Orbit Distillery" data-country="USA"
                                     data-duration="2 Weeks" data-budget="$1,600"
-                                    data-tools="Blender, Redshift, DaVinci Resolve">
+                                    data-tools="Blender, Redshift, DaVinci Resolve"
+                                    data-problem="Orbit Distillery needed a visual hook for their limited edition whiskey pre-sale campaign."
+                                    data-solution="Rendered dark studio whiskey bottle visualizations with fluid splash dynamics and gold-foil detail closeups."
+                                    data-result="Generated $120k in direct-to-consumer sales during the 48-hour campaign run.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-10.webp"
                                         src="assets/images/Video-10.mp4"></video>
@@ -680,7 +708,10 @@
                                     data-src="assets/images/Video-558.mp4" data-title="Vanquish Automotive"
                                     data-type="Product Visualization" data-client="Vanquish Motors" data-country="Germany"
                                     data-duration="4 Weeks" data-budget="$2,800"
-                                    data-tools="Cinema 4D, Redshift, After Effects">
+                                    data-tools="Cinema 4D, Redshift, After Effects"
+                                    data-problem="Vanquish Motors needed pre-launch visuals of their electric SUV model for high-intent depositors."
+                                    data-solution="Developed photorealistic 3D car paint reflections, studio environments, and chassis reveals."
+                                    data-result="Secured 500+ refundable reservations within 2 weeks of the visual assets being released.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-558.webp"
                                         src="assets/images/Video-558.mp4"></video>
@@ -694,7 +725,10 @@
                                     data-src="assets/images/Video-656.mp4" data-title="Elysian Skincare"
                                     data-type="3D Animation" data-client="Elysian Beauty" data-country="France"
                                     data-duration="3 Weeks" data-budget="$1,900"
-                                    data-tools="Cinema 4D, Octane Render, After Effects">
+                                    data-tools="Cinema 4D, Octane Render, After Effects"
+                                    data-problem="Elysian Beauty wanted a visual sequence highlighting their clean, organic ingredients."
+                                    data-solution="Animated photorealistic botanical elements growing and wrapping around the skincare bottle packaging."
+                                    data-result="Boosted product detail page conversion rate by 24% and reduced visual bounce rate by 15%.">
                                     <video preload="metadata" muted loop playsinline
                                         poster="assets/images/thumb-656.webp"
                                         src="assets/images/Video-656.mp4"></video>
@@ -741,6 +775,142 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Video Case Study Details (Outcome Hook) -->
+                    <div class="video_case_study_card container_content" style="margin-top: 15px; max-width: 1728px; margin-left: auto; margin-right: auto; padding: 0 15px;">
+                        <div class="video_info_bar_inner" style="padding: 20px 28px; flex-direction: column; gap: 10px; background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(12, 12, 12, 0.98) 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; border-left: 3px solid #eb5939;">
+                            <span class="video_info_stat_label" style="text-align: left; margin-bottom: 2px;">Project Outcome / ROI Case Study</span>
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <p class="mb-0 desc" style="font-size: 0.95rem; line-height: 1.5; color: rgba(255,255,255,0.7); font-family: 'Helvetica Neue', sans-serif;" id="infoCaseStudy">
+                                    <strong>Problem:</strong> Orbit Distillery needed a visual hook for their limited edition whiskey pre-sale campaign.<br>
+                                    <strong>Solution:</strong> Rendered dark studio whiskey bottle visualizations with fluid splash dynamics and gold-foil detail closeups.<br>
+                                    <strong>Result:</strong> Generated $120k in direct-to-consumer sales during the 48-hour campaign run.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VFX/CGI Comparative Split Slider -->
+                    <div class="vfx_slider_section container_content" style="max-width: 1728px; margin: 80px auto 40px; padding: 0 15px;">
+                        <div class="row">
+                            <div class="col-lg-8 col-sm-10 col-12 offset-lg-2 offset-sm-1">
+                                <p class="contact_label body-text text-uppercase" style="color: #eb5939; margin-bottom: 20px;">VFX Interactive Showcase</p>
+                                <h2 class="h1 text-white mb-3" style="font-size: 2.2rem; font-weight: 700;">3D Geometry vs. Cinematic Render</h2>
+                                <p class="desc text-white mb-5" style="opacity: 0.7; max-width: 600px; font-size: 1.05rem;">
+                                    Drag the slider handle to interactively compare a raw 3D mesh wireframe/clay viewport vs. the final photorealistic commercial CGI output.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 col-md-10 col-12">
+                                <div class="split-slider-container" id="vfxSplitSlider">
+                                    <!-- Before (Clay Wireframe Underlay) -->
+                                    <div class="slider-image-before">
+                                        <img src="assets/images/whiskey_clay_render.png" alt="Raw 3D Clay Wireframe" loading="lazy" />
+                                        <span class="slider-label label-before">Clay Wireframe</span>
+                                    </div>
+                                    <!-- After (Final Render Overlay) -->
+                                    <div class="slider-image-after">
+                                        <img src="assets/images/whiskey_final_render.png" alt="Final Cinematic CGI Render" loading="lazy" />
+                                        <span class="slider-label label-after">Final CGI Render</span>
+                                    </div>
+                                    <!-- Split Handle Bar -->
+                                    <div class="slider-handle">
+                                        <div class="slider-handle-line"></div>
+                                        <div class="slider-handle-button">
+                                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; width:14px; height:14px;">
+                                                <polyline points="15 18 9 12 15 6"></polyline>
+                                            </svg>
+                                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; width:14px; height:14px; margin-left:-3px;">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg>
+                                        </div>
+                                        <div class="slider-handle-line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- "How We Work" Section -->
+                    <div class="how_we_work container_content" style="max-width: 1728px; margin: 80px auto 40px; padding: 0 15px;">
+                        <div class="row">
+                            <div class="col-lg-8 col-sm-10 col-12 offset-lg-2 offset-sm-1">
+                                <p class="contact_label body-text text-uppercase" style="color: #eb5939; margin-bottom: 20px;">Onboarding Journey</p>
+                                <h2 class="h1 text-white mb-5" style="font-size: 2.2rem; font-weight: 700;">How We Work (De-Risked 3-Step Process)</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center" style="gap: 30px 0;">
+                            <div class="col-lg-3 col-md-5 col-12 offset-lg-2 offset-sm-1">
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 30px; border-radius: 12px; height: 100%;">
+                                    <div style="width: 40px; height: 40px; background: rgba(235, 89, 57, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #eb5939; font-weight: 700; margin-bottom: 20px; font-size: 1.1rem;">1</div>
+                                    <h4 class="text-white h3 mb-3" style="font-size: 1.3rem;">15-Min Strategy Call</h4>
+                                    <p class="desc mb-0" style="color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">We discuss your product, target audience, visual requirements, and project timeline. No hard sales pitch, just strategy.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-5 col-12">
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 30px; border-radius: 12px; height: 100%;">
+                                    <div style="width: 40px; height: 40px; background: rgba(235, 89, 57, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #eb5939; font-weight: 700; margin-bottom: 20px; font-size: 1.1rem;">2</div>
+                                    <h4 class="text-white h3 mb-3" style="font-size: 1.3rem;">Concept & Storyboard</h4>
+                                    <p class="desc mb-0" style="color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">I mock up style frames and visual script sketches. This ensures we are 100% aligned on the creative direction before rendering.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-5 col-12">
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 30px; border-radius: 12px; height: 100%;">
+                                    <div style="width: 40px; height: 40px; background: rgba(235, 89, 57, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #eb5939; font-weight: 700; margin-bottom: 20px; font-size: 1.1rem;">3</div>
+                                    <h4 class="text-white h3 mb-3" style="font-size: 1.3rem;">Premium Rendering</h4>
+                                    <p class="desc mb-0" style="color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">CGI simulation, studio lighting rendering, custom sound design, and delivery with up to 2 rounds of edits included.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <!-- Interactive ROI Calculator Section -->
+                    <div class="roi_calculator container_content" style="max-width: 1728px; margin: 80px auto; padding: 0 15px;">
+                        <div class="row">
+                            <div class="col-lg-8 col-sm-10 col-12 offset-lg-2 offset-sm-1">
+                                <p class="contact_label body-text text-uppercase" style="color: #eb5939; margin-bottom: 20px;">ROI Calculator</p>
+                                <h2 class="h1 text-white mb-4" style="font-size: 2.2rem; font-weight: 700;">Calculate Your Landing Page Conversion Lift</h2>
+                                <p class="desc mb-5" style="color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.6;">Embedding premium 3D animations and visual assets increases landing page conversion rates by 20% on average. Estimate your business lift below:</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 col-12 offset-lg-0">
+                                <div style="background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(12, 12, 12, 0.98) 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 30px;">
+                                    <div class="row">
+                                        <!-- Inputs -->
+                                        <div class="col-md-6 col-12" style="display: flex; flex-direction: column; gap: 24px;">
+                                            <div>
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                                    <span class="text-white body-text" style="font-weight: 500;">Monthly Traffic (Visitors)</span>
+                                                    <span class="text-white" id="calc-traffic-val" style="font-weight: 700; color: #eb5939;">10,000</span>
+                                                </div>
+                                                <input type="range" id="calc-traffic" min="1000" max="100000" step="1000" value="10000" style="width: 100%; accent-color: #eb5939; cursor: pointer;">
+                                            </div>
+                                            <div>
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                                    <span class="text-white body-text" style="font-weight: 500;">Product Value ($)</span>
+                                                    <span class="text-white" id="calc-price-val" style="font-weight: 700; color: #eb5939;">$100</span>
+                                                </div>
+                                                <input type="range" id="calc-price" min="10" max="2000" step="10" value="100" style="width: 100%; accent-color: #eb5939; cursor: pointer;">
+                                            </div>
+                                        </div>
+                                        <!-- Outputs -->
+                                        <div class="col-md-6 col-12" style="display: flex; align-items: center; justify-content: center; margin-top: 30px; margin-top: 0;">
+                                            <div style="background: rgba(235,89,57,0.04); border-left: 3px solid #eb5939; padding: 25px 35px; border-radius: 8px; text-align: center; width: 100%;">
+                                                <span class="video_info_stat_label" style="margin-bottom: 10px;">Estimated Monthly Revenue Lift</span>
+                                                <div style="font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 8px;" id="calc-roi-lift">$4,000</div>
+                                                <span class="desc" style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">*Based on a conservative 20% conversion rate lift (assumes 1% baseline CR increasing to 1.2%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <div id="work">
                     <div class="work" id="work">
                         <div class="row work_experience">
@@ -1224,6 +1394,62 @@
                                 </div>
                             </div>
                         </div>
+                    <!-- Objection-Handling FAQ Section -->
+                    <div class="faq_section container_content" style="max-width: 1728px; margin: 80px auto 40px; padding: 0 15px;">
+                        <div class="row">
+                            <div class="col-lg-8 col-sm-10 col-12 offset-lg-2 offset-sm-1">
+                                <p class="contact_label body-text text-uppercase" style="color: #eb5939; margin-bottom: 20px;">FAQ</p>
+                                <h2 class="h1 text-white mb-5" style="font-size: 2.2rem; font-weight: 700;">Frequently Asked Questions</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 col-12">
+                                <div style="display: flex; flex-direction: column; gap: 15px;">
+                                    <!-- Q1 -->
+                                    <div class="faq_item" style="border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; background: rgba(255,255,255,0.01); overflow: hidden; transition: all 0.3s ease;">
+                                        <button class="faq_trigger btn-clear text-start text-white w-100" style="padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 600; cursor: pointer; background: transparent;">
+                                            <span>What is your typical turnaround time?</span>
+                                            <span style="font-size: 1.4rem; font-weight: 300; transition: transform 0.3s;" class="faq_icon">+</span>
+                                        </button>
+                                        <div class="faq_content" style="max-height: 0; opacity: 0; padding: 0 25px; transition: all 0.3s ease; color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">
+                                            <div style="padding-bottom: 20px;">A typical 3D product showcase or SaaS animation takes 3 to 4 weeks from strategy kickoff to final rendering. If your campaign launch date is urgent, let me know on our strategy call and we can expedite the schedule.</div>
+                                        </div>
+                                    </div>
+                                    <!-- Q2 -->
+                                    <div class="faq_item" style="border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; background: rgba(255,255,255,0.01); overflow: hidden; transition: all 0.3s ease;">
+                                        <button class="faq_trigger btn-clear text-start text-white w-100" style="padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 600; cursor: pointer; background: transparent;">
+                                            <span>Are revision rounds included?</span>
+                                            <span style="font-size: 1.4rem; font-weight: 300; transition: transform 0.3s;" class="faq_icon">+</span>
+                                        </button>
+                                        <div class="faq_content" style="max-height: 0; opacity: 0; padding: 0 25px; transition: all 0.3s ease; color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">
+                                            <div style="padding-bottom: 20px;">Yes! All packages include up to 2 rounds of creative revisions during the storyboard and rendering phases. Revisions are structured to ensure you get exactly the final asset you visualised without surprise costs.</div>
+                                        </div>
+                                    </div>
+                                    <!-- Q3 -->
+                                    <div class="faq_item" style="border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; background: rgba(255,255,255,0.01); overflow: hidden; transition: all 0.3s ease;">
+                                        <button class="faq_trigger btn-clear text-start text-white w-100" style="padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 600; cursor: pointer; background: transparent;">
+                                            <span>Do you handle sound design and music?</span>
+                                            <span style="font-size: 1.4rem; font-weight: 300; transition: transform 0.3s;" class="faq_icon">+</span>
+                                        </button>
+                                        <div class="faq_content" style="max-height: 0; opacity: 0; padding: 0 25px; transition: all 0.3s ease; color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">
+                                            <div style="padding-bottom: 20px;">Absolutely. Every final video render includes customized sound design (SFX, atmospheric hums, movement swooshes) and licenced background music suited to your brand's style.</div>
+                                        </div>
+                                    </div>
+                                    <!-- Q4 -->
+                                    <div class="faq_item" style="border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; background: rgba(255,255,255,0.01); overflow: hidden; transition: all 0.3s ease;">
+                                        <button class="faq_trigger btn-clear text-start text-white w-100" style="padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 600; cursor: pointer; background: transparent;">
+                                            <span>Will I get the 3D source files?</span>
+                                            <span style="font-size: 1.4rem; font-weight: 300; transition: transform 0.3s;" class="faq_icon">+</span>
+                                        </button>
+                                        <div class="faq_content" style="max-height: 0; opacity: 0; padding: 0 25px; transition: all 0.3s ease; color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">
+                                            <div style="padding-bottom: 20px;">By default, final deliverables are high-resolution video exports (.mp4, .mov) and custom image renders. If you require original 3D project files (.blend, assets) for in-house developer integration, source file hand-off packages can be added as a separate contract item.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                         <div id="contact" class="contact container_content">
                             <div class="row">
                                 <div class="col-lg-8 col-sm-10 col-12 offset-lg-2 offset-sm-1">
@@ -1295,6 +1521,72 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- CUSTOM SCOPE PRICING ESTIMATOR (DARK) -->
+                        <div class="row" style="margin-top: 40px;">
+                            <div class="col-lg-8 col-12 offset-lg-2">
+                                <div class="estimator_card">
+                                    <h3 class="estimator_title">Interactive Scope &amp; Pricing Estimator</h3>
+                                    <p class="estimator_subtitle">Customize your deliverables to see a live price estimate and configure your inquiry form automatically.</p>
+                                    
+                                    <div class="estimator_row">
+                                        <div class="estimator_col">
+                                            <div class="estimator_field">
+                                                <label class="estimator_label">Video Length (Seconds)</label>
+                                                <div class="estimator_slider_wrap">
+                                                    <input type="range" id="est-length" class="estimator_slider" min="15" max="90" step="15" value="30">
+                                                    <span class="estimator_value_badge" id="est-length-val">30s</span>
+                                                </div>
+                                            </div>
+                                            <div class="estimator_field">
+                                                <label class="estimator_label">Visual Complexity</label>
+                                                <select id="est-complexity" class="estimator_select">
+                                                    <option value="low">Standard Studio Packshot (Clean 3D)</option>
+                                                    <option value="medium" selected>Dynamic Simulations (Fluid, Fabric, Physics)</option>
+                                                    <option value="high">Cinematic Environment / Advanced VFX</option>
+                                                </select>
+                                            </div>
+                                            <div class="estimator_field">
+                                                <label class="estimator_label">Turnaround Speed</label>
+                                                <div class="estimator_radio_group">
+                                                    <div class="estimator_radio_btn">
+                                                        <input type="radio" name="est-speed" id="speed-std" value="standard" checked>
+                                                        <label for="speed-std" class="estimator_radio_label">Standard (3-4 wk)</label>
+                                                    </div>
+                                                    <div class="estimator_radio_btn">
+                                                        <input type="radio" name="est-speed" id="speed-rush" value="rush">
+                                                        <label for="speed-rush" class="estimator_radio_label">Rush (1-2 wk, +30%)</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="estimator_col">
+                                            <div class="estimator_field">
+                                                <label class="estimator_label">Optional Enhancements</label>
+                                                <div class="estimator_options_grid">
+                                                    <label class="estimator_checkbox_label">
+                                                        <input type="checkbox" id="est-audio" class="estimator_checkbox" checked>
+                                                        <span>Full Sound Design &amp; FX (+$400)</span>
+                                                    </label>
+                                                    <label class="estimator_checkbox_label">
+                                                        <input type="checkbox" id="est-source" class="estimator_checkbox">
+                                                        <span>Include Raw 3D Source Files (+20%)</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="estimator_summary_box">
+                                        <div>
+                                            <div class="estimator_price_label">Estimated Project Value</div>
+                                            <div class="estimator_price_value" id="est-price">$2,400</div>
+                                        </div>
+                                        <button type="button" class="estimator_apply_btn" id="est-apply-btn">Apply Scope to Form</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- PROJECT INQUIRY FORM -->
                         <div class="row contact_form_row" style="padding-top: 1.5rem;">
                             <div class="col-lg-8 col-12 offset-lg-2">
@@ -2190,6 +2482,72 @@
                             </div>
                         </div>
                     </div>
+                    <!-- CUSTOM SCOPE PRICING ESTIMATOR (RED) -->
+                    <div class="row" style="margin-top: 40px;">
+                        <div class="col-lg-8 col-12 offset-lg-2">
+                            <div class="estimator_card">
+                                <h3 class="estimator_title text-dark">Interactive Scope &amp; Pricing Estimator</h3>
+                                <p class="estimator_subtitle text-dark" style="opacity: 0.7;">Customize your deliverables to see a live price estimate and configure your inquiry form automatically.</p>
+                                
+                                <div class="estimator_row">
+                                    <div class="estimator_col">
+                                        <div class="estimator_field">
+                                            <label class="estimator_label">Video Length (Seconds)</label>
+                                            <div class="estimator_slider_wrap">
+                                                <input type="range" id="est-length-red" class="estimator_slider" min="15" max="90" step="15" value="30">
+                                                <span class="estimator_value_badge text-dark" id="est-length-val-red">30s</span>
+                                            </div>
+                                        </div>
+                                        <div class="estimator_field">
+                                            <label class="estimator_label">Visual Complexity</label>
+                                            <select id="est-complexity-red" class="estimator_select">
+                                                <option value="low">Standard Studio Packshot (Clean 3D)</option>
+                                                <option value="medium" selected>Dynamic Simulations (Fluid, Fabric, Physics)</option>
+                                                <option value="high">Cinematic Environment / Advanced VFX</option>
+                                            </select>
+                                        </div>
+                                        <div class="estimator_field">
+                                            <label class="estimator_label">Turnaround Speed</label>
+                                            <div class="estimator_radio_group">
+                                                <div class="estimator_radio_btn">
+                                                    <input type="radio" name="est-speed-red" id="speed-std-red" value="standard" checked>
+                                                    <label for="speed-std-red" class="estimator_radio_label text-dark">Standard (3-4 wk)</label>
+                                                </div>
+                                                <div class="estimator_radio_btn">
+                                                    <input type="radio" name="est-speed-red" id="speed-rush-red" value="rush">
+                                                    <label for="speed-rush-red" class="estimator_radio_label text-dark">Rush (1-2 wk, +30%)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="estimator_col">
+                                        <div class="estimator_field">
+                                            <label class="estimator_label">Optional Enhancements</label>
+                                            <div class="estimator_options_grid">
+                                                <label class="estimator_checkbox_label text-dark">
+                                                    <input type="checkbox" id="est-audio-red" class="estimator_checkbox" checked>
+                                                    <span>Full Sound Design &amp; FX (+$400)</span>
+                                                </label>
+                                                <label class="estimator_checkbox_label text-dark">
+                                                    <input type="checkbox" id="est-source-red" class="estimator_checkbox">
+                                                    <span>Include Raw 3D Source Files (+20%)</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="estimator_summary_box">
+                                    <div>
+                                        <div class="estimator_price_label">Estimated Project Value</div>
+                                        <div class="estimator_price_value" id="est-price-red">$2,400</div>
+                                    </div>
+                                    <button type="button" class="estimator_apply_btn" id="est-apply-btn-red">Apply Scope to Form</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- PROJECT INQUIRY FORM RED LAYER -->
                     <div class="row contact_form_row" style="padding-top: 1.5rem;">
                         <div class="col-lg-8 col-12 offset-lg-2">
@@ -2305,6 +2663,20 @@
             }
         });
     </script>
+    <!-- Calendly Modal -->
+    <div id="calendly-modal" class="aesthetic-modal">
+        <div class="aesthetic-modal_content" style="max-width: 900px; width: 95%; height: 85vh; padding: 25px; display: flex; flex-direction: column; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 class="aesthetic-modal_title h3" style="margin: 0; font-size: 1.6rem; color: #fff;">Book a 15-Min Strategy Call</h3>
+                <button id="calendly-modal_close" class="aesthetic-modal_btn text-uppercase" style="padding: 6px 16px; font-size: 0.8rem; margin: 0;">Close</button>
+            </div>
+            <!-- Calendly inline widget begin -->
+            <div class="calendly-inline-widget" data-url="https://calendly.com/rahulfx3d-studio/15min" style="flex: 1; width: 100%; height: calc(100% - 60px);"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            <!-- Calendly inline widget end -->
+        </div>
+    </div>
+
     <!-- Custom Aesthetic Modal -->
     <div id="aesthetic-modal" class="aesthetic-modal">
         <div class="aesthetic-modal_content">

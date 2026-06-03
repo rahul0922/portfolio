@@ -2678,6 +2678,7 @@
         function unlockPortal(role, client) {
             document.getElementById('adminGate').classList.add('hidden');
             document.getElementById('portalContent').classList.add('unlocked');
+            
             // Badge
             const existing = document.querySelector('.role-badge');
             if (existing) existing.remove();
@@ -2700,7 +2701,7 @@
                     const owner = task.querySelector('.to');
                     if (owner && owner.classList.contains('y')) task.classList.add('locked');
                 });
-                if (client) prefillClient(client);
+                loadClientState();
                 loadProgress();
                 loadPhaseDates();
                 loadNotes();
@@ -2715,7 +2716,7 @@
             document.querySelector('.panel.active') || document.getElementById('panel-contract').classList.add('active');
             document.getElementById('statusBanner').style.display = '';
             document.getElementById('btnBack').classList.add('show');
-            prefillClient(client);
+            loadClientState();
             loadProgress();
             loadPhaseDates();
             loadNotes();
@@ -2736,19 +2737,23 @@
             const service = document.getElementById('c-service').value;
             const start = document.getElementById('c-start').value;
             const deadline = document.getElementById('c-deadline').value;
+            
             // → Invoice
             document.getElementById('i-name').value = name;
             document.getElementById('i-company').value = company;
             document.getElementById('i-project').value = project;
             document.getElementById('i-service').value = service;
             document.getElementById('i-delivery').value = deadline;
+            
             // → Progress
             document.getElementById('p-name').value = name;
             document.getElementById('p-project').value = project;
             document.getElementById('p-start').value = start;
             document.getElementById('p-deadline').value = deadline;
+            
             // → Signature name
             document.getElementById('cname').placeholder = name || 'Type full name to confirm';
+            
             // → Contract total to invoice first line item
             const total = document.getElementById('c-total').value.replace(/[^0-9.]/g, '');
             if (total) document.getElementById('p1').value = total;
@@ -2841,6 +2846,7 @@
                 localStorage.setItem('portal-theme', 'light');
             }
         }
+        
         // Load saved theme
         (function () {
             const saved = localStorage.getItem('portal-theme');
@@ -2851,29 +2857,158 @@
                 });
             }
         })();
-        function go(id, btn) { document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.getElementById('panel-' + id).classList.add('active'); btn.classList.add('active'); window.scrollTo(0, 0) }
 
-        function toggleC(el) { const o = el.classList.contains('open'); document.querySelectorAll('.clause').forEach(c => { c.classList.remove('open'); c.querySelector('.ca').textContent = '↓' }); if (!o) { el.classList.add('open'); el.querySelector('.ca').textContent = '↑' } }
+        function go(id, btn) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('panel-' + id).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleC(el) {
+            const o = el.classList.contains('open');
+            document.querySelectorAll('.clause').forEach(c => {
+                c.classList.remove('open');
+                c.querySelector('.ca').textContent = '↓';
+            });
+            if (!o) {
+                el.classList.add('open');
+                el.querySelector('.ca').textContent = '↑';
+            }
+        }
 
         const ctxs = {};
-        function initSig(cid, hid) { const canvas = document.getElementById(cid); const pad = canvas.parentElement; canvas.width = pad.offsetWidth; canvas.height = pad.offsetHeight; const ctx = canvas.getContext('2d'); ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctxs[cid] = ctx; let draw = false; const gp = e => { const r = canvas.getBoundingClientRect(); const s = e.touches ? e.touches[0] : e; return [s.clientX - r.left, s.clientY - r.top] }; const st = e => { e.preventDefault(); draw = true; ctx.beginPath(); ctx.moveTo(...gp(e)); document.getElementById(hid).classList.add('gone') }; const mv = e => { e.preventDefault(); if (!draw) return; ctx.lineTo(...gp(e)); ctx.stroke() }; const en = () => draw = false; canvas.addEventListener('mousedown', st); canvas.addEventListener('mousemove', mv); canvas.addEventListener('mouseup', en); canvas.addEventListener('mouseleave', en); canvas.addEventListener('touchstart', st, { passive: false }); canvas.addEventListener('touchmove', mv, { passive: false }); canvas.addEventListener('touchend', en) }
+        function initSig(cid, hid) {
+            const canvas = document.getElementById(cid);
+            const pad = canvas.parentElement;
+            canvas.width = pad.offsetWidth;
+            canvas.height = pad.offsetHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#c9a84c';
+            ctx.lineWidth = 2.2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctxs[cid] = ctx;
+            let draw = false;
+            const gp = e => {
+                const r = canvas.getBoundingClientRect();
+                const s = e.touches ? e.touches[0] : e;
+                return [s.clientX - r.left, s.clientY - r.top];
+            };
+            const st = e => {
+                e.preventDefault();
+                draw = true;
+                ctx.beginPath();
+                ctx.moveTo(...gp(e));
+                document.getElementById(hid).classList.add('gone');
+            };
+            const mv = e => {
+                e.preventDefault();
+                if (!draw) return;
+                ctx.lineTo(...gp(e));
+                ctx.stroke();
+            };
+            const en = () => {
+                draw = false;
+                saveClientState(); // Save signature coordinates
+            };
+            canvas.addEventListener('mousedown', st);
+            canvas.addEventListener('mousemove', mv);
+            canvas.addEventListener('mouseup', en);
+            canvas.addEventListener('mouseleave', en);
+            canvas.addEventListener('touchstart', st, { passive: false });
+            canvas.addEventListener('touchmove', mv, { passive: false });
+            canvas.addEventListener('touchend', en);
+        }
 
-        function clearSig() { ['c1', 'c2'].forEach(id => { const c = document.getElementById(id); ctxs[id] && ctxs[id].clearRect(0, 0, c.width, c.height) }); document.getElementById('h1').classList.remove('gone'); document.getElementById('h2').classList.remove('gone'); document.getElementById('sig-done').classList.remove('show') }
+        function clearSig() {
+            ['c1', 'c2'].forEach(id => {
+                const c = document.getElementById(id);
+                ctxs[id] && ctxs[id].clearRect(0, 0, c.width, c.height);
+            });
+            document.getElementById('h1').classList.remove('gone');
+            document.getElementById('h2').classList.remove('gone');
+            document.getElementById('sig-done').classList.remove('show');
+            saveClientState();
+        }
 
-        function signIt() { const n = document.getElementById('cname').value.trim(); if (!n) { alert('Please type the client full name to confirm.'); return } const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); document.getElementById('sig-date').textContent = now; const b = document.getElementById('sig-done'); b.classList.add('show'); b.scrollIntoView({ behavior: 'smooth', block: 'center' }) }
+        function signIt() {
+            const n = document.getElementById('cname').value.trim();
+            if (!n) {
+                alert('Please type the client full name to confirm.');
+                return;
+            }
+            const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('sig-date').textContent = now;
+            const b = document.getElementById('sig-done');
+            b.classList.add('show');
+            b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            saveClientState();
+        }
 
-        window.addEventListener('load', () => { initSig('c1', 'h1'); initSig('c2', 'h2') })
+        window.addEventListener('load', () => {
+            initSig('c1', 'h1');
+            initSig('c2', 'h2');
+            
+            // Bind auto-save to input events on contract/invoice fields for admin
+            document.querySelectorAll('.panel input, .panel select, .panel textarea').forEach(input => {
+                input.addEventListener('input', () => {
+                    if (currentRole === 'admin') {
+                        saveClientState();
+                    }
+                });
+                input.addEventListener('change', () => {
+                    if (currentRole === 'admin') {
+                        saveClientState();
+                    }
+                });
+            });
+        });
 
-        function calc() { let s = 0; for (let i = 1; i <= 5; i++) { const q = parseFloat(document.getElementById('q' + i).value) || 0; const p = parseFloat(document.getElementById('p' + i).value) || 0; const a = q * p; s += a; document.getElementById('a' + i).textContent = a > 0 ? '$ ' + a.toFixed(2) : '—' } document.getElementById('sub').textContent = '$ ' + s.toFixed(2); document.getElementById('tot').textContent = '$ ' + s.toFixed(2) }
+        function calc() {
+            let s = 0;
+            for (let i = 1; i <= 5; i++) {
+                const q = parseFloat(document.getElementById('q' + i).value) || 0;
+                const p = parseFloat(document.getElementById('p' + i).value) || 0;
+                const a = q * p;
+                s += a;
+                document.getElementById('a' + i).textContent = a > 0 ? '$ ' + a.toFixed(2) : '—';
+            }
+            document.getElementById('sub').textContent = '$ ' + s.toFixed(2);
+            document.getElementById('tot').textContent = '$ ' + s.toFixed(2);
+        }
 
-        function selP(el) { document.querySelectorAll('.pm').forEach(m => m.classList.remove('sel')); el.classList.add('sel') }
+        function selP(el) {
+            document.querySelectorAll('.pm').forEach(m => m.classList.remove('sel'));
+            el.classList.add('sel');
+            saveClientState();
+        }
 
-        function markPaid() { if (!document.querySelector('.pm.sel')) { alert('Please select a payment method first.'); return } const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); document.getElementById('pay-date').textContent = now; const b = document.getElementById('pay-done'); b.classList.add('show'); b.scrollIntoView({ behavior: 'smooth', block: 'center' }) }
+        function markPaid() {
+            if (!document.querySelector('.pm.sel')) {
+                alert('Please select a payment method first.');
+                return;
+            }
+            const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('pay-date').textContent = now;
+            const b = document.getElementById('pay-done');
+            b.classList.add('show');
+            b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            saveClientState();
+        }
 
-        function tP(e, el) { if (e.target.closest('.task')) return; el.classList.toggle('open') }
+        function tP(e, el) {
+            if (e.target.closest('.task')) return;
+            el.classList.toggle('open');
+        }
 
         function tT(e, el) {
             e.stopPropagation();
+            if (currentRole === 'client' && el.classList.contains('locked')) {
+                showToast('🔒 This task is managed by Rahul');
+                return;
+            }
             const cb = el.querySelector('.ck');
             cb.checked = !cb.checked;
             const taskName = el.querySelector('.tt').textContent;
@@ -2899,6 +3034,207 @@
             });
             updateStatusBanner();
             renderTimeline();
+        }
+
+        // --- Consolidated Client Data Persistence ---
+        function getClientDataKey() {
+            const cid = currentClient ? currentClient.id : 'default';
+            return 'portal-data-' + cid;
+        }
+
+        function saveClientState() {
+            if (!currentClient) return;
+            
+            const c1 = document.getElementById('c1');
+            const c2 = document.getElementById('c2');
+            const isSigDone = document.getElementById('sig-done').classList.contains('show');
+            const sigDate = document.getElementById('sig-date').textContent;
+            const cname = document.getElementById('cname').value;
+            
+            const isPayDone = document.getElementById('pay-done').classList.contains('show');
+            const payDate = document.getElementById('pay-date').textContent;
+            const pmEls = document.querySelectorAll('.pm');
+            let payMethodIndex = -1;
+            pmEls.forEach((el, index) => {
+                if (el.classList.contains('sel')) payMethodIndex = index;
+            });
+
+            const q = [], p = [];
+            for (let i = 1; i <= 5; i++) {
+                q.push(document.getElementById('q' + i).value);
+                p.push(document.getElementById('p' + i).value);
+            }
+            
+            const state = {
+                contract: {
+                    name: document.getElementById('c-name').value,
+                    company: document.getElementById('c-company').value,
+                    project: document.getElementById('c-project').value,
+                    service: document.getElementById('c-service').value,
+                    start: document.getElementById('c-start').value,
+                    deadline: document.getElementById('c-deadline').value,
+                    total: document.getElementById('c-total').value
+                },
+                invoice: {
+                    invNo: document.querySelector('.ino input') ? document.querySelector('.ino input').value : '0001',
+                    invDate: document.querySelectorAll('.imeta input[type="date"]')[0] ? document.querySelectorAll('.imeta input[type="date"]')[0].value : '',
+                    dueDate: document.querySelectorAll('.imeta input[type="date"]')[1] ? document.querySelectorAll('.imeta input[type="date"]')[1].value : '',
+                    q: q,
+                    p: p,
+                    paid: isPayDone,
+                    payDate: payDate,
+                    payMethodIndex: payMethodIndex
+                },
+                signatures: {
+                    signed: isSigDone,
+                    date: sigDate,
+                    cname: cname,
+                    sig1: (c1 && document.getElementById('h1').classList.contains('gone')) ? c1.toDataURL() : '',
+                    sig2: (c2 && document.getElementById('h2').classList.contains('gone')) ? c2.toDataURL() : ''
+                }
+            };
+            
+            localStorage.setItem(getClientDataKey(), JSON.stringify(state));
+            
+            const clientInRegistry = CLIENTS.find(c => c.id === currentClient.id);
+            if (clientInRegistry) {
+                clientInRegistry.name = state.contract.name;
+                clientInRegistry.company = state.contract.company;
+                clientInRegistry.project = state.contract.project;
+                localStorage.setItem('portal-clients', JSON.stringify(CLIENTS));
+            }
+        }
+
+        function loadClientState() {
+            if (!currentClient) return;
+            
+            clearAllClientFields();
+
+            const saved = localStorage.getItem(getClientDataKey());
+            if (!saved) {
+                prefillClient(currentClient);
+                calc();
+                applyRoleLocks();
+                return;
+            }
+
+            const state = JSON.parse(saved);
+            
+            document.getElementById('c-name').value = state.contract.name || '';
+            document.getElementById('c-company').value = state.contract.company || '';
+            document.getElementById('c-project').value = state.contract.project || '';
+            document.getElementById('c-service').value = state.contract.service || '';
+            document.getElementById('c-start').value = state.contract.start || '';
+            document.getElementById('c-deadline').value = state.contract.deadline || '';
+            document.getElementById('c-total').value = state.contract.total || '';
+            
+            if (document.querySelector('.ino input')) document.querySelector('.ino input').value = state.invoice.invNo || '0001';
+            const dateInputs = document.querySelectorAll('.imeta input[type="date"]');
+            if (dateInputs[0]) dateInputs[0].value = state.invoice.invDate || '';
+            if (dateInputs[1]) dateInputs[1].value = state.invoice.dueDate || '';
+            
+            if (state.invoice.q && state.invoice.p) {
+                for (let i = 1; i <= 5; i++) {
+                    const qVal = state.invoice.q[i - 1];
+                    const pVal = state.invoice.p[i - 1];
+                    if (qVal !== undefined) document.getElementById('q' + i).value = qVal;
+                    if (pVal !== undefined) document.getElementById('p' + i).value = pVal;
+                }
+            }
+
+            syncFields();
+            calc();
+            
+            if (state.signatures) {
+                document.getElementById('cname').value = state.signatures.cname || '';
+                if (state.signatures.signed) {
+                    document.getElementById('sig-date').textContent = state.signatures.date || '';
+                    document.getElementById('sig-done').classList.add('show');
+                } else {
+                    document.getElementById('sig-done').classList.remove('show');
+                }
+
+                ['c1', 'c2'].forEach((id, idx) => {
+                    const dataUrl = idx === 0 ? state.signatures.sig1 : state.signatures.sig2;
+                    const canvas = document.getElementById(id);
+                    const hid = idx === 0 ? 'h1' : 'h2';
+                    const label = document.getElementById(hid);
+                    
+                    if (dataUrl) {
+                        const ctx = canvas.getContext('2d');
+                        const img = new Image();
+                        img.onload = function() {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            ctx.drawImage(img, 0, 0);
+                        };
+                        img.src = dataUrl;
+                        label.classList.add('gone');
+                    } else {
+                        label.classList.remove('gone');
+                        const ctx = canvas.getContext('2d');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    }
+                });
+            }
+
+            if (state.invoice) {
+                const pmEls = document.querySelectorAll('.pm');
+                pmEls.forEach(el => el.classList.remove('sel'));
+                if (state.invoice.payMethodIndex !== undefined && state.invoice.payMethodIndex !== -1) {
+                    if (pmEls[state.invoice.payMethodIndex]) {
+                        pmEls[state.invoice.payMethodIndex].classList.add('sel');
+                    }
+                }
+
+                if (state.invoice.paid) {
+                    document.getElementById('pay-date').textContent = state.invoice.payDate || '';
+                    document.getElementById('pay-done').classList.add('show');
+                } else {
+                    document.getElementById('pay-done').classList.remove('show');
+                }
+            }
+
+            applyRoleLocks();
+        }
+
+        function clearAllClientFields() {
+            const inputs = document.querySelectorAll('.panel input, .panel select, .panel textarea');
+            inputs.forEach(i => {
+                if (i.id !== 'cname' && !i.readOnly && i.type !== 'button' && i.type !== 'submit') {
+                    i.value = '';
+                }
+            });
+            document.getElementById('sig-done').classList.remove('show');
+            document.getElementById('pay-done').classList.remove('show');
+            document.getElementById('cname').value = '';
+            document.querySelectorAll('.pm').forEach(m => m.classList.remove('sel'));
+            
+            ['c1', 'c2'].forEach((id, idx) => {
+                const canvas = document.getElementById(id);
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+                const hid = idx === 0 ? 'h1' : 'h2';
+                const label = document.getElementById(hid);
+                if (label) label.classList.remove('gone');
+            });
+        }
+
+        function applyRoleLocks() {
+            const isClient = currentRole === 'client';
+            
+            const contractInputs = document.querySelectorAll('#panel-contract input, #panel-contract select, #panel-contract textarea');
+            contractInputs.forEach(i => {
+                if (i.id !== 'cname') {
+                    i.disabled = isClient;
+                }
+            });
+
+            const invoiceInputs = document.querySelectorAll('#panel-invoice input, #panel-invoice select, #panel-invoice textarea');
+            invoiceInputs.forEach(i => {
+                i.disabled = isClient;
+            });
         }
 
         function updateStatusBanner() {
