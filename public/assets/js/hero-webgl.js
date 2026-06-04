@@ -37,7 +37,7 @@
                 powerPreference: "high-performance"
             });
             renderer.setSize(width, height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
         } catch (e) {
             console.error('WebGL is not supported by this browser. Falling back to video background.', e);
             return;
@@ -62,7 +62,7 @@
         }, { passive: true });
 
         // Geometry: detailed sphere for smooth shader wave displacements
-        const geometry = new THREE.SphereGeometry(1.4, 128, 128);
+        const geometry = new THREE.SphereGeometry(1.4, 80, 80);
 
         // Custom Shader Material for Liquid Metal look
         const uniforms = {
