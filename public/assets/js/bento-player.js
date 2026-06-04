@@ -665,14 +665,14 @@
             const audio = estAudio ? estAudio.checked : true;
             const source = estSource ? estSource.checked : false;
 
-            let baseRate = 600;
+            let baseRate = 780;
             const lengthMultiplier = length / 30;
             baseRate *= lengthMultiplier;
 
             if (complexity === 'low') baseRate *= 0.7;
             if (complexity === 'high') baseRate *= 1.5;
 
-            if (audio) baseRate += 150;
+            if (audio) baseRate += 195;
             if (source) baseRate *= 1.1;
             if (speed === 'rush') baseRate *= 1.15;
 
@@ -745,7 +745,7 @@
             const speed = (estSpeedRush && estSpeedRush.checked) ? 'Rush Delivery (1-2 weeks)' : 'Standard Delivery (3-4 weeks)';
             const audio = estAudio ? estAudio.checked : true;
             const source = estSource ? estSource.checked : false;
-            const price = estPriceVal ? estPriceVal.textContent : '$750';
+            const price = estPriceVal ? estPriceVal.textContent : '$975';
 
             const summaryText = `[Custom Scope selected: ${length}s video length, ${complexityText}, ${speed}, Audio sound FX: ${audio ? 'Yes' : 'No'}, Source files: ${source ? 'Yes' : 'No'}. Estimated Price: ${price}]`;
 
