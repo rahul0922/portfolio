@@ -401,14 +401,14 @@
 }
 
 /* Project Title Area — with red left accent */
+/*.video_info_project*/
 .video_info_project {
     display: flex;
     align-items: center;
     gap: 14px;
     padding: 20px 28px;
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
     border-left: 3px solid #eb5939;
-    min-width: 230px;
+    width: 100%;
     background: rgba(235, 89, 57, 0.04);
 }
 
@@ -463,9 +463,7 @@
 
 /* Stats Grid */
 .video_info_stats {
-    display: flex;
-    flex: 1;
-    align-items: center;
+    display: none !important;
 }
 
 .video_info_stat {
@@ -1606,4 +1604,180 @@ select.form_input {
     .vfx-tabs-divider {
         display: none;
     }
+}
+
+/* ==========================================
+   VISUAL-FIRST PREMIUM LAYOUT ENHANCEMENTS
+   ========================================== */
+
+/* Accordion collapsing styles for Case Study Card */
+.video_case_study_card {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0 !important;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin-top 0.5s ease;
+}
+.video_case_study_card.is-expanded {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 15px !important;
+}
+
+/* Case Study Toggle Container & Tab Style Button */
+.case_study_toggle_container {
+    max-width: 1728px;
+    margin: 15px auto 0;
+    padding: 0 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+#btnToggleCaseStudy {
+    font-size: 11px;
+    padding: 8px 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#btnToggleCaseStudy .vfx-tab-dot {
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+#btnToggleCaseStudy.active {
+    background: #eb5939;
+    border-color: #eb5939;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(235, 89, 57, 0.35);
+}
+#btnToggleCaseStudy.active .vfx-tab-dot {
+    background-color: #fff;
+    box-shadow: 0 0 6px #fff;
+}
+
+/* Pulsing handle glow effect */
+@keyframes handle-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(235, 89, 57, 0.7), 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(235, 89, 57, 0), 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(235, 89, 57, 0), 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+}
+.slider-handle-button {
+    animation: handle-pulse 2s infinite;
+}
+
+/* Premium Estimator Card Checkboxes */
+.estimator_card_checkbox {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.estimator_card_input {
+    display: none; /* Hide actual input */
+}
+
+.estimator_card_inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.estimator_card_icon {
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.estimator_card_label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.estimator_card_price {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #eb5939;
+    background: rgba(235, 89, 57, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Checked States */
+.estimator_card_input:checked + .estimator_card_inner {
+    background: rgba(235, 89, 57, 0.06);
+    border-color: #eb5939;
+    box-shadow: 0 0 15px rgba(235, 89, 57, 0.15);
+}
+
+.estimator_card_input:checked + .estimator_card_inner .estimator_card_icon {
+    color: #eb5939;
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(235, 89, 57, 0.5));
+}
+
+.estimator_card_input:checked + .estimator_card_inner .estimator_card_label {
+    color: #fff;
+    font-weight: 600;
+}
+
+.estimator_card_input:checked + .estimator_card_inner .estimator_card_price {
+    color: #fff;
+    background: #eb5939;
+    box-shadow: 0 2px 6px rgba(235, 89, 57, 0.3);
+}
+
+/* Hover States */
+.estimator_card_inner:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* RED LAYER STYLING OVERRIDES */
+.layer__red .estimator_card_inner {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.layer__red .estimator_card_label {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.layer__red .estimator_card_icon {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.layer__red .estimator_card_inner:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.layer__red .estimator_card_input:checked + .estimator_card_inner {
+    background: rgba(235, 89, 57, 0.06);
+    border-color: #eb5939;
+    box-shadow: 0 0 15px rgba(235, 89, 57, 0.1);
+}
+
+.layer__red .estimator_card_input:checked + .estimator_card_inner .estimator_card_label {
+    color: #000;
 }

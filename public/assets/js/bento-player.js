@@ -614,6 +614,8 @@
             }
         };
 
+        window.UXSound = UXSound;
+
         bentoItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
                 UXSound.playHover();
