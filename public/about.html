@@ -259,8 +259,8 @@
     <link href="app.css?v=1.0.0.3" rel="stylesheet">
 </head>
 
-<body id="main-site-wrapper" class="home custom-site-layout" style="overflow: hidden">
-    <div class="page-loading js-page-loading" style="position: fixed;
+<body id="main-site-wrapper" class="home custom-site-layout" style="overflow: auto;">
+    <div class="page-loading js-page-loading" style="display: none !important; position: fixed;
         top: 0;
         z-index: 99999999;
         width: 100%;
@@ -282,12 +282,16 @@
                     src="assets/icons/logo.svg" alt="logo"></a></div>
         <div class="header_menu">
             <ul class="header_menu_list ul__reset">
-                <li class="header_menu_item is-active js-cursor-contract"><a href="about.html" class="desc text-uppercase"><span
+                <li class="header_menu_item is-active js-cursor-contract"><a href="about.html"
+                        onclick="window.location.href='about.html';return false;"
+                        class="desc text-uppercase"><span
                             class="header_menu_item_inner"><span
                                 class="header_menu_item_link header_menu_item_link__deep">About Rahul</span> <span
                                 class="header_menu_item_link header_menu_item_link__active">About
                                 Rahul</span></span></a></li>
-                <li class="header_menu_item js-cursor-contract"><a href="index.html#work" class="desc text-uppercase"><span
+                <li class="header_menu_item js-cursor-contract"><a href="index.html#work"
+                        onclick="window.location.href='index.html#work';return false;"
+                        class="desc text-uppercase"><span
                             class="header_menu_item_inner"><span
                                 class="header_menu_item_link header_menu_item_link__deep">Work</span> <span
                                 class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
@@ -1749,6 +1753,15 @@
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            setTimeout(function() {
+                document.body.classList.remove("is-loading");
+                document.body.classList.add("is-ready", "is-loaded", "is-enter");
+                document.body.style.overflow = "auto";
+            }, 50);
+        });
+    </script>
 </body>
 
 </html>
