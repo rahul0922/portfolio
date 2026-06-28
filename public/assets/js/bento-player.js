@@ -5,22 +5,16 @@
     'use strict';
 
     function initBentoPlayer() {
-        const mainVideo = document.getElementById('mainVideo');
-        const bentoStage = document.querySelector('.bento_main_stage');
-        const overlay = document.querySelector('.bento_player_overlay');
-        const playBtn = document.querySelector('.bento_play_center_btn');
-        const playIcon = playBtn.querySelector('.icon-play');
-        const pauseIcon = playBtn.querySelector('.icon-pause');
-
-        const progressBar = document.querySelector('.bento_progress_bar');
-        const progressContainer = document.querySelector('.bento_progress_container');
-
-        const muteBtn = document.querySelector('.bento_mute_btn');
-        const unmuteIcon = muteBtn.querySelector('.icon-unmuted');
-        const mutedIcon = muteBtn.querySelector('.icon-muted');
-
-        const fullscreenBtn = document.querySelector('.bento_fullscreen_btn');
-        const bentoItems = document.querySelectorAll('.bento_item');
+        // --- FILMSTRIP CINEMA CONTROLS ---
+        const trackDark = document.querySelector('.layer__dark .filmstrip-track');
+        const trackRed = document.querySelector('.layer__red .filmstrip-track');
+        
+        const cardsDark = document.querySelectorAll('.layer__dark .filmstrip-card');
+        const cardsRed = document.querySelectorAll('.layer__red .filmstrip-card');
+        
+        const prevBtns = document.querySelectorAll('.filmstrip-prev-btn');
+        const nextBtns = document.querySelectorAll('.filmstrip-next-btn');
+        const countCurrents = document.querySelectorAll('.filmstrip-current-count');
 
         // Info bar elements
         const infoProjectName = document.getElementById('infoProjectName');
@@ -31,11 +25,11 @@
         const infoBudget = document.getElementById('infoBudget');
         const infoTools = document.getElementById('infoTools');
 
-        if (!mainVideo) return;
+        if (!trackDark || !trackRed) return;
 
-        // Assign view transition names dynamically to all bento items
-        bentoItems.forEach((item, index) => {
-            item.style.viewTransitionName = `bento-item-${index}`;
+        // Assign view transition names dynamically to all filmstrip items (for visual excellence)
+        cardsDark.forEach((item, index) => {
+            item.style.viewTransitionName = `filmstrip-item-${index}`;
         });
 
         // --- Info Bar Update ---
@@ -68,8 +62,27 @@
                 if (infoCaseStudy) {
                     const problem = item.getAttribute('data-problem') || '—';
                     const solution = item.getAttribute('data-solution') || '—';
-                    const result = item.getAttribute('data-result') || '—';
-                    infoCaseStudy.innerHTML = `<strong>Problem:</strong> ${problem}<br><strong>Solution:</strong> ${solution}<br><strong>Result:</strong> ${result}`;
+                    const quote = item.getAttribute('data-testimonial-quote');
+                    const author = item.getAttribute('data-testimonial-author');
+                    
+                    let htmlContent = `<strong>Problem:</strong> ${problem}<br><br><strong>Solution:</strong> ${solution}`;
+                    if (quote && author) {
+                        htmlContent += `<div class="case-study-testimonial-block" style="margin-top: 20px; border-left: 2px solid #eb5939; padding-left: 15px; opacity: 0.85;">
+                            <p class="mb-1 desc case-study-testimonial-quote" style="font-style: italic; font-size: 0.95rem;">"${quote}"</p>
+                            <span class="case-study-testimonial-author" style="font-family: var(--hud-mono, monospace); font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);">${author}</span>
+                        </div>`;
+                    }
+                    infoCaseStudy.innerHTML = htmlContent;
+
+                    // Update editorial stats
+                    const roiVal = item.getAttribute('data-roi-val') || '4.2%';
+                    const roiLbl = item.getAttribute('data-roi-lbl') || 'Click-Through Rate (CTR)<br>on Facebook Video Ads';
+                    
+                    const hudROI = document.getElementById('hudMetricROI');
+                    const hudLabel = document.getElementById('hudMetricLabel');
+                    
+                    if (hudROI) hudROI.innerHTML = roiVal;
+                    if (hudLabel) hudLabel.innerHTML = roiLbl;
                 }
 
                 // Fade in
@@ -80,296 +93,245 @@
             }, 250);
         }
 
-        // --- Playback Logic ---
-        function togglePlay() {
-            if (mainVideo.paused) {
-                mainVideo.muted = false;
-                updateMuteUI();
-                mainVideo.play();
-                bentoStage.classList.add('is-playing');
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-            } else {
-                mainVideo.pause();
-                bentoStage.classList.remove('is-playing');
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-            }
-        }
-
-        function updateMuteUI() {
-            if (mainVideo.muted) {
-                unmuteIcon.style.display = 'none';
-                mutedIcon.style.display = 'block';
-            } else {
-                unmuteIcon.style.display = 'block';
-                mutedIcon.style.display = 'none';
-            }
-        }
-
-        playBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            togglePlay();
-        });
-
-        bentoStage.addEventListener('click', togglePlay);
-
-        // --- Progress Bar ---
-        mainVideo.addEventListener('timeupdate', () => {
-            const progress = (mainVideo.currentTime / mainVideo.duration) * 100;
-            progressBar.style.width = `${progress}%`;
-        });
-
-        progressContainer.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const rect = progressContainer.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            mainVideo.currentTime = pos * mainVideo.duration;
-        });
-
-        // --- Mute/Unmute ---
-        muteBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mainVideo.muted = !mainVideo.muted;
-            updateMuteUI();
-        });
-
-        // --- Fullscreen ---
-        fullscreenBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (mainVideo.requestFullscreen) {
-                mainVideo.requestFullscreen();
-            } else if (mainVideo.webkitRequestFullscreen) {
-                mainVideo.webkitRequestFullscreen();
-            } else if (mainVideo.msRequestFullscreen) {
-                mainVideo.msRequestFullscreen();
-            }
-        });
-
-        // --- Sidebar Interactions ---
-        function updateActiveState(src) {
-            bentoItems.forEach(item => {
-                const itemSrc = item.getAttribute('data-src');
-                if (itemSrc === src) {
-                    item.classList.add('is-active');
-                } else {
-                    item.classList.remove('is-active');
+        // --- Active Card Calculations ---
+        function getActiveCardIndex(track, cards) {
+            let closestIndex = 0;
+            let closestDiff = Infinity;
+            const scrollLeft = track.scrollLeft;
+            cards.forEach((card, index) => {
+                const diff = Math.abs(card.offsetLeft - scrollLeft);
+                if (diff < closestDiff) {
+                    closestDiff = diff;
+                    closestIndex = index;
                 }
+            });
+            return closestIndex;
+        }
+
+        function highlightCard(index) {
+            cardsDark.forEach((c, idx) => {
+                if (idx === index) c.classList.add('is-active');
+                else c.classList.remove('is-active');
+            });
+            cardsRed.forEach((c, idx) => {
+                if (idx === index) c.classList.add('is-active');
+                else c.classList.remove('is-active');
             });
         }
 
-        bentoItems.forEach(item => {
-            item.addEventListener('click', function () {
-                const newSrc = this.getAttribute('data-src');
-                if (newSrc && mainVideo.getAttribute('src') !== newSrc) {
-                    mainVideo.src = newSrc;
-                    mainVideo.play();
-                    bentoStage.classList.add('is-playing');
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'block';
-                    updateActiveState(newSrc);
-                    updateInfoBar(this);
+        // Initialize state with first card
+        if (cardsDark.length > 0) {
+            highlightCard(0);
+            updateInfoBar(cardsDark[0]);
+        }
 
-                    // Sync the red layer main video
-                    const mainVideoRed = document.getElementById('mainVideo_red');
-                    if (mainVideoRed) {
-                        mainVideoRed.src = newSrc;
-                    }
+        // --- Drag to Scroll (trackDark) ---
+        let isDown = false;
+        let startX;
+        let scrollLeft;
 
-                    // Auto-scroll to main video on mobile screens
-                    if (window.innerWidth <= 991) {
-                        bentoStage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                }
-            });
+        trackDark.addEventListener('mousedown', (e) => {
+            isDown = true;
+            trackDark.classList.add('is-dragging');
+            startX = e.pageX - trackDark.offsetLeft;
+            scrollLeft = trackDark.scrollLeft;
+        });
 
-            // Hover preview & Custom Cursor Interaction
-            const smallVideo = item.querySelector('video');
-            const cursorEl = document.querySelector('.js-vj-cursor');
+        trackDark.addEventListener('mouseleave', () => {
+            isDown = false;
+            trackDark.classList.remove('is-dragging');
+        });
 
-            item.addEventListener('mouseenter', () => {
-                if (smallVideo) {
-                    smallVideo.play().catch(() => { });
-                    // Sync the play on the red layer version too since it ignores pointer events
-                    const itemSrc = item.getAttribute('data-src');
-                    const redVideos = document.querySelectorAll(`#bento_sidebar_red .bento_item[data-src="${itemSrc}"] video`);
-                    redVideos.forEach(v => v.play().catch(() => { }));
-                }
+        trackDark.addEventListener('mouseup', () => {
+            isDown = false;
+            trackDark.classList.remove('is-dragging');
+        });
 
-                // Show & style custom cursor inside bento area
-                if (cursorEl) {
-                    cursorEl.classList.add('is-hovering-bento');
-                    if (!cursorEl.hasAttribute('data-original-html')) {
-                        cursorEl.setAttribute('data-original-html', cursorEl.innerHTML);
-                    }
-                    const text = item.getAttribute('data-category') === 'motion' ? 'PLAY' : 'VIEW';
-                    cursorEl.innerHTML = `<span><span class="d-block">${text}</span></span>`;
-                }
-            });
+        trackDark.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - trackDark.offsetLeft;
+            const walk = (x - startX) * 1.5; // Scroll speed multiplier
+            trackDark.scrollLeft = scrollLeft - walk;
+        });
 
-            item.addEventListener('mouseleave', () => {
-                if (smallVideo) {
-                    smallVideo.pause();
-                    smallVideo.currentTime = 0;
-                    smallVideo.load();
-                    // Sync the pause on the red layer version too
-                    const itemSrc = item.getAttribute('data-src');
-                    const redVideos = document.querySelectorAll(`#bento_sidebar_red .bento_item[data-src="${itemSrc}"] video`);
-                    redVideos.forEach(v => {
-                        v.pause();
-                        v.currentTime = 0;
-                        v.load();
+        // --- Scroll Synchronization & Count Updates ---
+        let ticking = false;
+        trackDark.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    trackRed.scrollLeft = trackDark.scrollLeft;
+                    const activeIndex = getActiveCardIndex(trackDark, cardsDark);
+                    countCurrents.forEach(el => {
+                        el.textContent = activeIndex + 1;
                     });
-                }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
 
-                // Reset custom cursor
-                if (cursorEl) {
-                    cursorEl.classList.remove('is-hovering-bento');
-                    const originalHtml = cursorEl.getAttribute('data-original-html');
-                    if (originalHtml) {
-                        cursorEl.innerHTML = originalHtml;
-                    }
-                }
-
-                // Reset 3D tilt smooth transitions
-                item.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-                item.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s';
+        // --- Next / Prev Arrow Navigation ---
+        function scrollToCard(index) {
+            if (index < 0 || index >= cardsDark.length) return;
+            const targetCard = cardsDark[index];
+            trackDark.scrollTo({
+                left: targetCard.offsetLeft - 40, // offset padding matching container clamp padding
+                behavior: 'smooth'
             });
+        }
 
-            // 3D Parallax Tilt Effect
-            item.addEventListener('mousemove', function (e) {
-                const rect = this.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                this.style.transform = `perspective(1000px) rotateX(${y * -10}deg) rotateY(${x * 10}deg) scale3d(1.02, 1.02, 1.02)`;
-                this.style.transition = 'transform 0.1s ease-out, border-color 0.4s, box-shadow 0.4s';
+        prevBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const activeIndex = getActiveCardIndex(trackDark, cardsDark);
+                scrollToCard(activeIndex - 1);
+                if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                    window.UXSound.playClick();
+                }
             });
         });
-        // --- Portfolio Category Filtering ---
-        const filterTabs = document.querySelectorAll('.portfolio-tab');
-        const bentoSidebar = document.querySelector('.bento_sidebar');
-        const bentoSidebarRed = document.getElementById('bento_sidebar_red');
 
-        // Only get the base bentoItems to track filtering
-        const baseBentoItems = Array.from(document.querySelectorAll('.bento_sidebar .bento_item'));
+        nextBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const activeIndex = getActiveCardIndex(trackDark, cardsDark);
+                scrollToCard(activeIndex + 1);
+                if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                    window.UXSound.playClick();
+                }
+            });
+        });
 
-        if (filterTabs.length > 0 && bentoSidebar) {
-            filterTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const filterValue = tab.getAttribute('data-filter');
+        // --- Card Click Selection & Fullscreen Trigger ---
+        cardsDark.forEach((card, index) => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.filmstrip-card-play')) return; // handled by play modal logic
+                
+                // If already active, click to view bigger/fullscreen
+                if (card.classList.contains('is-active')) {
+                    const src = card.getAttribute('data-src');
+                    if (src) {
+                        openVideoModal(src);
+                        return;
+                    }
+                }
+                
+                highlightCard(index);
+                updateInfoBar(card);
+                scrollToCard(index);
+                if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                    window.UXSound.playClick();
+                }
+            });
+        });
 
-                    // Core filtering state logic
-                    const applyFilter = () => {
-                        // Update active tab state (for both layers of tabs)
-                        filterTabs.forEach(t => {
-                            if (t.getAttribute('data-filter') === filterValue) t.classList.add('active');
-                            else t.classList.remove('active');
-                        });
-
-                        // Use class-based grid positioning instead of removing DOM nodes (avoids video blackouts)
-                        let firstVisibleItem = null;
-
-                        function updateGridPositions(sidebarContainer) {
-                            if (!sidebarContainer) return null;
-                            let pos = 1;
-                            let first = null;
-                            const items = sidebarContainer.querySelectorAll('.bento_item');
-                            items.forEach(item => {
-                                // remove all old pos- classes
-                                for (let i = 1; i <= 10; i++) item.classList.remove('pos-' + i);
-
-                                const itemCategory = item.getAttribute('data-category');
-                                const hideInAll = item.classList.contains('hide-in-all');
-                                
-                                if ((filterValue === 'all' && !hideInAll) || itemCategory === filterValue) {
-                                    item.style.display = '';
-                                    item.classList.add('pos-' + pos);
-                                    if (!first) first = item;
-                                    pos++;
-                                    item.style.opacity = '';
-                                    item.style.transform = '';
-                                } else {
-                                    item.style.display = 'none';
-                                }
-                            });
-                            return first;
+        // Sync clicks on Red cards too
+        if (cardsRed) {
+            cardsRed.forEach((card, index) => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.filmstrip-card-play')) return;
+                    
+                    if (card.classList.contains('is-active')) {
+                        const src = card.getAttribute('data-src');
+                        if (src) {
+                            openVideoModal(src);
+                            return;
                         }
-
-                        firstVisibleItem = updateGridPositions(bentoSidebar);
-                        updateGridPositions(bentoSidebarRed);
-
-                        // Automatically snap the main stage to the first item of the newly selected category
-                        const mainVideoRed = document.getElementById('mainVideo_red');
-                        if (firstVisibleItem) {
-                            const newSrc = firstVisibleItem.getAttribute('data-src');
-                            if (newSrc && mainVideo.getAttribute('src') !== newSrc) {
-                                mainVideo.src = newSrc;
-                                if (mainVideoRed) mainVideoRed.src = newSrc;
-
-                                mainVideo.play();
-                                bentoStage.classList.add('is-playing');
-                                playIcon.style.display = 'none';
-                                pauseIcon.style.display = 'block';
-                                updateInfoBar(firstVisibleItem);
-
-                                document.querySelectorAll('.bento_item').forEach(i => i.classList.remove('is-active'));
-                                // Add active to the matched items in both bases
-                                document.querySelectorAll(`.bento_item[data-src="${newSrc}"]`).forEach(i => i.classList.add('is-active'));
-
-                            } else if (newSrc === mainVideo.getAttribute('src')) {
-                                document.querySelectorAll('.bento_item').forEach(i => i.classList.remove('is-active'));
-                                document.querySelectorAll(`.bento_item[data-src="${newSrc}"]`).forEach(i => i.classList.add('is-active'));
-                                updateInfoBar(firstVisibleItem);
-                            }
-                        }
-                    };
-
-                    // Run view transitions if supported
-                    if (document.startViewTransition) {
-                        document.startViewTransition(() => {
-                            applyFilter();
-                        });
-                    } else {
-                        // Fallback transition for older browsers
-                        const allItems = Array.from(document.querySelectorAll('.bento_item'));
-                        allItems.forEach(item => {
-                            item.style.opacity = '0';
-                            item.style.transform = 'scale(0.95)';
-                        });
-                        setTimeout(() => {
-                            applyFilter();
-                        }, 300);
+                    }
+                    
+                    highlightCard(index);
+                    if (cardsDark[index]) updateInfoBar(cardsDark[index]);
+                    scrollToCard(index);
+                    if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                        window.UXSound.playClick();
                     }
                 });
             });
         }
 
-        // Initialize by applying the active tab's filter directly
-        const activeTab = document.querySelector('.portfolio-tab.active[data-filter]');
-        if (activeTab) {
-            const filterValue = activeTab.getAttribute('data-filter');
+        // Cinematic View Button Listener
+        const btnCinematicPlay = document.getElementById('btnCinematicPlay');
+        if (btnCinematicPlay) {
+            btnCinematicPlay.addEventListener('click', () => {
+                const activeCard = document.querySelector('.filmstrip-card.is-active') || cardsDark[0];
+                if (activeCard) {
+                    const src = activeCard.getAttribute('data-src');
+                    if (src) {
+                        openVideoModal(src);
+                    }
+                }
+            });
+        }
 
-            function initGridPositions(sidebarContainer) {
-                if (!sidebarContainer) return;
-                let pos = 1;
-                sidebarContainer.querySelectorAll('.bento_item').forEach(item => {
-                    for (let i = 1; i <= 10; i++) item.classList.remove('pos-' + i);
-                    const itemCategory = item.getAttribute('data-category');
-                    if (itemCategory === filterValue) {
-                        item.style.display = '';
-                        item.classList.add('pos-' + pos++);
-                    } else {
-                        item.style.display = 'none';
+        // --- Hover Play/Pause Synchronization ---
+        cardsDark.forEach((card, index) => {
+            const videoDark = card.querySelector('video');
+            const cardRed = cardsRed[index];
+            const videoRed = cardRed ? cardRed.querySelector('video') : null;
+
+            card.addEventListener('mouseenter', () => {
+                if (videoDark) videoDark.play().catch(() => {});
+                if (videoRed) videoRed.play().catch(() => {});
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (videoDark) {
+                    videoDark.pause();
+                    videoDark.currentTime = 0;
+                }
+                if (videoRed) {
+                    videoRed.pause();
+                    videoRed.currentTime = 0;
+                }
+            });
+        });
+
+        // --- Full-Res Video Modal Overlay Player ---
+        const videoModal = document.getElementById('video-modal');
+        const modalVideoElement = videoModal ? videoModal.querySelector('video') : null;
+        const modalCloseBtn = videoModal ? videoModal.querySelector('.video-modal-close') : null;
+
+        function openVideoModal(src) {
+            if (!videoModal || !modalVideoElement) return;
+            modalVideoElement.src = src;
+            videoModal.classList.add('is-active');
+            modalVideoElement.play().catch(() => {});
+            if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                window.UXSound.playClick();
+            }
+        }
+
+        function closeVideoModal() {
+            if (!videoModal || !modalVideoElement) return;
+            modalVideoElement.pause();
+            modalVideoElement.src = '';
+            videoModal.classList.remove('is-active');
+            if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                window.UXSound.playClick();
+            }
+        }
+
+        cardsDark.forEach((card) => {
+            const playBtn = card.querySelector('.filmstrip-card-play');
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const src = card.getAttribute('data-src');
+                    if (src) {
+                        openVideoModal(src);
                     }
                 });
             }
+        });
 
-            initGridPositions(bentoSidebar);
-            initGridPositions(bentoSidebarRed);
-            updateActiveState(mainVideo.getAttribute('src'));
-            const activeItem = document.querySelector('.bento_sidebar .bento_item[data-category="' + filterValue + '"][data-src="' + mainVideo.getAttribute('src') + '"]')
-                || document.querySelector('.bento_sidebar .bento_item[data-category="' + filterValue + '"]');
-            if (activeItem) updateInfoBar(activeItem);
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeVideoModal);
+        }
+        if (videoModal) {
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    closeVideoModal();
+                }
+            });
         }
 
         // --- Scroll Animation Observer ---
@@ -445,28 +407,77 @@
             }
         });
 
-        // --- Before/After VFX Split Slider Controller ---
-        const sliderContainer = document.getElementById('vfxSplitSlider');
-        if (sliderContainer) {
-            const handle = sliderContainer.querySelector('.slider-handle');
-            const overlay = sliderContainer.querySelector('.slider-image-after');
+        // --- Minimalist Comparison Slider Controller ---
+        const slider = document.getElementById('vfxSplitSlider');
+        if (slider) {
+            const handle = slider.querySelector('.slider-handle');
+            const overlay = slider.querySelector('.slider-image-after');
             let isDragging = false;
 
-            function moveSlider(clientX) {
-                const rect = sliderContainer.getBoundingClientRect();
-                const x = clientX - rect.left;
-                let percentage = (x / rect.width) * 100;
-                
+            const telemetryData = {
+                "Perfume Bottle Design": {
+                    cam: "ARRI ALEXA LF",
+                    lens: "Signature Prime 35mm",
+                    engine: "Redshift Render",
+                    material: "Frosted Glass & Gold Leaf"
+                },
+                "Skincare Bottle Set Design": {
+                    cam: "HASSELBLAD H6D",
+                    lens: "HC Macro 120mm",
+                    engine: "Octane Render",
+                    material: "Opaline Matte Plastic"
+                },
+                "Chronograph Watch Design": {
+                    cam: "PHANTOM FLEX 4K",
+                    lens: "Leica Summicron 75mm",
+                    engine: "Cycles Engine",
+                    material: "Steel & Sapphire Crystal"
+                },
+                "Whiskey Bottle Design": {
+                    cam: "RED V-RAPTOR 8K",
+                    lens: "Cooke Anamorphic 50mm",
+                    engine: "Cycles Engine",
+                    material: "Refractive Amber Glass"
+                },
+                "Egyptian Tomb Chamber": {
+                    cam: "SONY VENICE 2",
+                    lens: "Zeiss Supreme 24mm",
+                    engine: "Unreal Engine 5.4",
+                    material: "Eroded Sandstone Mesh"
+                },
+                "Cyberpunk City Alley": {
+                    cam: "RED V-RAPTOR 8K",
+                    lens: "Panavision Primo 28mm",
+                    engine: "Octane Render",
+                    material: "PBR Wet Asphalt & Neon"
+                },
+                "Mountain Lake Scene": {
+                    cam: "ARRI ALEXA 35",
+                    lens: "Angenieux Optimo 18mm",
+                    engine: "Cycles Engine",
+                    material: "Volumetric Glacial Mist"
+                }
+            };
+
+            function setPosition(percentage) {
                 if (percentage < 0) percentage = 0;
                 if (percentage > 100) percentage = 100;
-
-                handle.style.left = `${percentage}%`;
-                overlay.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
-                overlay.style.webkitClipPath = `inset(0 ${100 - percentage}% 0 0)`;
+                if (handle) handle.style.left = `${percentage}%`;
+                if (overlay) {
+                    overlay.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+                    overlay.style.webkitClipPath = `inset(0 ${100 - percentage}% 0 0)`;
+                }
             }
 
-            handle.addEventListener('mousedown', (e) => {
+            function move(clientX) {
+                const rect = slider.getBoundingClientRect();
+                const x = clientX - rect.left;
+                setPosition((x / rect.width) * 100);
+            }
+
+            slider.addEventListener('mousedown', (e) => {
                 isDragging = true;
+                move(e.clientX);
                 e.preventDefault();
             });
 
@@ -475,12 +486,14 @@
             });
 
             window.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                moveSlider(e.clientX);
+                if (isDragging) move(e.clientX);
             });
 
-            handle.addEventListener('touchstart', () => {
+            slider.addEventListener('touchstart', (e) => {
                 isDragging = true;
+                if (e.touches && e.touches[0]) {
+                    move(e.touches[0].clientX);
+                }
             }, { passive: true });
 
             window.addEventListener('touchend', () => {
@@ -488,22 +501,16 @@
             });
 
             window.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                if (e.touches && e.touches[0]) {
-                    moveSlider(e.touches[0].clientX);
+                if (isDragging && e.touches && e.touches[0]) {
+                    move(e.touches[0].clientX);
                 }
             }, { passive: true });
-
-            sliderContainer.addEventListener('click', (e) => {
-                if (e.target.closest('.slider-handle-button')) return;
-                moveSlider(e.clientX);
-            });
 
             // VFX/CGI Tab switcher logic
             const vfxTabs = document.querySelectorAll('.vfx-tab');
             const vfxActiveLabel = document.getElementById('vfxActiveProjectLabel');
-            const sliderBeforeImg = sliderContainer.querySelector('.slider-image-before img');
-            const sliderAfterImg = sliderContainer.querySelector('.slider-image-after img');
+            const beforeImg = slider.querySelector('.slider-image-before img');
+            const afterImg = slider.querySelector('.slider-image-after img');
 
             vfxTabs.forEach(tab => {
                 tab.addEventListener('click', () => {
@@ -514,9 +521,23 @@
                     const finalSrc = tab.getAttribute('data-final');
                     const titleText = tab.getAttribute('data-title');
 
-                    if (sliderBeforeImg) sliderBeforeImg.src = claySrc;
-                    if (sliderAfterImg) sliderAfterImg.src = finalSrc;
+                    if (beforeImg) beforeImg.src = claySrc;
+                    if (afterImg) afterImg.src = finalSrc;
                     if (vfxActiveLabel) vfxActiveLabel.textContent = titleText;
+
+                    // Update minimal specs list
+                    const data = telemetryData[titleText];
+                    if (data) {
+                        const specCam = document.getElementById('vfxSpecCam');
+                        const specLens = document.getElementById('vfxSpecLens');
+                        const specEngine = document.getElementById('vfxSpecEngine');
+                        const specMaterial = document.getElementById('vfxSpecMaterial');
+
+                        if (specCam) specCam.textContent = data.cam.toUpperCase();
+                        if (specLens) specLens.textContent = data.lens;
+                        if (specEngine) specEngine.textContent = data.engine;
+                        if (specMaterial) specMaterial.textContent = data.material;
+                    }
 
                     if (UXSound && typeof UXSound.playClick === 'function') {
                         UXSound.playClick();
@@ -529,6 +550,9 @@
                     }
                 });
             });
+
+            // Initial slider position
+            setPosition(50);
         }
 
 
@@ -616,7 +640,7 @@
 
         window.UXSound = UXSound;
 
-        bentoItems.forEach(item => {
+        cardsDark.forEach(item => {
             item.addEventListener('mouseenter', () => {
                 UXSound.playHover();
             });
@@ -667,7 +691,7 @@
             const audio = estAudio ? estAudio.checked : true;
             const source = estSource ? estSource.checked : false;
 
-            let baseRate = 780;
+            let baseRate = 1375;
             const lengthMultiplier = length / 30;
             baseRate *= lengthMultiplier;
 
@@ -781,15 +805,15 @@
 
         // --- Red Layer Dynamic Alignment Helper ---
         function alignRedLayer() {
-            const darkWork = document.querySelector('.layer__dark .work_experience');
-            const redWork = document.querySelector('.layer__red .work_experience');
+            const darkWork = document.querySelector('.layer__dark .how_we_work');
+            const redWork = document.querySelector('.layer__red .how_we_work');
             if (darkWork && redWork) {
                 redWork.style.setProperty('margin-top', '0px', 'important');
                 const darkRect = darkWork.getBoundingClientRect();
                 const redRect = redWork.getBoundingClientRect();
                 const darkTop = darkRect.top + window.scrollY;
                 const redTop = redRect.top + window.scrollY;
-                const diff = darkTop - redTop;
+                const diff = (darkTop - redTop) + 30;
                 redWork.style.setProperty('margin-top', `${diff}px`, 'important');
             }
         }
@@ -1178,7 +1202,6 @@
                 loadNextBatch();
             });
         }
-
         calculateCustomPrice();
     }
 

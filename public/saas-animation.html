@@ -13,41 +13,158 @@
     <link rel="canonical" href="https://rahulfx3d.studio/saas-animation.html">
     <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
     <link rel="stylesheet" href="saas-styles.css">
+    <link rel="stylesheet" href="fs-nav.css">
 </head>
 <body>
 
-<!-- NAV — Matches homepage header -->
-<header class="hp-header">
-    <div class="hp-header_logo"><a href="index.html"><img src="assets/icons/logo.svg" alt="logo"></a></div>
-    <div class="hp-header_menu">
-        <ul class="hp-menu-list">
-            <li class="hp-menu-item"><a href="index.html" onclick="window.location.href='index.html';return false;"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">Home</span><span class="hp-link hp-link__active">Home</span></span></a></li>
-            <li class="hp-menu-item"><a href="about.html" onclick="window.location.href='about.html';return false;"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">About Rahul</span><span class="hp-link hp-link__active">About Rahul</span></span></a></li>
-            <li class="hp-menu-item"><a href="index.html#work" onclick="window.location.href='index.html#work';return false;"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">Work</span><span class="hp-link hp-link__active">Work</span></span></a></li>
-            <li class="hp-menu-item is-active"><a href="saas-animation.html" onclick="window.location.href='saas-animation.html';return false;"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">SaaS Animation</span><span class="hp-link hp-link__active">SaaS Animation</span></span></a></li>
-            <li class="hp-menu-item"><a href="client-portal.html" onclick="window.location.href='client-portal.html';return false;"><span class="hp-menu-inner"><span class="hp-link hp-link__deep">Client Portal</span><span class="hp-link hp-link__active">Client Portal</span></span></a></li>
-        </ul>
+    <!-- Organic Film Grain & Background Glow Orbs -->
+    <div class="grain-overlay"></div>
+    <div class="bg-glow-container">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
     </div>
-</header>
 
-<!-- HERO — Full viewport, animated lines -->
-<section class="saas-hero">
-    <div class="saas-bg-word">MOTION</div>
-    <div class="saas-eyebrow">SaaS Animation &amp; Motion Graphics</div>
-    <h1 class="saas-h1">
-        <span class="line">Scroll-stopping</span>
-        <span class="line"><em>SaaS visuals</em></span>
-        <span class="line">that convert.</span>
-    </h1>
-    <p class="saas-hero-body">
-        Motion graphics, ad films, and brand stories crafted for tech startups
-        and SaaS companies. Every frame designed to capture attention and drive action.
-    </p>
-    <div class="scroll-hint">
-        <div class="scroll-line"></div>
-        Scroll to explore
+    <!-- MAIN HEADER -->
+    <header class="header js-header">
+        <div class="header_logo js-header_logo fs-logo">
+            <a class="link-logo" aria-label="Home page" href="index.html">
+                <img class="svg" src="assets/icons/logo.svg" alt="logo">
+            </a>
+        </div>
+        
+        <!-- Desktop Glass Capsule Nav -->
+        <nav class="fs-nav-desktop">
+            <ul class="header_menu_list ul__reset fs-nav-links">
+                <div class="fs-nav-pill"></div>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html" onclick="window.location.href='index.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Home</span> <span class="header_menu_item_link header_menu_item_link__active">Home</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="about.html" onclick="window.location.href='about.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">About Rahul</span> <span class="header_menu_item_link header_menu_item_link__active">About Rahul</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#work" onclick="window.location.href='index.html#work';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Work</span> <span class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#pricing-estimator" onclick="window.location.href='index.html#pricing-estimator';return false;" id="navPricingLinkDesktop" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Pricing</span> <span class="header_menu_item_link header_menu_item_link__active">Pricing</span></span></a></li>
+                <li class="header_menu_item fs-nav-item is-active js-cursor-contract"><a href="saas-animation.html" onclick="window.location.href='saas-animation.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">SaaS</span> <span class="header_menu_item_link header_menu_item_link__active">SaaS</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="client-portal.html" onclick="window.location.href='client-portal.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Portal</span> <span class="header_menu_item_link header_menu_item_link__active">Portal</span></span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="fs-menu-toggle" aria-label="Toggle Menu">
+            <span class="fs-menu-icon"></span>
+        </button>
+    </header>
+
+    <div class="fs-nav-overlay">
+        <nav class="fs-nav-menu">
+            <ul class="fs-nav-list">
+                <li class="fs-nav-item"><a href="index.html" data-text="Home">Home</a></li>
+                <li class="fs-nav-item"><a href="about.html" data-text="About Rahul">About Rahul</a></li>
+                <li class="fs-nav-item"><a href="index.html#work" data-text="Work">Work</a></li>
+                <li class="fs-nav-item is-active"><a href="saas-animation.html" data-text="SaaS Animation">SaaS Animation</a></li>
+                <li class="fs-nav-item"><a href="client-portal.html" data-text="Client Portal">Client Portal</a></li>
+            </ul>
+        </nav>
+        <div class="fs-nav-footer">
+            <a href="mailto:hello@rahulfx3d.studio">hello@rahulfx3d.studio</a>
+            <div class="fs-nav-socials">
+                <a href="#">Instagram</a>
+                <a href="#">Behance</a>
+            </div>
+        </div>
     </div>
+
+<!-- HERO — Full viewport, video BG, marquee, stats bar -->
+<section class="saas-hero">
+
+    <!-- Available Badge -->
+    <div class="saas-avail">
+        <span class="saas-avail__dot"></span>
+        Taking new projects
+    </div>
+
+    <!-- Background Video -->
+    <div class="saas-hero-bg">
+        <video id="saasHeroBg" autoplay muted playsinline loop preload="auto">
+            <source src="assets/images/Video-390.mp4" type="video/mp4">
+        </video>
+        <!-- Scrolling Marquee behind video -->
+        <div class="saas-hero-marquee">
+            <div class="saas-hero-marquee__track">
+                <span>MOTION GRAPHICS ✦ </span>
+                <span>SAAS PRODUCT DEMOS ✦ </span>
+                <span>BRAND FILMS ✦ </span>
+                <span>AD FILMS ✦ </span>
+                <span>MOTION GRAPHICS ✦ </span>
+                <span>SAAS PRODUCT DEMOS ✦ </span>
+                <span>BRAND FILMS ✦ </span>
+                <span>AD FILMS ✦ </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="saas-hero-content">
+        <div class="saas-hero-eyebrow">RahulFX3D — SaaS Animation &amp; Motion Graphics</div>
+        <h1 class="saas-h1">
+            SCROLL-STOPPING<br>
+            <strong>SAAS VISUALS</strong><br>
+            THAT CONVERT
+        </h1>
+        <p class="saas-hero-body">
+            Motion graphics, ad films, and brand stories crafted for tech startups
+            and SaaS companies. Every frame designed to capture attention and drive action.
+        </p>
+        <div class="saas-hero-cta-wrap">
+            <a class="saas-btn-primary" href="mailto:rahul@rahulfx3d.studio?subject=SaaS Animation Inquiry">
+                <span>Book a Strategy Call</span>
+            </a>
+            <span class="saas-hero-cta-note">Limited openings for Q3 2026</span>
+        </div>
+    </div>
+
+    <!-- Bottom Stats + Ticker -->
+    <div class="saas-hero-bottom">
+        <div class="saas-hero-stats">
+            <div class="saas-hero-stat">
+                <span class="saas-hero-stat__num">20<em>%+</em></span>
+                <span class="saas-hero-stat__lbl">Avg Conversion Lift</span>
+            </div>
+            <div class="saas-hero-stat">
+                <span class="saas-hero-stat__num">50<em>+</em></span>
+                <span class="saas-hero-stat__lbl">Videos Delivered</span>
+            </div>
+            <div class="saas-hero-stat">
+                <span class="saas-hero-stat__num">12<em>+</em></span>
+                <span class="saas-hero-stat__lbl">Countries Served</span>
+            </div>
+            <div class="saas-hero-stat">
+                <span class="saas-hero-stat__num">2023</span>
+                <span class="saas-hero-stat__lbl">Studio Founded</span>
+            </div>
+        </div>
+        <div class="saas-hero-ticker">
+            <div class="saas-hero-ticker__track">
+                <span>UI SCREEN ANIMATION <b>✦</b></span>
+                <span>MOTION GRAPHICS <b>✦</b></span>
+                <span>SOUND DESIGN <b>✦</b></span>
+                <span>AD FILMS <b>✦</b></span>
+                <span>BRAND STORIES <b>✦</b></span>
+                <span>CINEMATIC DEMOS <b>✦</b></span>
+                <span>3D VISUALIZATION <b>✦</b></span>
+                <span>VOICEOVER DIRECTION <b>✦</b></span>
+                <!-- Duplicates for seamless loop -->
+                <span>UI SCREEN ANIMATION <b>✦</b></span>
+                <span>MOTION GRAPHICS <b>✦</b></span>
+                <span>SOUND DESIGN <b>✦</b></span>
+                <span>AD FILMS <b>✦</b></span>
+                <span>BRAND STORIES <b>✦</b></span>
+                <span>CINEMATIC DEMOS <b>✦</b></span>
+                <span>3D VISUALIZATION <b>✦</b></span>
+                <span>VOICEOVER DIRECTION <b>✦</b></span>
+            </div>
+        </div>
+    </div>
+
 </section>
+
 
 <!-- BENTO VIDEO SECTION — Same layout as homepage -->
 <section class="saas-video-section" id="work">
@@ -435,5 +552,6 @@
 })();
 </script>
 
+    <script src="fs-nav.js"></script>
 </body>
 </html>

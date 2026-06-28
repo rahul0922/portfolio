@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RahulFX3D Studio — Client Portal</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=DM+Mono:wght@300;400;500&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
         rel="stylesheet">
     <style>
         *,
@@ -18,35 +18,36 @@
         }
 
         :root {
-            --ink: #ede9e3;
-            --dim: #7a766f;
-            --bg: #0c0c0b;
-            --surf: #131311;
-            --raise: #1a1a17;
-            --line: #252520;
-            --gold: #c9a84c;
-            --gdim: #7a6430;
-            --green: #4a9268;
-            --nav-bg: rgba(12, 12, 11, .97);
-            --placeholder: #2a2a27;
-            --opt-bg: #1a1a17;
-            --gold-btn-text: #0c0c0b
+            --ink: #eae3db;
+            --dim: #8b8076;
+            --bg: #0d0b0a;
+            --surf: #151210;
+            --raise: #1d1815;
+            --line: rgba(212, 178, 90, 0.12);
+            --gold: #d4b25a;
+            --gdim: #6d5420;
+            --green: #4ade80;
+            --nav-bg: rgba(13, 11, 10, 0.96);
+            --placeholder: #3a322b;
+            --opt-bg: #1d1815;
+            --gold-btn-text: #0d0b0a;
+            --hud-mono: 'DM Mono', monospace;
         }
 
         [data-theme="light"] {
-            --ink: #0d0d0d;
-            --dim: #7a766f;
-            --bg: #f7f5f0;
-            --surf: #f7f5f0;
+            --ink: #1a1512;
+            --dim: #7a7065;
+            --bg: #f4efea;
+            --surf: #eae3db;
             --raise: #ffffff;
-            --line: #e2dfd8;
-            --gold: #c9a84c;
-            --gdim: #7a6430;
-            --green: #4a9268;
-            --nav-bg: rgba(247, 245, 240, 0.92);
-            --placeholder: #d0cdc6;
+            --line: rgba(109, 84, 32, 0.15);
+            --gold: #b38820;
+            --gdim: #6d5420;
+            --green: #22c55e;
+            --nav-bg: rgba(244, 239, 234, 0.96);
+            --placeholder: #bbaea1;
             --opt-bg: #ffffff;
-            --gold-btn-text: #0c0c0b
+            --gold-btn-text: #ffffff;
         }
 
         .theme-toggle {
@@ -79,8 +80,8 @@
         body {
             background: var(--bg);
             color: var(--ink);
-            font-family: 'DM Mono', monospace;
-            font-weight: 300;
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 400;
             min-height: 100vh
         }
 
@@ -100,10 +101,11 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            font-size: 1.3rem;
-            letter-spacing: .04em
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: .08em;
+            text-transform: uppercase
         }
 
         .logo em {
@@ -113,31 +115,34 @@
 
         .tabs {
             display: flex;
-            gap: 2px
+            gap: 8px
         }
 
         .tab {
             background: none;
             border: none;
             cursor: pointer;
-            font-family: 'DM Mono', monospace;
-            font-size: .72rem;
-            letter-spacing: .1em;
+            font-family: 'Cinzel', serif;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .12em;
             text-transform: uppercase;
             color: var(--dim);
             padding: 10px 22px;
-            border-radius: 3px;
-            transition: all .2s
+            border-radius: 0;
+            transition: all .3s ease
         }
 
         .tab:hover {
-            color: var(--ink)
+            color: #fff;
+            background: rgba(212, 178, 90, 0.05);
         }
 
         .tab.active {
             background: var(--gold);
-            color: #0c0c0b;
-            font-weight: 500
+            color: #0d0b0a;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(212, 178, 90, 0.35);
         }
 
         .panel {
@@ -193,24 +198,26 @@
         }
 
         .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            font-size: clamp(2.8rem, 5vw, 4.4rem);
-            line-height: 1.08;
-            letter-spacing: -.02em;
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            line-height: 1.1;
+            letter-spacing: -.01em;
+            text-transform: uppercase;
             margin-bottom: 24px
         }
 
         .hero h1 em {
-            font-style: italic;
+            font-style: normal;
             color: var(--gold)
         }
 
         .hero-note {
-            font-size: .88rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .92rem;
             color: var(--dim);
-            line-height: 1.9;
-            border-left: 1px solid var(--gold);
+            line-height: 1.7;
+            border-left: 2px solid var(--gold);
             padding-left: 18px;
             max-width: 500px
         }
@@ -268,12 +275,12 @@
             background: none;
             border: none;
             outline: none;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.08rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .95rem;
             color: var(--ink);
             border-bottom: 1px solid var(--line);
             padding-bottom: 5px;
-            transition: border-color .2s;
+            transition: all .3s ease;
             line-height: 1.4
         }
 
@@ -310,8 +317,8 @@
         }
 
         .cn {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
+            font-family: 'DM Mono', monospace;
+            font-size: .85rem;
             color: var(--gold)
         }
 
@@ -373,7 +380,7 @@
             height: 120px;
             background: var(--raise);
             border: 1px solid var(--line);
-            border-radius: 3px;
+            border-radius: 8px;
             cursor: crosshair;
             overflow: hidden
         }
@@ -478,9 +485,11 @@
         }
 
         .ibrand .iname {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            font-size: 1.8rem
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: .05em;
+            text-transform: uppercase
         }
 
         .ibrand .isub {
@@ -495,9 +504,9 @@
         }
 
         .ino {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.4rem;
-            font-weight: 300;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: var(--gold);
             line-height: 1;
             margin-bottom: 16px
@@ -508,10 +517,10 @@
             border: none;
             border-bottom: 1px solid var(--line);
             color: var(--gold);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.4rem;
-            font-weight: 300;
-            width: 90px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            width: 120px;
             outline: none
         }
 
@@ -564,11 +573,11 @@
             border: none;
             border-bottom: 1px solid var(--line);
             color: var(--ink);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .92rem;
             padding: 7px 0;
             outline: none;
-            transition: border-color .2s;
+            transition: all .3s ease;
             margin-bottom: 6px
         }
 
@@ -612,8 +621,8 @@
         }
 
         .in2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .92rem;
             color: var(--ink)
         }
 
@@ -677,8 +686,9 @@
         }
 
         .tr2.g .v {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--gold)
         }
 
@@ -752,11 +762,12 @@
         }
 
         .pb {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Nunito Sans', sans-serif;
             font-size: 2.6rem;
-            font-weight: 300;
+            font-weight: 800;
             color: var(--gold);
-            line-height: 1
+            line-height: 1;
+            letter-spacing: -0.02em;
         }
 
         .pl {
@@ -827,9 +838,9 @@
         }
 
         .phn {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
-            font-weight: 400
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700
         }
 
         .phm {
@@ -939,9 +950,11 @@
         }
 
         footer .fl {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
-            font-weight: 600
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 800;
+            font-size: .85rem;
+            letter-spacing: .05em;
+            text-transform: uppercase
         }
 
         footer .fl em {
@@ -954,10 +967,21 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: var(--bg);
+            background: #090807;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .admin-gate::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 30%, #000 100%),
+                        radial-gradient(circle at 30% 20%, rgba(212, 178, 90, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 80%, rgba(178, 59, 37, 0.04) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .admin-gate.hidden {
@@ -965,30 +989,48 @@
         }
 
         .gate-card {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            max-width: 380px;
+            max-width: 420px;
             width: 90%;
-            animation: fadeUp .5s ease both
+            background: rgba(14, 12, 11, 0.95);
+            border: 1px solid rgba(212, 178, 90, 0.25);
+            border-radius: 0;
+            padding: 55px 45px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(212, 178, 90, 0.04);
+            backdrop-filter: blur(8px);
+            animation: fadeUp .6s cubic-bezier(0.16, 1, 0.3, 1) both
         }
 
-        .gate-lock {
-            width: 48px;
-            height: 48px;
-            border: 1.5px solid var(--line);
+        .gate-rune {
+            width: 64px;
+            height: 64px;
+            border: 2px double var(--gold);
             border-radius: 50%;
+            margin: 0 auto 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 28px;
-            font-size: 1.2rem;
-            color: var(--gold)
+            font-size: 1.6rem;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 178, 90, 0.5);
+            box-shadow: 0 0 15px rgba(212, 178, 90, 0.15), inset 0 0 10px rgba(212, 178, 90, 0.1);
+            animation: runeGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes runeGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 178, 90, 0.15); }
+            50% { transform: scale(1.04); box-shadow: 0 0 25px rgba(212, 178, 90, 0.3); }
         }
 
         .gate-brand {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            font-size: 1.6rem;
-            letter-spacing: .04em;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #fff;
             margin-bottom: 8px
         }
 
@@ -998,75 +1040,83 @@
         }
 
         .gate-sub {
-            font-size: .68rem;
+            font-family: 'Cinzel', serif;
+            font-size: .65rem;
             letter-spacing: .18em;
             text-transform: uppercase;
             color: var(--dim);
-            margin-bottom: 36px
+            margin-bottom: 40px
         }
 
         .gate-field {
             position: relative;
-            margin-bottom: 16px
+            margin-bottom: 18px
         }
 
         .gate-input {
             width: 100%;
-            background: var(--surf);
-            border: 1px solid var(--line);
-            border-radius: 3px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 178, 90, 0.2);
+            border-radius: 0;
             padding: 16px 20px;
             font-family: 'DM Mono', monospace;
-            font-size: .82rem;
+            font-size: .85rem;
             color: var(--ink);
             outline: none;
             text-align: center;
-            letter-spacing: .12em;
-            transition: border-color .2s
+            letter-spacing: .15em;
+            transition: all .3s ease
         }
 
         .gate-input:focus {
-            border-color: var(--gold)
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 178, 90, 0.15);
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .gate-input::placeholder {
-            color: var(--placeholder);
+            color: rgba(212, 178, 90, 0.25);
             letter-spacing: .08em
         }
 
         .gate-btn {
             width: 100%;
-            background: var(--gold);
-            color: var(--gold-btn-text);
-            border: none;
-            border-radius: 3px;
-            padding: 14px;
-            font-family: 'DM Mono', monospace;
-            font-size: .7rem;
-            font-weight: 500;
-            letter-spacing: .14em;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 0;
+            padding: 15px;
+            font-family: 'Cinzel', serif;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .2em;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background .2s;
+            transition: all .3s ease;
             margin-bottom: 14px
         }
 
         .gate-btn:hover {
-            background: #d4b25a
+            background: var(--gold);
+            color: #0d0b0a;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 25px rgba(212, 178, 90, 0.25);
         }
 
         .gate-error {
-            font-size: .7rem;
-            color: #c94c4c;
+            font-family: 'Cinzel', serif;
+            font-size: .68rem;
+            color: #d84a38;
             min-height: 1.2em;
-            letter-spacing: .05em
+            letter-spacing: .08em
         }
 
         .gate-footer {
-            margin-top: 48px;
+            font-family: 'Cinzel', serif;
+            margin-top: 40px;
             font-size: .6rem;
             color: var(--dim);
-            letter-spacing: .1em
+            letter-spacing: .12em
         }
 
         .portal-content {
@@ -1079,18 +1129,20 @@
 
         /* Role badge in nav */
         .role-badge {
-            font-size: .58rem;
-            letter-spacing: .12em;
+            font-family: 'DM Mono', monospace;
+            font-size: .6rem;
+            letter-spacing: .08em;
             text-transform: uppercase;
-            padding: 5px 12px;
-            border-radius: 2px;
+            padding: 6px 12px;
+            border-radius: 6px;
             margin-left: 12px;
             flex-shrink: 0
         }
 
         .role-badge.admin {
             background: var(--gold);
-            color: var(--gold-btn-text)
+            color: #ffffff;
+            font-weight: 500;
         }
 
         .role-badge.client {
@@ -1200,6 +1252,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-family: 'DM Mono', monospace;
             font-size: .72rem;
             letter-spacing: .08em;
             color: var(--dim);
@@ -1258,9 +1311,9 @@
         }
 
         .status-pct {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            font-weight: 400;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
             color: var(--gold);
             line-height: 1
         }
@@ -1287,15 +1340,17 @@
         }
 
         .dash-header h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.4rem;
-            font-weight: 300;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -.01em;
             margin-bottom: 8px
         }
 
         .dash-header h1 em {
             color: var(--gold);
-            font-style: italic
+            font-style: normal
         }
 
         .dash-sub {
@@ -1311,21 +1366,23 @@
         }
 
         .client-card {
-            background: var(--surf);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.00) 100%);
             border: 1px solid var(--line);
-            border-radius: 4px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 28px;
             cursor: pointer;
-            transition: all .2s;
+            transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative
         }
 
         .client-card:hover {
             border-color: var(--gold);
-            transform: translateY(-2px)
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(235, 89, 57, 0.08);
         }
 
         .client-card-id {
+            font-family: 'DM Mono', monospace;
             font-size: .58rem;
             letter-spacing: .15em;
             text-transform: uppercase;
@@ -1334,23 +1391,27 @@
         }
 
         .client-card-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            margin-bottom: 4px
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px
         }
 
         .client-card-company {
             font-size: .74rem;
             color: var(--dim);
-            margin-bottom: 14px
+            margin-bottom: 16px
         }
 
         .client-card-project {
-            font-size: .72rem;
+            font-family: 'DM Mono', monospace;
+            font-size: .65rem;
+            font-weight: 500;
             color: var(--gold);
-            padding: 6px 10px;
-            background: rgba(201, 168, 76, .08);
-            border-radius: 2px;
+            padding: 4px 10px;
+            background: rgba(235, 89, 57, 0.08);
+            border-radius: 6px;
             display: inline-block
         }
 
@@ -1358,11 +1419,12 @@
             position: absolute;
             top: 24px;
             right: 24px;
+            font-family: 'DM Mono', monospace;
             font-size: .58rem;
             color: var(--dim);
-            background: var(--raise);
-            padding: 3px 8px;
-            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 8px;
+            border-radius: 4px;
             letter-spacing: .08em
         }
 
@@ -1370,15 +1432,16 @@
             background: none;
             border: 1px solid var(--line);
             color: var(--dim);
-            font-family: 'DM Mono', monospace;
-            font-size: .62rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .65rem;
+            font-weight: 700;
             letter-spacing: .1em;
             text-transform: uppercase;
-            padding: 7px 14px;
-            border-radius: 3px;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
             margin-right: 12px;
-            transition: all .2s;
+            transition: all .3s ease;
             display: none
         }
 
@@ -1392,37 +1455,44 @@
         }
 
         .add-client-card {
-            background: var(--surf);
-            border: 2px dashed var(--line);
-            border-radius: 4px;
+            background: transparent;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
             padding: 24px;
-            cursor: default;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             gap: 8px;
             color: var(--dim);
-            min-height: 160px
+            min-height: 160px;
+            transition: all .3s ease;
+        }
+
+        .add-client-card:hover {
+            border-color: var(--gold);
+            color: #fff;
+            background: rgba(235, 89, 57, 0.01);
         }
 
         .add-client-icon {
             font-size: 1.4rem;
-            opacity: .5
+            opacity: .7;
+            transition: all .3s ease;
+        }
+
+        .add-client-card:hover .add-client-icon {
+            color: var(--gold);
+            transform: scale(1.1);
         }
 
         .add-client-text {
-            font-size: .68rem;
-            letter-spacing: .1em
-        }
-
-        .add-client-card {
-            cursor: pointer;
-            transition: all .2s
-        }
-
-        .add-client-card:hover {
-            border-color: var(--gold)
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase
         }
 
         /* ADD CLIENT MODAL */
@@ -1445,9 +1515,9 @@
         }
 
         .modal-card {
-            background: var(--surf);
-            border: 1px solid var(--line);
-            border-radius: 6px;
+            background: linear-gradient(135deg, rgba(20, 20, 22, 0.95) 0%, rgba(13, 13, 15, 0.98) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
             padding: 32px;
             width: 400px;
             max-width: 90vw;
@@ -1455,15 +1525,17 @@
         }
 
         .modal-card h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -.01em;
             margin-bottom: 20px
         }
 
         .modal-card h2 em {
             color: var(--gold);
-            font-style: italic
+            font-style: normal
         }
 
         .modal-field {
@@ -1550,20 +1622,21 @@
             background: none;
             border: 1px solid var(--line);
             color: var(--dim);
-            font-family: 'DM Mono', monospace;
-            font-size: .58rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .65rem;
+            font-weight: 700;
             letter-spacing: .1em;
             text-transform: uppercase;
-            padding: 6px 12px;
-            border-radius: 3px;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
             margin-left: 8px;
-            transition: all .2s
+            transition: all .3s ease
         }
 
         .btn-logout:hover {
-            border-color: #c94c4c;
-            color: #c94c4c
+            border-color: #ff4a4a;
+            color: #ff4a4a
         }
 
         /* CLIENT NOTES */
@@ -1675,8 +1748,9 @@
         }
 
         .tl-label-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .85rem;
+            font-weight: 700;
             color: var(--ink)
         }
 
@@ -1951,8 +2025,8 @@
             }
 
             .ck:checked {
-                background: #b8922e;
-                border-color: #b8922e
+                background: #d4b25a;
+                border-color: #d4b25a
             }
 
             /* Page settings */
@@ -1965,13 +2039,14 @@
             .panel.active::before {
                 content: 'RahulFX3D Studio';
                 display: block;
-                font-family: 'Cormorant Garamond', serif;
+                font-family: 'Nunito Sans', sans-serif;
                 font-size: 18pt;
-                font-weight: 600;
-                letter-spacing: .04em;
+                font-weight: 800;
+                letter-spacing: .08em;
+                text-transform: uppercase;
                 margin-bottom: 4px;
                 padding-bottom: 12px;
-                border-bottom: 2px solid #b8922e;
+                border-bottom: 2px solid #d4b25a;
                 color: #0d0d0d;
             }
 
@@ -1998,24 +2073,610 @@
                 page-break-inside: avoid
             }
         }
+
+        /* ═══ ELDEN RING / ANIME VIBE OVERRIDES ═══ */
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Dark Vignette Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.75) 100%);
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Embers Container */
+        #embers-bg {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .ember {
+            position: absolute;
+            bottom: -20px;
+            width: 4px;
+            height: 4px;
+            background: #d4b25a;
+            border-radius: 50%;
+            filter: blur(1.5px);
+            box-shadow: 0 0 8px #d4b25a, 0 0 16px #b23b25;
+            opacity: 0;
+            animation: floatUp 12s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-110vh) translateX(60px) scale(0.4) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Staggering embers animation */
+        .ember:nth-child(1) { left: 8%; animation-delay: 0s; animation-duration: 9s; width: 3px; }
+        .ember:nth-child(2) { left: 18%; animation-delay: 3s; animation-duration: 12s; width: 5px; }
+        .ember:nth-child(3) { left: 28%; animation-delay: 1.5s; animation-duration: 10s; }
+        .ember:nth-child(4) { left: 38%; animation-delay: 5s; animation-duration: 14s; width: 3px; }
+        .ember:nth-child(5) { left: 48%; animation-delay: 0.8s; animation-duration: 8s; width: 4px; }
+        .ember:nth-child(6) { left: 58%; animation-delay: 4.2s; animation-duration: 13s; }
+        .ember:nth-child(7) { left: 68%; animation-delay: 2.1s; animation-duration: 11s; width: 5px; }
+        .ember:nth-child(8) { left: 78%; animation-delay: 6s; animation-duration: 15s; width: 3px; }
+        .ember:nth-child(9) { left: 88%; animation-delay: 1.2s; animation-duration: 9.5s; }
+        .ember:nth-child(10) { left: 95%; animation-delay: 7s; animation-duration: 12.5s; width: 4px; }
+        .ember:nth-child(11) { left: 14%; animation-delay: 4.5s; animation-duration: 10.5s; }
+        .ember:nth-child(12) { left: 34%; animation-delay: 8s; animation-duration: 11.5s; }
+        .ember:nth-child(13) { left: 54%; animation-delay: 2.8s; animation-duration: 9s; }
+        .ember:nth-child(14) { left: 74%; animation-delay: 9.5s; animation-duration: 13.5s; }
+        .ember:nth-child(15) { left: 91%; animation-delay: 5.5s; animation-duration: 8.5s; }
+
+        /* Sword slash hover transitions on elements */
+        .gate-btn, .client-card, .tab, .btn-back, .btn-logout, .add-client-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .gate-btn::before, .client-card::before, .tab::before, .btn-back::before, .btn-logout::before, .add-client-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 178, 90, 0.4), transparent);
+            transform: skewX(-30deg);
+            pointer-events: none;
+            z-index: 5;
+        }
+        .gate-btn:hover::before, .client-card:hover::before, .tab:hover::before, .btn-back:hover::before, .btn-logout:hover::before, .add-client-card:hover::before {
+            left: 150%;
+            transition: left 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        /* Viewport Coordinates Corner Borders */
+        .er-border {
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        }
+        .er-border::before, .er-border::after {
+            content: '❖';
+            position: absolute;
+            color: var(--gold);
+            font-size: 7px;
+            line-height: 1;
+            text-shadow: 0 0 4px var(--gold);
+            z-index: 10;
+        }
+        .er-border::before { top: -4px; left: -4px; }
+        .er-border::after { bottom: -4px; right: -4px; }
+
+        /* Elden Ring Gothic Card Layout */
+        .client-card {
+            background: rgba(21, 18, 16, 0.85) !important;
+            border: 1px solid rgba(212, 178, 90, 0.15) !important;
+            border-radius: 0 !important;
+            padding: 24px !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+            box-shadow: inset 0 0 15px rgba(212, 178, 90, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .client-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .client-card:hover::after {
+            border-color: rgba(212, 178, 90, 0.3);
+            box-shadow: inset 0 0 15px rgba(212, 178, 90, 0.05);
+        }
+
+        /* Redesigned Card Identity */
+        .client-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            color: var(--dim);
+        }
+
+        .card-pass-pill {
+            background: rgba(212, 178, 90, 0.08);
+            color: var(--gold);
+            padding: 2px 8px;
+            font-size: 0.6rem;
+            border: 1px solid rgba(212, 178, 90, 0.2);
+            font-family: 'DM Mono', monospace;
+        }
+
+        .client-card-identity {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .card-title-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.1em;
+            color: var(--dim);
+            margin-bottom: 4px;
+        }
+
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+            border-bottom: 1px solid rgba(212, 178, 90, 0.12);
+            padding-bottom: 10px;
+        }
+
+        .card-meta-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            margin-bottom: 6px;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        .card-meta-line span.label {
+            color: var(--dim);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.05em;
+        }
+
+        .card-meta-line span.val {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .card-meta-line span.val.project-badge {
+            color: var(--gold);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            background: rgba(212, 178, 90, 0.04);
+            padding: 1px 6px;
+            border: 1px solid rgba(212, 178, 90, 0.1);
+        }
+
+        /* RPG Stats Layout & Bars */
+        .client-card-stats {
+            margin-top: 10px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(212, 178, 90, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 20px;
+            gap: 12px;
+            align-items: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--dim);
+            letter-spacing: 0.05em;
+        }
+
+        .stat-bar-container {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            background: var(--gold);
+            box-shadow: 0 0 6px var(--gold);
+        }
+
+        .stat-row span.val {
+            color: var(--gold);
+            text-align: right;
+        }
+
+        /* Custom inputs with amber gold glows */
+        .f input, .f select, .f textarea {
+            border-bottom: 1px solid rgba(212, 178, 90, 0.15) !important;
+        }
+        .f input:focus, .f select:focus, .f textarea:focus {
+            border-bottom-color: var(--gold) !important;
+            box-shadow: 0 1px 0 var(--gold) !important;
+        }
+
+        /* Gate Split Layout */
+        .gate-split {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            width: 90%;
+            max-width: 960px;
+            margin: 0 auto;
+            align-items: center;
+            z-index: 10;
+            position: relative;
+            padding: 24px 0;
+        }
+
+        @media (min-width: 768px) {
+            .gate-split {
+                grid-template-columns: 1.15fr 1fr;
+                gap: 60px;
+            }
+        }
+
+        .gate-left {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Glowing Sigil Styles */
+        .sigil-container {
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.18;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glowing-sigil {
+            width: 100%;
+            height: 100%;
+            animation: rotateSigil 80s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(212, 178, 90, 0.5));
+        }
+
+        @keyframes rotateSigil {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .gate-card {
+            z-index: 2;
+        }
+
+        .gate-right {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            text-align: left;
+            z-index: 2;
+        }
+
+        .offering-header {
+            margin-bottom: 8px;
+        }
+
+        .offering-header .eyebrow {
+            font-size: .65rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .offering-header .eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .offering-header h2 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: .02em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .offering-header h2 em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .offering-desc {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 0.88rem;
+            color: var(--dim);
+            line-height: 1.7;
+            max-width: 440px;
+        }
+
+        .offerings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            max-width: 440px;
+        }
+
+        .offering-item {
+            display: flex;
+            gap: 18px;
+            padding: 20px !important;
+            background: rgba(21, 18, 16, 0.45) !important;
+            border: 1px solid rgba(212, 178, 90, 0.1) !important;
+            border-radius: 0;
+            box-shadow: inset 0 0 10px rgba(212, 178, 90, 0.01);
+            align-items: flex-start;
+        }
+
+        .offering-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 8px rgba(212, 178, 90, 0.4);
+            line-height: 1;
+        }
+
+        .offering-body h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .offering-body p {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 0.8rem;
+            color: var(--dim);
+            line-height: 1.6;
+        }
+
+        /* Workspace Sidebar Layout */
+        @media (min-width: 1024px) {
+            body.client-view .portal-content {
+                display: grid;
+                grid-template-columns: 1fr 340px;
+                gap: 40px;
+                max-width: 1200px;
+                margin: 0 auto;
+                align-items: start;
+                padding-top: 24px;
+            }
+
+            body.client-view .status-banner {
+                max-width: 1200px;
+                margin: 0 auto;
+                left: 50%;
+                transform: translateX(-50%);
+                border-right: 1px solid var(--line);
+            }
+
+            body.client-view .client-sidebar-card {
+                position: sticky;
+                top: 156px;
+                margin-top: 88px;
+                display: block !important;
+            }
+        }
+
+        .client-sidebar-card {
+            display: none;
+            margin: 20px auto 40px auto;
+            max-width: 340px;
+            width: 100%;
+        }
+
+        body.client-view .client-sidebar-card {
+            display: block;
+        }
+
+        .client-sidebar-card .client-card {
+            box-shadow: 0 10px 40px rgba(212, 178, 90, 0.05), inset 0 0 20px rgba(212, 178, 90, 0.03);
+            border-color: rgba(212, 178, 90, 0.25) !important;
+            cursor: default;
+        }
+
+        .client-sidebar-card .client-card::after {
+            display: none;
+        }
     </style>
+    <link rel="stylesheet" href="fs-nav.css">
 </head>
 
 <body>
+    <!-- MAIN HEADER -->
+    <header class="header js-header is-red">
+        <div class="header_logo js-header_logo fs-logo">
+            <a class="link-logo" aria-label="Home page" href="index.html">
+                <img class="svg" src="assets/icons/logo.svg" alt="logo">
+            </a>
+        </div>
+        
+        <!-- Desktop Glass Capsule Nav -->
+        <nav class="fs-nav-desktop">
+            <ul class="header_menu_list ul__reset fs-nav-links">
+                <div class="fs-nav-pill"></div>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html" onclick="window.location.href='index.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Home</span> <span class="header_menu_item_link header_menu_item_link__active">Home</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="about.html" onclick="window.location.href='about.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">About Rahul</span> <span class="header_menu_item_link header_menu_item_link__active">About Rahul</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#work" onclick="window.location.href='index.html#work';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Work</span> <span class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#pricing-estimator" onclick="window.location.href='index.html#pricing-estimator';return false;" id="navPricingLinkDesktop" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Pricing</span> <span class="header_menu_item_link header_menu_item_link__active">Pricing</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="saas-animation.html" onclick="window.location.href='saas-animation.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">SaaS</span> <span class="header_menu_item_link header_menu_item_link__active">SaaS</span></span></a></li>
+                <li class="header_menu_item fs-nav-item is-active js-cursor-contract"><a href="client-portal.html" onclick="window.location.href='client-portal.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Portal</span> <span class="header_menu_item_link header_menu_item_link__active">Portal</span></span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="fs-menu-toggle" aria-label="Toggle Menu">
+            <span class="fs-menu-icon"></span>
+        </button>
+    </header>
+
+    <div class="fs-nav-overlay">
+        <nav class="fs-nav-menu">
+            <ul class="fs-nav-list">
+                <li class="fs-nav-item"><a href="index.html" data-text="Home">Home</a></li>
+                <li class="fs-nav-item"><a href="about.html" data-text="About Rahul">About Rahul</a></li>
+                <li class="fs-nav-item"><a href="index.html#work" data-text="Work">Work</a></li>
+                <li class="fs-nav-item"><a href="saas-animation.html" data-text="SaaS Animation">SaaS Animation</a></li>
+                <li class="fs-nav-item is-active"><a href="client-portal.html" data-text="Client Portal">Client Portal</a></li>
+            </ul>
+        </nav>
+        <div class="fs-nav-footer">
+            <a href="mailto:hello@rahulfx3d.studio">hello@rahulfx3d.studio</a>
+            <div class="fs-nav-socials">
+                <a href="#">Instagram</a>
+                <a href="#">Behance</a>
+            </div>
+        </div>
+    </div>
+    <div id="embers-bg">
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+        <div class="ember"></div>
+    </div>
 
     <!-- ADMIN PASSWORD GATE -->
     <div class="admin-gate" id="adminGate">
-        <div class="gate-card">
-            <div class="gate-lock">🔒</div>
-            <div class="gate-brand">Rahul<em>FX3D</em> Studio</div>
-            <div class="gate-sub">Client Portal — Authorized Access Only</div>
-            <div class="gate-field">
-                <input class="gate-input" type="password" id="gatePass" placeholder="Enter access code"
-                    onkeydown="if(event.key==='Enter')checkGate()" autofocus />
+        <div class="gate-split">
+            <!-- Left: Passcode entry gate with rotating SVG rune sigil -->
+            <div class="gate-left">
+                <div class="sigil-container">
+                    <svg viewBox="0 0 200 200" class="glowing-sigil">
+                        <circle cx="100" cy="100" r="90" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="6,4" />
+                        <circle cx="100" cy="100" r="82" fill="none" stroke="var(--gold)" stroke-width="0.5" />
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="20,10,5,10" />
+                        <polygon points="100,20 169,140 31,140" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.6" />
+                        <polygon points="100,180 31,60 169,60" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.6" />
+                        <circle cx="100" cy="100" r="30" fill="none" stroke="var(--gold)" stroke-width="1.5" />
+                        <!-- Intricate inner runes text path or details -->
+                        <path id="runePath" d="M 100,100 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" stroke="none" />
+                        <text fill="var(--gold)" font-size="6.5" font-family="'Cinzel', serif" letter-spacing="4" opacity="0.8">
+                            <textPath href="#runePath">COVENANT • AGREEMENT • PROGRESS • TRIBUTE •</textPath>
+                        </text>
+                    </svg>
+                </div>
+
+                <div class="gate-card er-border">
+                    <div class="gate-rune">⚔️</div>
+                    <div class="gate-brand">Rahul<em>FX3D</em> Studio</div>
+                    <div class="gate-sub">Client Portal — Authorized Access Only</div>
+                    <div class="gate-field">
+                        <input class="gate-input" type="password" id="gatePass" placeholder="Enter access code"
+                            onkeydown="if(event.key==='Enter')checkGate()" autofocus />
+                    </div>
+                    <button class="gate-btn" onclick="checkGate()">Unlock Portal →</button>
+                    <div class="gate-error" id="gateError"></div>
+                    <div class="gate-footer">Access codes are provided by the studio.</div>
+                </div>
             </div>
-            <button class="gate-btn" onclick="checkGate()">Unlock Portal →</button>
-            <div class="gate-error" id="gateError"></div>
-            <div class="gate-footer">Access codes are provided by the studio.</div>
+
+            <!-- Right: Explanatory portal features list -->
+            <div class="gate-right">
+                <div class="offering-header">
+                    <div class="eyebrow">Roundtable offerings</div>
+                    <h2>Beyond the<br><em>Fog Portal</em></h2>
+                    <p class="offering-desc">Secure access to thy digital studio workspace. Settle thy sigil entry to unlock the following Roundtable features:</p>
+                </div>
+
+                <div class="offerings-list">
+                    <div class="offering-item er-border">
+                        <div class="offering-icon">📜</div>
+                        <div class="offering-body">
+                            <h3>Covenant Contract</h3>
+                            <p>Review thy project scope, deadlines, and rights accord. Both parties affix digital sigils before work commences.</p>
+                        </div>
+                    </div>
+
+                    <div class="offering-item er-border">
+                        <div class="offering-icon">🪙</div>
+                        <div class="offering-body">
+                            <h3>Tribute Ledger</h3>
+                            <p>View invoices, project deposits, and payment milestones. Settle your tribute securely via direct Wise or PayPal channels.</p>
+                        </div>
+                    </div>
+
+                    <div class="offering-item er-border">
+                        <div class="offering-icon">🧭</div>
+                        <div class="offering-body">
+                            <h3>Quest Checklist</h3>
+                            <p>Track real-time progress of your CGI project. Watch tasks turn gold as Rahul coordinates modeling, lighting, rendering, and delivery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -2024,9 +2685,9 @@
         <nav>
             <div class="logo">Rahul<em>FX3D</em> Studio</div>
             <div class="tabs">
-                <button class="tab active" onclick="go('contract',this)">① Contract</button>
-                <button class="tab" onclick="go('invoice',this)">② Invoice</button>
-                <button class="tab" onclick="go('checklist',this)">③ Progress</button>
+                <button class="tab active" onclick="go('contract',this)">📜 Contract</button>
+                <button class="tab" onclick="go('invoice',this)">🪙 Invoice</button>
+                <button class="tab" onclick="go('checklist',this)">🧭 Progress</button>
             </div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"
                 title="Toggle light/dark mode">☀</button>
@@ -2057,13 +2718,11 @@
 
         <!-- CONTRACT -->
         <div id="panel-contract" class="panel active">
-            <div class="wrap">
+            <div class="wrap er-border">
                 <div class="hero">
                     <div class="eyebrow">Freelance Services Agreement</div>
                     <h1>Sign your<br><em>Contract</em></h1>
-                    <p class="hero-note">Fill in project details, read each clause, then both parties sign below before
-                        work
-                        begins.</p>
+                    <p class="hero-note">Fill in project details, read each clause, then both parties sign below before work begins.</p>
                 </div>
 
                 <div class="divider">Project Details <span>01</span></div>
@@ -2091,6 +2750,10 @@
                             oninput="syncFields()" /></div>
                     <div class="f"><label>Deposit Required</label><input value="50% upfront — non-refundable" readonly
                             style="color:var(--dim)" /></div>
+                </div>
+
+                <div class="admin-actions" id="contractAdminActions" style="display:none; margin: 24px 0; text-align: right;">
+                    <button class="btn bo" onclick="deleteClient()" style="border-color: #c94c4c; color: #c94c4c; border-radius: 0; padding: 10px 20px;">🗑️ Remove Client Account</button>
                 </div>
 
                 <div class="divider">Terms & Conditions <span>02</span></div>
@@ -2211,12 +2874,11 @@
 
         <!-- INVOICE -->
         <div id="panel-invoice" class="panel">
-            <div class="wrap">
+            <div class="wrap er-border">
                 <div class="hero">
                     <div class="eyebrow">Billing Document</div>
                     <h1>Pay your<br><em>Invoice</em></h1>
-                    <p class="hero-note">Enter project prices, choose a payment method below, then confirm payment when
-                        sent.</p>
+                    <p class="hero-note">Enter project prices, choose a payment method below, then confirm payment when sent.</p>
                 </div>
 
                 <div class="itop">
@@ -2260,7 +2922,7 @@
                             </td>
                             <td class="r"><input class="ni q" value="1" id="q1" oninput="calc()" /></td>
                             <td class="r"><input class="ni" placeholder="0.00" id="p1" oninput="calc()" /></td>
-                            <td class="r" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem" id="a1">—</td>
+                            <td class="r" style="font-family:'Nunito Sans',sans-serif;font-size:.92rem;font-weight:700" id="a1">—</td>
                         </tr>
                         <tr>
                             <td>
@@ -2269,7 +2931,7 @@
                             </td>
                             <td class="r"><input class="ni q" value="1" id="q2" oninput="calc()" /></td>
                             <td class="r"><input class="ni" placeholder="0.00" id="p2" oninput="calc()" /></td>
-                            <td class="r" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem" id="a2">—</td>
+                            <td class="r" style="font-family:'Nunito Sans',sans-serif;font-size:.92rem;font-weight:700" id="a2">—</td>
                         </tr>
                         <tr>
                             <td>
@@ -2278,7 +2940,7 @@
                             </td>
                             <td class="r"><input class="ni q" value="1" id="q3" oninput="calc()" /></td>
                             <td class="r"><input class="ni" placeholder="0.00" id="p3" oninput="calc()" /></td>
-                            <td class="r" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem" id="a3">—</td>
+                            <td class="r" style="font-family:'Nunito Sans',sans-serif;font-size:.92rem;font-weight:700" id="a3">—</td>
                         </tr>
                         <tr>
                             <td>
@@ -2287,7 +2949,7 @@
                             </td>
                             <td class="r"><input class="ni q" value="1" id="q4" oninput="calc()" /></td>
                             <td class="r"><input class="ni" placeholder="0.00" id="p4" oninput="calc()" /></td>
-                            <td class="r" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem" id="a4">—</td>
+                            <td class="r" style="font-family:'Nunito Sans',sans-serif;font-size:.92rem;font-weight:700" id="a4">—</td>
                         </tr>
                         <tr>
                             <td>
@@ -2296,7 +2958,7 @@
                             </td>
                             <td class="r"><input class="ni q" value="0" id="q5" oninput="calc()" /></td>
                             <td class="r"><input class="ni" value="65.00" id="p5" oninput="calc()" /></td>
-                            <td class="r" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem" id="a5">—</td>
+                            <td class="r" style="font-family:'Nunito Sans',sans-serif;font-size:.92rem;font-weight:700" id="a5">—</td>
                         </tr>
                     </tbody>
                 </table>
@@ -2330,22 +2992,18 @@
                         <button class="btn bg" onclick="markPaid()">✓ Confirm Payment</button>
                         <button class="btn bo" onclick="window.print()">↓ Export PDF</button>
                     </div>
-                    <div class="badge" id="pay-done">✓ &nbsp;Payment confirmed on <span id="pay-date"></span>. Final
-                        files
-                        will be delivered shortly. Thank you.</div>
+                    <div class="badge" id="pay-done">✓ &nbsp;Payment confirmed on <span id="pay-date"></span>. Final files will be delivered shortly. Thank you.</div>
                 </div>
             </div>
         </div>
 
         <!-- CHECKLIST -->
         <div id="panel-checklist" class="panel">
-            <div class="wrap">
+            <div class="wrap er-border">
                 <div class="hero">
                     <div class="eyebrow">Project Management</div>
                     <h1>Track<br><em>Progress</em></h1>
-                    <p class="hero-note">Every step from signed contract to final delivery. Tap any task to check it
-                        off.
-                        Phases turn gold when fully complete.</p>
+                    <p class="hero-note">Every step from signed contract to final delivery. Tap any task to check it off. Phases turn gold when fully complete.</p>
                 </div>
 
                 <div class="g2" style="margin-bottom:44px">
@@ -2592,6 +3250,9 @@
             </div>
         </div>
 
+        <!-- CLIENT SIDEBAR CARD -->
+        <div class="client-sidebar-card" id="clientSidebarCard"></div>
+
         <div class="toast-container" id="toastContainer"></div>
 
         <footer>
@@ -2627,23 +3288,102 @@
             grid.innerHTML = '';
             CLIENTS.forEach(c => {
                 const card = document.createElement('div');
-                card.className = 'client-card';
+                card.className = 'client-card er-border';
                 card.onclick = () => openClient(c);
+                const vig = c.name.length * 3 + 30;
+                const min = (c.project || '').length * 2 + 20;
+                const end = c.id.length * 4 + 45;
                 card.innerHTML = `
-                    <div class="client-card-id">${c.id}</div>
-                    <div class="client-card-name">${c.name || 'Unnamed'}</div>
-                    <div class="client-card-company">${c.company || '—'}</div>
-                    <div class="client-card-project">${c.project || 'No project set'}</div>
-                    <div class="client-card-pass">${c.password}</div>`;
+                    <div class="client-card-header">
+                        <span class="card-id">${c.id.toUpperCase()}</span>
+                        <span class="card-pass-pill">${c.password}</span>
+                    </div>
+                    <div class="client-card-identity">
+                        <div class="card-title-label">CLIENT PROFILE</div>
+                        <h3 class="card-name">${c.name || 'UNNAMED'}</h3>
+                        <div class="card-meta-line">
+                            <span class="label">ORG</span>
+                            <span class="val">${c.company || '—'}</span>
+                        </div>
+                        <div class="card-meta-line">
+                            <span class="label">PRJ</span>
+                            <span class="val project-badge">${c.project || 'NO ACTIVE PROJECT'}</span>
+                        </div>
+                    </div>
+                    <div class="client-card-stats">
+                        <div class="stat-row">
+                            <span>PRG (PROGRESS)</span>
+                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${vig}%"></div></div>
+                            <span class="val">${vig}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>AST (ASSETS)</span>
+                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${min}%"></div></div>
+                            <span class="val">${min}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>RND (RENDER)</span>
+                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${end}%"></div></div>
+                            <span class="val">${end}</span>
+                        </div>
+                    </div>`;
                 grid.appendChild(card);
             });
             // Add "Add Client" placeholder card
             const add = document.createElement('div');
             add.className = 'add-client-card';
-            add.innerHTML = '<div class="add-client-icon">+</div><div class="add-client-text">Add new client</div>';
+            add.innerHTML = '<div class="add-client-icon">🛡️</div><div class="add-client-text">Add new client</div>';
             add.style.cursor = 'pointer';
             add.onclick = () => showAddClientModal();
             grid.appendChild(add);
+        }
+
+        function renderSidebarCard(client) {
+            const container = document.getElementById('clientSidebarCard');
+            if (!client) {
+                container.innerHTML = '';
+                return;
+            }
+            const vig = client.name.length * 3 + 30;
+            const min = (client.project || '').length * 2 + 20;
+            const end = client.id.length * 4 + 45;
+            container.innerHTML = `
+                <div class="client-card er-border">
+                    <div class="client-card-header">
+                        <span class="card-id">${client.id.toUpperCase()}</span>
+                        <span class="card-pass-pill">${client.password}</span>
+                    </div>
+                    <div class="client-card-identity">
+                        <div class="card-title-label">CLIENT PROFILE</div>
+                        <h3 class="card-name">${client.name || 'UNNAMED'}</h3>
+                        <div class="card-meta-line">
+                            <span class="label">ORG</span>
+                            <span class="val">${client.company || '—'}</span>
+                        </div>
+                        <div class="card-meta-line">
+                            <span class="label">PRJ</span>
+                            <span class="val project-badge">${client.project || 'NO ACTIVE PROJECT'}</span>
+                        </div>
+                    </div>
+                    <div class="client-card-stats">
+                        <div class="stat-row">
+                            <span>PRG (PROGRESS)</span>
+                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${vig}%"></div></div>
+                            <span class="val">${vig}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>AST (ASSETS)</span>
+                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${min}%"></div></div>
+                            <span class="val">${min}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>RND (RENDER)</span>
+                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${end}%"></div></div>
+                            <span class="val">${end}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function checkGate() {
@@ -2693,10 +3433,15 @@
                 document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
                 document.getElementById('statusBanner').style.display = 'none';
                 document.body.classList.remove('client-mode');
+                document.body.classList.remove('client-view');
+                document.getElementById('contractAdminActions').style.display = 'none';
+                renderSidebarCard(null);
             } else {
                 document.getElementById('adminDash').classList.remove('active');
                 document.getElementById('statusBanner').style.display = '';
                 document.body.classList.add('client-mode');
+                document.body.classList.add('client-view');
+                document.getElementById('contractAdminActions').style.display = 'none';
                 document.querySelectorAll('.task').forEach(task => {
                     const owner = task.querySelector('.to');
                     if (owner && owner.classList.contains('y')) task.classList.add('locked');
@@ -2705,6 +3450,7 @@
                 loadProgress();
                 loadPhaseDates();
                 loadNotes();
+                renderSidebarCard(client);
             }
             document.getElementById('btnLogout').style.display = 'inline-flex';
         }
@@ -2716,10 +3462,13 @@
             document.querySelector('.panel.active') || document.getElementById('panel-contract').classList.add('active');
             document.getElementById('statusBanner').style.display = '';
             document.getElementById('btnBack').classList.add('show');
+            document.body.classList.add('client-view');
+            document.getElementById('contractAdminActions').style.display = 'block';
             loadClientState();
             loadProgress();
             loadPhaseDates();
             loadNotes();
+            renderSidebarCard(client);
             window.scrollTo(0, 0);
         }
 
@@ -2757,6 +3506,14 @@
             // → Contract total to invoice first line item
             const total = document.getElementById('c-total').value.replace(/[^0-9.]/g, '');
             if (total) document.getElementById('p1').value = total;
+
+            // Sync to current client and re-render sidebar
+            if (currentClient) {
+                currentClient.name = name;
+                currentClient.company = company;
+                currentClient.project = project;
+                renderSidebarCard(currentClient);
+            }
         }
 
         // ═══ ADD CLIENT MODAL ═══
@@ -2817,7 +3574,25 @@
             document.getElementById('adminDash').classList.add('active');
             document.getElementById('statusBanner').style.display = 'none';
             document.getElementById('btnBack').classList.remove('show');
+            document.body.classList.remove('client-view');
+            document.getElementById('contractAdminActions').style.display = 'none';
+            renderSidebarCard(null);
             window.scrollTo(0, 0);
+        }
+
+        function deleteClient() {
+            if (!currentClient) return;
+            if (!confirm(`Are you sure you want to permanently delete client "${currentClient.name || 'Unnamed'}"? This action cannot be undone.`)) {
+                return;
+            }
+            
+            const idx = CLIENTS.findIndex(c => c.id === currentClient.id);
+            if (idx !== -1) {
+                CLIENTS.splice(idx, 1);
+                localStorage.setItem('portal-clients', JSON.stringify(CLIENTS));
+                showToast(`✓ Removed client profile`);
+                backToDash();
+            }
         }
 
         // Auto-unlock if already authenticated this session
@@ -3255,8 +4030,8 @@
             document.getElementById('statusPct').textContent = pct + '%';
             document.getElementById('statusBanner').style.setProperty('--progress', pct + '%');
             if (pct === 100) {
-                document.querySelector('.status-dot').style.background = '#4a9268';
-                document.querySelector('.status-dot').style.boxShadow = '0 0 8px rgba(74,146,104,.5)';
+                document.querySelector('.status-dot').style.background = '#eb5939';
+                document.querySelector('.status-dot').style.boxShadow = '0 0 12px rgba(235, 89, 57, 0.8)';
             }
         }
 
@@ -3380,6 +4155,7 @@
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script src="fs-nav.js"></script>
 </body>
 
 </html>
