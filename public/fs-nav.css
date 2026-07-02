@@ -562,3 +562,56 @@
         background: var(--border);
     }
 }
+
+/* ==========================================================================
+   7. Fixed Side Navigation Arrows (Desktop/Tablet Overlay Switcher)
+   ========================================================================== */
+.side-nav-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(20, 20, 20, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+    text-decoration: none;
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.side-nav-arrow:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(235, 89, 57, 0.4);
+}
+.side-nav-prev {
+    left: 24px;
+}
+.side-nav-next {
+    right: 24px;
+}
+.side-nav-arrow svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+.side-nav-prev:hover svg {
+    transform: translateX(-2px);
+}
+.side-nav-next:hover svg {
+    transform: translateX(2px);
+}
+
+@media (max-width: 1100px) {
+    .side-nav-arrow {
+        display: none !important;
+    }
+}
