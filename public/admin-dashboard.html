@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | RahulFX3D Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fs-nav.css">
+<style>
+  :root {
+    --cream: #DAD3C1;
+    --paper: #EFE8D8;
+    --ink: #211D18;
+    --red: #C22032;
+    --line: #211D18;
+    --line-soft: #B9AF98;
+    --muted: #555555;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--ink);
+    padding: 120px 16px 60px;
+    line-height: 1.4;
+  }
+
+  /* ---------- Toolbar / Tabs ---------- */
+  .toolbar {
+    max-width: 1000px;
+    margin: 0 auto 30px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 0;
+    border: 2px solid var(--ink);
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    align-items: center;
+    font-size: 12px;
+  }
+  
+  .toolbar h1 {
+    font-family: Impact, 'Arial Narrow', sans-serif;
+    font-size: 20px;
+    letter-spacing: .03em;
+    margin: 0 auto 0 0;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: .04em;
+    background: #2E2A23;
+    color: #9A9484;
+    border: 2px solid #4A4538;
+    padding: 8px 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+
+  .tab-btn:hover {
+    color: var(--paper);
+    border-color: var(--paper);
+  }
+
+  .tab-btn.active {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+
+  /* ---------- Sheet ---------- */
+  .sheet {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 48px 52px;
+    position: relative;
+    box-shadow: 0 18px 40px rgba(0,0,0,.15);
+    border: 2px solid var(--ink);
+  }
+
+  .sheet-title {
+    font-family: Impact, 'Arial Narrow', sans-serif;
+    font-size: 38px;
+    color: var(--red);
+    margin: 0 0 24px;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 12px;
+  }
+
+  [contenteditable] {
+    outline: none;
+  }
+  
+  [contenteditable]:hover {
+    background: rgba(194, 32, 50, 0.06);
+    border-radius: 2px;
+  }
+  
+  [contenteditable]:focus {
+    background: rgba(194, 32, 50, 0.1);
+    border-radius: 2px;
+  }
+
+  /* ---------- Form & Grid Styling ---------- */
+  .grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    border: 2px solid var(--ink);
+  }
+
+  .grid-table th {
+    background: transparent;
+    border: 1px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 12px 10px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-align: left;
+  }
+
+  .grid-table td {
+    border: 1px solid var(--ink);
+    padding: 12px 10px;
+    font-size: 12px;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .form-input {
+    font-family: inherit;
+    font-size: 12px;
+    background: transparent;
+    border: 2px solid var(--ink);
+    padding: 8px 10px;
+    color: var(--ink);
+    outline: none;
+    text-transform: uppercase;
+  }
+
+  .form-input:focus {
+    background: rgba(194, 32, 50, 0.05);
+  }
+
+  .btn-action {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--red);
+    background: none;
+    border: 1px dashed var(--red);
+    padding: 6px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+
+  .btn-action:hover {
+    background: rgba(194,32,50,0.06);
+  }
+
+  .btn-solid {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+
+  .btn-solid:hover {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+
+  /* ---------- Client Manager Panel ---------- */
+  .progress-bar-container {
+    width: 100%;
+    background: rgba(0,0,0,0.1);
+    height: 12px;
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+
+  .progress-fill {
+    background: var(--red);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* ---------- Proposal Builder Template ---------- */
+  .proposal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+
+  .proposal-prompt {
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .proposal-line {
+    border-bottom: 1px solid var(--ink);
+    display: inline-block;
+    min-width: 250px;
+    padding-left: 8px;
+  }
+
+  /* ---------- Review Annotation System ---------- */
+  .review-split {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+  }
+
+  .dummy-player {
+    background: #000;
+    border: 2px solid var(--ink);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 11px;
+    position: relative;
+  }
+
+  .dummy-timeline {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .dummy-playhead {
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    position: absolute;
+    top: -3px; left: 24%;
+  }
+
+  /* ---------- Admin Gate Authentication ---------- */
+  .admin-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0b0b0b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .admin-gate::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 30%, #000 100%),
+                  radial-gradient(circle at 30% 20%, rgba(235, 89, 57, 0.04) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 1;
+  }
+
+  .gate-card {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      background: rgba(22, 22, 24, 0.95);
+      border: 1px solid rgba(235, 89, 57, 0.2);
+      border-radius: 12px;
+      padding: 50px 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      font-family: sans-serif;
+  }
+
+  .gate-rune {
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--red);
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 15px rgba(235, 89, 57, 0.15);
+  }
+
+  .gate-brand {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 8px;
+  }
+
+  .gate-brand em {
+      color: var(--red);
+      font-style: normal;
+  }
+
+  .gate-sub {
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 35px;
+  }
+
+  .gate-field {
+      position: relative;
+      margin-bottom: 18px;
+  }
+
+  .gate-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(235, 89, 57, 0.15);
+      border-radius: 6px;
+      padding: 14px 20px;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--ink);
+      outline: none;
+      text-align: center;
+      letter-spacing: .12em;
+      transition: all .3s ease;
+  }
+
+  .gate-input:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 15px rgba(235, 89, 57, 0.15);
+      background: rgba(0, 0, 0, 0.6);
+  }
+
+  .gate-input::placeholder {
+      color: rgba(255, 255, 255, 0.2);
+  }
+
+  .gate-btn {
+      width: 100%;
+      background: var(--red);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      padding: 14px;
+      cursor: pointer;
+      transition: all .3s ease;
+  }
+
+  .gate-btn:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 5px 20px rgba(235, 89, 57, 0.25);
+  }
+
+  .gate-error {
+      color: var(--red);
+      font-size: 11px;
+      margin-top: 14px;
+      min-height: 18px;
+      letter-spacing: .05em;
+  }
+
+  .gate-footer {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 30px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    body { padding-top: 100px; }
+    .sheet { padding: 30px 20px; }
+    .review-split { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    .header, .fs-nav-overlay, .toolbar, .btn-action, .btn-solid, .form-row, .col-del {
+      display: none !important;
+    }
+    body { background: #fff; padding: 0; }
+    .sheet { border: none; box-shadow: none; padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- PASSCODE GATE -->
+  <div class="admin-gate" id="adminGate">
+      <div class="gate-card">
+          <div class="gate-rune">🔒</div>
+          <div class="gate-brand">Rahul<em>FX3D</em> Studio</div>
+          <div class="gate-sub">Admin Suite — Authorized Access Only</div>
+          <div class="gate-field">
+              <input class="gate-input" type="password" id="gatePass" placeholder="Enter passcode"
+                  onkeydown="if(event.key==='Enter')checkAdminGate()" autofocus />
+          </div>
+          <button class="gate-btn" onclick="checkAdminGate()">Unlock Workspace →</button>
+          <div class="gate-error" id="gateError"></div>
+          <div class="gate-footer">Access is restricted to studio administrators.</div>
+      </div>
+  </div>
+
+  <div id="mainContent" style="display: none;">
+
+    <!-- MAIN HEADER -->
+    <header class="header js-header is-red">
+        <div class="header_logo js-header_logo fs-logo">
+            <a class="link-logo" aria-label="Home page" href="index.html">
+                <img class="svg" src="assets/icons/logo.svg" alt="logo">
+            </a>
+        </div>
+        
+        <!-- Desktop Glass Capsule Nav -->
+        <nav class="fs-nav-desktop">
+            <ul class="header_menu_list ul__reset fs-nav-links">
+                <div class="fs-nav-pill"></div>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html" onclick="window.location.href='index.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Home</span> <span class="header_menu_item_link header_menu_item_link__active">Home</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="about.html" onclick="window.location.href='about.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">About Rahul</span> <span class="header_menu_item_link header_menu_item_link__active">About Rahul</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#work" onclick="window.location.href='index.html#work';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Work</span> <span class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#pricing-estimator" onclick="window.location.href='index.html#pricing-estimator';return false;" id="navPricingLinkDesktop" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Pricing</span> <span class="header_menu_item_link header_menu_item_link__active">Pricing</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="saas-animation.html" onclick="window.location.href='saas-animation.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">SaaS</span> <span class="header_menu_item_link header_menu_item_link__active">SaaS</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="client-portal.html" onclick="window.location.href='client-portal.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Portal</span> <span class="header_menu_item_link header_menu_item_link__active">Portal</span></span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="fs-menu-toggle" aria-label="Toggle Menu">
+            <span class="fs-menu-icon"></span>
+        </button>
+    </header>
+
+    <div class="fs-nav-overlay">
+        <nav class="fs-nav-menu">
+            <ul class="fs-nav-list">
+                <li class="fs-nav-item"><a href="index.html" data-text="Home">Home</a></li>
+                <li class="fs-nav-item"><a href="about.html" data-text="About Rahul">About Rahul</a></li>
+                <li class="fs-nav-item"><a href="index.html#work" data-text="Work">Work</a></li>
+                <li class="fs-nav-item"><a href="saas-animation.html" data-text="SaaS Animation">SaaS Animation</a></li>
+                <li class="fs-nav-item"><a href="client-portal.html" data-text="Client Portal">Client Portal</a></li>
+            </ul>
+        </nav>
+        <div class="fs-nav-footer">
+            <a href="mailto:rahul@rahulfx3d.studio">rahul@rahulfx3d.studio</a>
+            <div class="fs-nav-socials">
+                <a href="https://www.linkedin.com/in/rahul-meena-503161400/?skipRedirect=true" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROL TOOLBAR -->
+    <div class="toolbar">
+      <h1>Studio Admin Suite</h1>
+      <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('client-manager', this)">👥 Client Manager</button>
+        <button class="tab-btn" onclick="switchTab('proposal-builder', this)">📝 Proposal Builder</button>
+        <button class="tab-btn" onclick="switchTab('feedback-review', this)">💬 Review Portal</button>
+        <button class="tab-btn" onclick="switchTab('budget-calc', this)">🧮 Margin Calculator</button>
+      </div>
+    </div>
+
+    <!-- 👥 CLIENT & PROJECT MANAGER SHEET -->
+    <div class="sheet" id="panel-client-manager">
+      <h2 class="sheet-title">Client &amp; Project Manager</h2>
+      
+      <!-- New Client Form -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Brand / Client Name</label>
+          <input type="text" id="clientNameInput" class="form-input" placeholder="e.g. Aurelius Fragrance">
+        </div>
+        <div class="form-group">
+          <label>Portal Access Password</label>
+          <input type="text" id="clientPassInput" class="form-input" placeholder="e.g. aurelius99">
+        </div>
+        <div class="form-group" style="flex: 0.5; min-width: 100px; justify-content: flex-end;">
+          <button class="btn-solid" onclick="addClient()">Add Client</button>
+        </div>
+      </div>
+
+      <table class="grid-table">
+        <thead>
+          <tr>
+            <th>Client Name</th>
+            <th>Passcode</th>
+            <th>CGI Phase Progress</th>
+            <th class="col-del" style="text-align: center;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="clientTableBody">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 📝 CREATIVE BRIEF & PROPOSAL BUILDER SHEET -->
+    <div class="sheet" id="panel-proposal-builder" style="display: none;">
+      <div class="proposal-header">
+        <h2 class="sheet-title" style="border: none; margin: 0; padding: 0;">PROJECT PROPOSAL</h2>
+        <button class="btn-solid" onclick="window.print()">Print / Export PDF</button>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-block">
+          <div class="proposal-prompt">PROPOSAL NO: <span class="proposal-line" contenteditable="true">#SOW-2026-08</span></div>
+          <div class="proposal-prompt">DATE: <span class="proposal-line" contenteditable="true" id="propDate"></span></div>
+        </div>
+        <div class="meta-block right">
+          <div class="proposal-prompt">STUDIO: <span class="proposal-line" contenteditable="true">RAHULFX3D STUDIO</span></div>
+          <div class="proposal-prompt">CONTACT: <span class="proposal-line" contenteditable="true">RAHUL@RAHULFX3D.STUDIO</span></div>
+        </div>
+      </div>
+
+      <div class="parties-row">
+        <div class="party">
+          <h3>Prepared For:</h3>
+          <div class="proposal-prompt">CLIENT: <span class="proposal-line" contenteditable="true">Aurelius Luxury</span></div>
+          <div class="proposal-prompt">CONTACT: <span class="proposal-line" contenteditable="true">licensing@aurelius.com</span></div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: 30px; margin-bottom: 12px; border-bottom: 2px solid var(--ink); display: inline-block;">1. Creative Direction &amp; Deliverables</h3>
+      <table class="grid-table">
+        <thead>
+          <tr>
+            <th>Deliverable Description</th>
+            <th style="width: 15%; text-align: center;">Format</th>
+            <th style="width: 20%; text-align: right;">Milestone Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td contenteditable="true">01. 3D Product CGI Campaign Animation (30-second hero ad)</td>
+            <td contenteditable="true" style="text-align: center;">4K 9:16</td>
+            <td contenteditable="true" style="text-align: right;">$3,500</td>
+          </tr>
+          <tr>
+            <td contenteditable="true">02. Social Hook Loop Animatic (10-second cutdowns)</td>
+            <td contenteditable="true" style="text-align: center;">4K 9:16</td>
+            <td contenteditable="true" style="text-align: right;">$1,200</td>
+          </tr>
+          <tr>
+            <td contenteditable="true">03. High-Fidelity Product Still Renders (Packaging &amp; bottle details)</td>
+            <td contenteditable="true" style="text-align: center;">Print High-res</td>
+            <td contenteditable="true" style="text-align: right;">$800</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: 30px; margin-bottom: 12px; border-bottom: 2px solid var(--ink); display: inline-block;">2. Distribution &amp; Commercial Licensing Rights</h3>
+      <p contenteditable="true" style="font-size: 12px; line-height: 1.8; margin: 0 0 20px;">RahulFX3D Studio grants client full commercial usage rights for paid social channels, website integration, and digital advertising globally for a perpetual duration upon final payment clearance.</p>
+
+      <div class="footer-row" style="margin-top: 40px;">
+        <div class="terms">
+          <h4>Proposal Terms</h4>
+          <p contenteditable="true">This quote is valid for 30 days. Work begins upon receipt of a 50% retainer deposit and signed SOW agreement.</p>
+        </div>
+        <div class="signature-block">
+          <div class="signature-wrap">
+            <div class="signature-line" contenteditable="true">Rahul Meena</div>
+          </div>
+          <div class="sig-line">
+            <span contenteditable="true" style="font-weight: bold; color: var(--ink);">RAHUL MEENA</span><br>
+            <span contenteditable="true" style="font-size: 9px; color: var(--muted); margin-top: 4px; display: inline-block;">DIRECTOR &amp; 3D CGI ARTIST</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 💬 CLIENT REVIEW & ANNOTATION PANEL SHEET -->
+    <div class="sheet" id="panel-feedback-review" style="display: none;">
+      <h2 class="sheet-title">Review &amp; Annotation Simulator</h2>
+      
+      <div class="review-split">
+        <div>
+          <div class="dummy-player">
+            🎥 [ DRAFT ANIMATION PLAYER SIMULATION ]
+            <div class="dummy-timeline">
+              <div class="dummy-playhead"></div>
+            </div>
+          </div>
+          <div class="form-row" style="margin-top: 15px;">
+            <div class="form-input" style="flex: 1;" contenteditable="true" id="commentInput">Type timestamped feedback note here (e.g. [00:08] - Make perfume spray mist denser)</div>
+            <button class="btn-solid" onclick="addComment()">Add Note</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="font-size: 13px; font-weight: bold; text-transform: uppercase; margin: 0 0 10px; border-bottom: 2px solid var(--ink); display: inline-block;">Client Feedback Logs</h3>
+          <table class="grid-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Timestamp</th>
+                <th>Annotation Note</th>
+              </tr>
+            </thead>
+            <tbody id="feedbackTableBody">
+              <tr>
+                <td>[ 00:04 ]</td>
+                <td>Increase bottle glass reflection and lighting bloom intensity.</td>
+              </tr>
+              <tr>
+                <td>[ 00:12 ]</td>
+                <td>Speed up the simulation physics for liquid collision swirl.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🧮 RENDERING BUDGET & MARGIN CALCULATOR SHEET -->
+    <div class="sheet" id="panel-budget-calc" style="display: none;">
+      <h2 class="sheet-title">Project Cost &amp; Margin Calculator</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Campaign Retainer Budget ($)</label>
+          <input type="number" id="projectBudget" class="form-input" value="5500" oninput="calculateMargins()">
+        </div>
+        <div class="form-group">
+          <label>GPU Cloud Render Credits ($)</label>
+          <input type="number" id="renderCosts" class="form-input" value="350" oninput="calculateMargins()">
+        </div>
+        <div class="form-group">
+          <label>3D Assets &amp; Rigging Licenses ($)</label>
+          <input type="number" id="assetCosts" class="form-input" value="180" oninput="calculateMargins()">
+        </div>
+      </div>
+
+      <table class="grid-table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th>Financial Summary Item</th>
+            <th style="text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Retainer Revenue</td>
+            <td style="text-align: right; font-weight: bold;" id="displayRevenue">$5,500</td>
+          </tr>
+          <tr>
+            <td>Render Farm Costs</td>
+            <td style="text-align: right; color: var(--red);" id="displayRender">-$350</td>
+          </tr>
+          <tr>
+            <td>Asset &amp; Support Costs</td>
+            <td style="text-align: right; color: var(--red);" id="displayAssets">-$180</td>
+          </tr>
+          <tr class="total-row">
+            <td class="lbl">Total CGI Overhead Expenses</td>
+            <td class="sub" style="color: var(--red);" id="displayExpenses">-$530</td>
+          </tr>
+          <tr class="total-row" style="border-top: 3px double var(--ink);">
+            <td class="lbl">Net Studio Profit Margin</td>
+            <td class="sub" style="color: #2b5c4a; font-size: 16px;" id="displayProfit">$4,970 (90%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div> <!-- Close mainContent -->
+
+  <script src="fs-nav.js"></script>
+  <script>
+    // Authentication logic
+    document.addEventListener("DOMContentLoaded", () => {
+      if (sessionStorage.getItem('portal-auth') === 'admin') {
+        unlockGenerator();
+      }
+    });
+
+    function checkAdminGate() {
+      const input = document.getElementById('gatePass');
+      const val = input.value;
+      if (val === 'rahulfx3d') {
+        sessionStorage.setItem('portal-auth', 'admin');
+        unlockGenerator();
+      } else {
+        document.getElementById('gateError').textContent = 'Invalid access code. Please try again.';
+        input.value = '';
+      }
+    }
+
+    function unlockGenerator() {
+      document.getElementById('adminGate').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      loadClientsTable();
+      calculateMargins();
+    }
+
+    // Tab switcher
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.querySelectorAll('.sheet').forEach(panel => panel.style.display = 'none');
+      document.getElementById('panel-' + tabId).style.display = 'block';
+    }
+
+    // Default dates for proposal SOW
+    const today = new Date();
+    const opts = {year:'numeric', month:'long', day:'numeric'};
+    document.getElementById('propDate').textContent = today.toLocaleDateString('en-US', opts).toUpperCase();
+
+    // Client & Project Manager Logic (Linked to localStorage so it is persistent!)
+    const DEFAULT_CLIENTS = [
+      { name: 'Aurelius Fragrance', password: 'aurelius-cg3', progress: 65 },
+      { name: 'Ombre Perfume', password: 'ombre-lux', progress: 40 },
+      { name: 'Newaar Skincare', password: 'newaar-glow', progress: 90 }
+    ];
+
+    function getClients() {
+      const data = localStorage.getItem('studio-clients');
+      if (data) return JSON.parse(data);
+      localStorage.setItem('studio-clients', JSON.stringify(DEFAULT_CLIENTS));
+      return DEFAULT_CLIENTS;
+    }
+
+    function loadClientsTable() {
+      const clients = getClients();
+      const tbody = document.getElementById('clientTableBody');
+      tbody.innerHTML = '';
+
+      clients.forEach((c, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${c.name}</strong></td>
+          <td><span contenteditable="true" onblur="updateClientPass(${idx}, this)">${c.password}</span></td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span contenteditable="true" style="font-weight: bold; width: 40px;" onblur="updateClientProgress(${idx}, this)">${c.progress}%</span>
+              <div class="progress-bar-container">
+                <div class="progress-fill" style="width: ${c.progress}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="col-del" style="text-align: center;">
+            <button class="btn-action" onclick="removeClient(${idx})">✕ Remove</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addClient() {
+      const name = document.getElementById('clientNameInput').value.trim();
+      const pass = document.getElementById('clientPassInput').value.trim();
+      if (!name || !pass) return alert("Please fill in both name and password fields!");
+
+      const clients = getClients();
+      clients.push({ name: name, password: pass, progress: 10 });
+      localStorage.setItem('studio-clients', JSON.stringify(clients));
+      
+      document.getElementById('clientNameInput').value = '';
+      document.getElementById('clientPassInput').value = '';
+      loadClientsTable();
+    }
+
+    function removeClient(idx) {
+      if (!confirm("Are you sure you want to remove this client?")) return;
+      const clients = getClients();
+      clients.splice(idx, 1);
+      localStorage.setItem('studio-clients', JSON.stringify(clients));
+      loadClientsTable();
+    }
+
+    function updateClientPass(idx, el) {
+      const clients = getClients();
+      clients[idx].password = el.textContent.trim();
+      localStorage.setItem('studio-clients', JSON.stringify(clients));
+    }
+
+    function updateClientProgress(idx, el) {
+      let val = parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
+      val = Math.max(0, Math.min(100, val));
+      
+      const clients = getClients();
+      clients[idx].progress = val;
+      localStorage.setItem('studio-clients', JSON.stringify(clients));
+      loadClientsTable();
+    }
+
+    // Feedback Notes Simulator
+    function addComment() {
+      const input = document.getElementById('commentInput');
+      const text = input.textContent.trim();
+      if (!text || text.startsWith("Type timestamped")) return;
+
+      const tbody = document.getElementById('feedbackTableBody');
+      const tr = document.createElement('tr');
+      
+      // Parse timestamp if entered, e.g. [00:08]
+      const tsMatch = text.match(/^\[\s*\d+:\d+\s*\]/);
+      const ts = tsMatch ? tsMatch[0] : '[ 00:00 ]';
+      const cleanText = text.replace(ts, '').trim();
+
+      tr.innerHTML = `
+        <td>${ts}</td>
+        <td>${cleanText}</td>
+      `;
+      tbody.appendChild(tr);
+      input.textContent = '';
+    }
+
+    // Margin Calculator logic
+    function calculateMargins() {
+      const budget = parseFloat(document.getElementById('projectBudget').value) || 0;
+      const render = parseFloat(document.getElementById('renderCosts').value) || 0;
+      const assets = parseFloat(document.getElementById('assetCosts').value) || 0;
+
+      const expenses = render + assets;
+      const profit = budget - expenses;
+      const marginPct = budget > 0 ? Math.round((profit / budget) * 100) : 0;
+
+      document.getElementById('displayRevenue').textContent = '$' + budget.toLocaleString();
+      document.getElementById('displayRender').textContent = '-$' + render.toLocaleString();
+      document.getElementById('displayAssets').textContent = '-$' + assets.toLocaleString();
+      document.getElementById('displayExpenses').textContent = '-$' + expenses.toLocaleString();
+      document.getElementById('displayProfit').textContent = '$' + profit.toLocaleString() + ' (' + marginPct + '%)';
+    }
+  </script>
+
+  </div> <!-- Close mainContent -->
+</body>
+</html>
