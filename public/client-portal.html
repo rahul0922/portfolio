@@ -91,7 +91,11 @@
             min-height: 100vh
         }
 
-        nav {
+        body.portal-logged-in .header.js-header {
+            display: none !important;
+        }
+
+        .portal-nav {
             position: fixed;
             top: 0;
             left: 0;
@@ -1793,7 +1797,7 @@
 
         /* MOBILE RESPONSIVE */
         @media (max-width:700px) {
-            nav {
+            .portal-nav {
                 padding: 12px 16px;
                 flex-wrap: wrap;
                 gap: 8px
@@ -2738,8 +2742,8 @@
 
     <div class="portal-content" id="portalContent">
 
-        <nav>
-            <div class="logo">Rahul<em>FX3D</em> Studio</div>
+        <nav class="portal-nav">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">Rahul<em>FX3D</em> Studio</a></div>
             <div class="tabs">
                 <button class="tab active" onclick="go('contract',this)">📜 Contract</button>
                 <button class="tab" onclick="go('invoice',this)">🪙 Invoice</button>
@@ -3589,6 +3593,7 @@
         function unlockPortal(role, client) {
             document.getElementById('adminGate').classList.add('hidden');
             document.getElementById('portalContent').classList.add('unlocked');
+            document.body.classList.add('portal-logged-in');
             
             // Badge
             const existing = document.querySelector('.role-badge');
@@ -3596,7 +3601,7 @@
             const badge = document.createElement('span');
             badge.className = 'role-badge ' + role;
             badge.textContent = role === 'admin' ? '✓ Admin' : '◎ ' + (client ? client.name : 'Client');
-            document.querySelector('nav').appendChild(badge);
+            document.querySelector('.portal-nav').appendChild(badge);
 
             if (role === 'admin') {
                 renderDashboard();
