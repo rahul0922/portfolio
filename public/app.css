@@ -5399,7 +5399,7 @@ canvas.three-app {
     background: none;
     border: none;
     bottom: 2.1875rem;
-    display: none;
+    display: none !important;
     left: calc(50% - 39px);
     left: calc(50% - var(--size-btn)/2);
     padding: 0 !important;
