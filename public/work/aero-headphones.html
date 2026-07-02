@@ -302,6 +302,47 @@
             color: var(--accent);
         }
 
+        /* Redesigned Premium CTA Button */
+        .btn-aesthetic-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, #eb5939 0%, #ff7b5a 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(235, 89, 57, 0.3);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-aesthetic-cta::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ff7b5a 0%, #eb5939 100%);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+        }
+        .btn-aesthetic-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(235, 89, 57, 0.5);
+            border-color: rgba(255,255,255,0.25);
+        }
+        .btn-aesthetic-cta:hover::after {
+            opacity: 1;
+        }
+
         /* CTA section */
         .cta-section {
             text-align: center;
@@ -321,7 +362,128 @@
         .cta-subtitle {
             font-size: 14px;
             color: var(--cream-mute);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Value Proposition & Workflow Section Styles */
+        .case-study-extra-sections {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header-centered {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-header-centered .subtitle-mono {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .section-header-centered h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        /* Pillars Grid */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 100px;
+        }
+        .pillar-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 35px 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .pillar-card:hover {
+            border-color: rgba(235, 89, 57, 0.25);
+            transform: translateY(-2px);
+        }
+        .pillar-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .pillar-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--cream);
+        }
+        .pillar-desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--cream-mute);
+            font-weight: 300;
+        }
+
+        /* Workflow Steps */
+        .workflow-sequence {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 80px;
+        }
+        .workflow-step {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px 20px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .step-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.8;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .step-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--cream);
+        }
+        .step-desc {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--cream-mute);
+            font-weight: 300;
+        }
+
+        @media (max-width: 991px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+            .workflow-sequence {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -447,12 +609,71 @@
         </div>
     </div>
 
+    <!-- VALUE PROP & WORKFLOW SECTIONS -->
+    <section class="case-study-extra-sections">
+        <!-- Why Work Section -->
+        <div class="section-header-centered">
+            <span class="subtitle-mono">The Studio Difference</span>
+            <h2>Why Work with RahulFX3D Studio?</h2>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <span class="pillar-icon">🎥</span>
+                <h3 class="pillar-title">Cinematic Standard</h3>
+                <p class="pillar-desc">No generic template assets. We construct custom high-fidelity models, simulate physically accurate interactions, and craft bespoke scene lighting.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-icon">📈</span>
+                <h3 class="pillar-title">Engineered to Convert</h3>
+                <p class="pillar-desc">We structure visuals around key product benefits and consumer psychology, explicitly designed to boost conversion rates and social ad performance.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-icon">🤝</span>
+                <h3 class="pillar-title">Direct Collaboration</h3>
+                <p class="pillar-desc">You collaborate directly with founder and director Rahul Meena. Expect fast turnarounds, zero agency overhead, and precise creative alignment.</p>
+            </div>
+        </div>
+
+        <!-- Workflow Section -->
+        <div class="section-header-centered">
+            <span class="subtitle-mono">The Studio Process</span>
+            <h2>Our Seamless Workflow</h2>
+        </div>
+        <div class="workflow-sequence">
+            <div class="workflow-step">
+                <span class="step-num">01</span>
+                <h3 class="step-title">Concept & Brief</h3>
+                <p class="step-desc">Aligning on direction, shot list, references, and messaging objectives.</p>
+            </div>
+            <div class="workflow-step">
+                <span class="step-num">02</span>
+                <h3 class="step-title">Scene Setup</h3>
+                <p class="step-desc">Creating realistic 3D models and custom material texture maps.</p>
+            </div>
+            <div class="workflow-step">
+                <span class="step-num">03</span>
+                <h3 class="step-title">Animation</h3>
+                <p class="step-desc">Keyframing sweeps, simulations (liquids/particles), and timings.</p>
+            </div>
+            <div class="workflow-step">
+                <span class="step-num">04</span>
+                <h3 class="step-title">Render & Lighting</h3>
+                <p class="step-desc">Setting cinematic studio lights and executing GPU-accelerated engine renders.</p>
+            </div>
+            <div class="workflow-step">
+                <span class="step-num">05</span>
+                <h3 class="step-title">Final Polish</h3>
+                <p class="step-desc">Fine-tuning color grading, compositing, SFX, and delivering optimized outputs.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- CALL TO ACTION -->
     <section class="cta-section">
         <h2 class="cta-title">WANT TO INCREASE CONVERSIONS FOR YOUR PRODUCT?</h2>
         <p class="cta-subtitle">Let's craft a cinematic product film that turns scrollers into buyers.</p>
-        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20Aero%20Headphones%20Inspiration" class="btn-aesthetic" style="display: inline-block;">
-            <span>Book a Strategy Call</span>
+        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20Aero%20Headphones%20Inspiration" class="btn-aesthetic-cta">
+            Book a Strategy Call
         </a>
     </section>
 
