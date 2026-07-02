@@ -764,17 +764,17 @@
     const opts = {year:'numeric', month:'long', day:'numeric'};
     document.getElementById('propDate').textContent = today.toLocaleDateString('en-US', opts).toUpperCase();
 
-    // Client & Project Manager Logic (Linked to localStorage so it is persistent!)
+    // Client & Project Manager Logic (Linked to client-portal.html database!)
     const DEFAULT_CLIENTS = [
-      { name: 'Aurelius Fragrance', password: 'aurelius-cg3', progress: 65 },
-      { name: 'Ombre Perfume', password: 'ombre-lux', progress: 40 },
-      { name: 'Newaar Skincare', password: 'newaar-glow', progress: 90 }
+      { id: 'client001', name: 'Aurelius Fragrance', company: 'Aurelius Luxury', password: 'aurelius-cg3', project: 'Aurelius Fragrance CGI Ad', progress: 65, assets: 40, render: 80 },
+      { id: 'client002', name: 'Ombre Perfume', company: 'Ombre Co', password: 'ombre-lux', project: 'Ombre Perfume Simulation', progress: 40, assets: 30, render: 50 },
+      { id: 'client003', name: 'Newaar Skincare', company: 'Newaar Labs', password: 'newaar-glow', project: 'Newaar Skincare Render Campaign', progress: 90, assets: 85, render: 95 }
     ];
 
     function getClients() {
-      const data = localStorage.getItem('studio-clients');
+      const data = localStorage.getItem('portal-clients');
       if (data) return JSON.parse(data);
-      localStorage.setItem('studio-clients', JSON.stringify(DEFAULT_CLIENTS));
+      localStorage.setItem('portal-clients', JSON.stringify(DEFAULT_CLIENTS));
       return DEFAULT_CLIENTS;
     }
 
@@ -792,7 +792,7 @@
             <div style="display: flex; align-items: center; gap: 10px;">
               <span contenteditable="true" style="font-weight: bold; width: 40px;" onblur="updateClientProgress(${idx}, this)">${c.progress}%</span>
               <div class="progress-bar-container">
-                <div class="progress-fill" style="width: ${c.progress}%"></div>
+                <div class="progress-fill" style="width: ${c.progress || 0}%"></div>
               </div>
             </div>
           </td>
@@ -810,8 +810,18 @@
       if (!name || !pass) return alert("Please fill in both name and password fields!");
 
       const clients = getClients();
-      clients.push({ name: name, password: pass, progress: 10 });
-      localStorage.setItem('studio-clients', JSON.stringify(clients));
+      const id = 'client' + String(clients.length + 1).padStart(3, '0');
+      clients.push({
+        id: id,
+        name: name,
+        company: name.toUpperCase(),
+        password: pass,
+        project: name + ' CGI Production',
+        progress: 10,
+        assets: 20,
+        render: 30
+      });
+      localStorage.setItem('portal-clients', JSON.stringify(clients));
       
       document.getElementById('clientNameInput').value = '';
       document.getElementById('clientPassInput').value = '';
@@ -822,14 +832,14 @@
       if (!confirm("Are you sure you want to remove this client?")) return;
       const clients = getClients();
       clients.splice(idx, 1);
-      localStorage.setItem('studio-clients', JSON.stringify(clients));
+      localStorage.setItem('portal-clients', JSON.stringify(clients));
       loadClientsTable();
     }
 
     function updateClientPass(idx, el) {
       const clients = getClients();
       clients[idx].password = el.textContent.trim();
-      localStorage.setItem('studio-clients', JSON.stringify(clients));
+      localStorage.setItem('portal-clients', JSON.stringify(clients));
     }
 
     function updateClientProgress(idx, el) {
@@ -838,7 +848,10 @@
       
       const clients = getClients();
       clients[idx].progress = val;
-      localStorage.setItem('studio-clients', JSON.stringify(clients));
+      // also adjust assets and renders proportionally to match
+      clients[idx].assets = Math.max(0, val - 15);
+      clients[idx].render = Math.min(100, val + 15);
+      localStorage.setItem('portal-clients', JSON.stringify(clients));
       loadClientsTable();
     }
 
