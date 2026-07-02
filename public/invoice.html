@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Generator | RahulFX3D Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fs-nav.css">
+<style>
+  :root {
+    --cream: #0b0b0b;
+    --paper: #161617;
+    --ink: #f5f5f7;
+    --red: #eb5939;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-soft: rgba(255, 255, 255, 0.04);
+    --muted: #86868b;
+    --stamp-intl: #4ade80;
+    --stamp-dom: #f59e0b;
+    --accent-glow: rgba(235, 89, 57, 0.15);
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Outfit', sans-serif;
+    color: var(--ink);
+    padding: 120px 16px 60px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Toolbar ---------- */
+  .toolbar {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    background: rgba(22, 22, 24, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    font-size: 13px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  
+  .toolbar h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: .02em;
+    margin: 0 auto 0 0;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  
+  .toolbar label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+  }
+  
+  .toolbar select {
+    font-family: inherit;
+    font-size: 13px;
+    background: #222224;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 12px;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .toggle-group {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .toggle-group button {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    background: #222224;
+    color: var(--muted);
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle-group button.active {
+    background: var(--red);
+    color: #fff;
+  }
+  
+  .btn {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .btn.secondary {
+    background: #222224;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  
+  .btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Sheet ---------- */
+  .sheet {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 50px 60px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  }
+
+  .stamp {
+    position: absolute;
+    top: 50px;
+    right: 60px;
+    border: 2px dashed var(--stamp-intl);
+    color: var(--stamp-intl);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    transform: rotate(12deg);
+    opacity: .75;
+    line-height: 1.3;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  
+  .sheet.domestic .stamp {
+    border-color: var(--stamp-dom);
+    color: var(--stamp-dom);
+  }
+
+  [contenteditable] {
+    outline: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  [contenteditable]:hover {
+    background: rgba(235, 89, 57, 0.08);
+    border-radius: 4px;
+  }
+  
+  [contenteditable]:focus {
+    background: rgba(235, 89, 57, 0.12);
+    border-radius: 4px;
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .invoice-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    color: var(--red);
+    letter-spacing: -.02em;
+    line-height: 1;
+    margin: 0;
+  }
+  
+  .biz-block {
+    text-align: right;
+    padding-top: 4px;
+  }
+  
+  .biz-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--red);
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+  
+  .biz-addr {
+    font-size: 13px;
+    color: var(--ink);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+  }
+  
+  .meta-block {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  
+  .meta-block .lbl {
+    color: var(--muted);
+  }
+  
+  .meta-block.right {
+    text-align: right;
+  }
+
+  .parties-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .party {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .party.right {
+    text-align: right;
+  }
+  
+  .party h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin: 0 0 10px;
+    border-bottom: 2px solid var(--red);
+    display: inline-block;
+    padding-bottom: 2px;
+    color: var(--red);
+  }
+  
+  .party .line {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  
+  .gst-tag {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    table-layout: fixed;
+  }
+  
+  thead th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 10px;
+    color: var(--muted);
+  }
+  
+  thead th.num {
+    text-align: right;
+  }
+  
+  tbody td {
+    border-bottom: 1px solid var(--line-soft);
+    padding: 14px 10px;
+    font-size: 13.5px;
+    vertical-align: top;
+    color: var(--ink);
+  }
+  
+  tbody td.num {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+  }
+  
+  tbody tr:hover {
+    background: rgba(255,255,255,0.01);
+  }
+  
+  .col-desc { width: 44%; }
+  .col-qty { width: 12%; }
+  .col-price { width: 18%; }
+  .col-sub { width: 18%; }
+  .col-del { width: 8%; text-align: center; }
+  
+  .del-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .del-btn:hover {
+    color: var(--red);
+    background: rgba(235, 89, 57, 0.08);
+  }
+  
+  .add-row-btn {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--red);
+    background: none;
+    border: 1px dashed var(--red);
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin: 10px 0 35px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .add-row-btn:hover {
+    background: rgba(235, 89, 57, 0.06);
+    transform: translateY(-1px);
+  }
+
+  .totals-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+  }
+  
+  .totals {
+    width: 320px;
+    font-size: 13px;
+  }
+  
+  .totals-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  
+  .totals-line .lbl {
+    color: var(--muted);
+  }
+  
+  .totals-line span:last-child {
+    font-family: 'DM Mono', monospace;
+  }
+  
+  .totals-line.grand {
+    border-top: 1px solid var(--line);
+    border-bottom: none;
+    margin-top: 6px;
+    padding-top: 14px;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  
+  .totals-line.grand .lbl {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  
+  .totals-line.grand span:last-child {
+    color: var(--red);
+  }
+  
+  .export-note {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    border-top: 1px solid var(--line);
+    padding-top: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .terms {
+    max-width: 350px;
+  }
+  
+  .terms h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin: 0 0 10px;
+    color: var(--red);
+  }
+  
+  .terms p {
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0;
+  }
+  
+  .contact {
+    font-size: 12px;
+    text-align: right;
+    line-height: 1.8;
+  }
+  
+  .contact .who {
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--ink);
+  }
+  
+  .contact .role {
+    color: var(--muted);
+    font-size: 11px;
+  }
+  
+  .sig-line {
+    margin-top: 20px;
+    border-top: 1px solid var(--line);
+    width: 180px;
+    margin-left: auto;
+    padding-top: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    body { padding-top: 100px; }
+    .sheet { padding: 35px 25px; }
+    .invoice-title { font-size: 38px; }
+    .top-row { flex-direction: column; gap: 15px; }
+    .biz-block { text-align: left; }
+    .meta-block.right { text-align: left; }
+    .parties-row { flex-direction: column; gap: 20px; }
+    .party.right { text-align: left; }
+    .stamp { display: none; }
+    thead th:nth-child(2), tbody td:nth-child(2) { display: none; }
+    .toolbar h1 { width: 100%; order: -1; margin-bottom: 4px; }
+  }
+
+  /* ---------- Print Layout ---------- */
+  @media print {
+    :root {
+      --cream: #ffffff;
+      --paper: #ffffff;
+      --ink: #0b0b0b;
+      --red: #eb5939;
+      --line: #222222;
+      --line-soft: #dddddd;
+      --muted: #555555;
+      --stamp-intl: #2b5c4a;
+      --stamp-dom: #8a5a20;
+    }
+    body {
+      background: #fff;
+      padding: 0;
+    }
+    .header, .fs-nav-overlay, .toolbar, .add-row-btn, .del-btn {
+      display: none !important;
+    }
+    .sheet {
+      box-shadow: none;
+      border: none;
+      border-radius: 0;
+      max-width: 100%;
+      padding: 0;
+    }
+    .stamp {
+      display: flex !important;
+      opacity: 0.8;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- MAIN HEADER -->
+  <header class="header js-header is-red">
+      <div class="header_logo js-header_logo fs-logo">
+          <a class="link-logo" aria-label="Home page" href="index.html">
+              <img class="svg" src="assets/icons/logo.svg" alt="logo">
+          </a>
+      </div>
+      
+      <!-- Desktop Glass Capsule Nav -->
+      <nav class="fs-nav-desktop">
+          <ul class="header_menu_list ul__reset fs-nav-links">
+              <div class="fs-nav-pill"></div>
+              <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html" onclick="window.location.href='index.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Home</span> <span class="header_menu_item_link header_menu_item_link__active">Home</span></span></a></li>
+              <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="about.html" onclick="window.location.href='about.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">About Rahul</span> <span class="header_menu_item_link header_menu_item_link__active">About Rahul</span></span></a></li>
+              <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#work" onclick="window.location.href='index.html#work';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Work</span> <span class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
+              <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="index.html#pricing-estimator" onclick="window.location.href='index.html#pricing-estimator';return false;" id="navPricingLinkDesktop" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Pricing</span> <span class="header_menu_item_link header_menu_item_link__active">Pricing</span></span></a></li>
+              <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="saas-animation.html" onclick="window.location.href='saas-animation.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">SaaS</span> <span class="header_menu_item_link header_menu_item_link__active">SaaS</span></span></a></li>
+              <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="client-portal.html" onclick="window.location.href='client-portal.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Portal</span> <span class="header_menu_item_link header_menu_item_link__active">Portal</span></span></a></li>
+          </ul>
+      </nav>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="fs-menu-toggle" aria-label="Toggle Menu">
+          <span class="fs-menu-icon"></span>
+      </button>
+  </header>
+
+  <div class="fs-nav-overlay">
+      <nav class="fs-nav-menu">
+          <ul class="fs-nav-list">
+              <li class="fs-nav-item"><a href="index.html" data-text="Home">Home</a></li>
+              <li class="fs-nav-item"><a href="about.html" data-text="About Rahul">About Rahul</a></li>
+              <li class="fs-nav-item"><a href="index.html#work" data-text="Work">Work</a></li>
+              <li class="fs-nav-item"><a href="saas-animation.html" data-text="SaaS Animation">SaaS Animation</a></li>
+              <li class="fs-nav-item"><a href="client-portal.html" data-text="Client Portal">Client Portal</a></li>
+          </ul>
+      </nav>
+      <div class="fs-nav-footer">
+          <a href="mailto:rahul@rahulfx3d.studio">rahul@rahulfx3d.studio</a>
+          <div class="fs-nav-socials">
+              <a href="https://www.instagram.com/its_rahul_fr/" target="_blank">Instagram</a>
+          </div>
+      </div>
+  </div>
+
+  <div class="toolbar">
+    <h1>Invoice Generator</h1>
+
+    <div class="toggle-group" id="typeToggle">
+      <button data-type="international" class="active">International</button>
+      <button data-type="domestic">India (GST)</button>
+    </div>
+
+    <label>Currency
+      <select id="currencySelect">
+        <option value="$" selected>USD $</option>
+        <option value="€">EUR €</option>
+        <option value="£">GBP £</option>
+        <option value="₹">INR ₹</option>
+        <option value="A$">AUD A$</option>
+        <option value="C$">CAD C$</option>
+        <option value="AED">AED</option>
+        <option value="S$">SGD S$</option>
+        <option value="¥">JPY ¥</option>
+      </select>
+    </label>
+
+    <button class="btn secondary" id="addRowBtnTop">+ Add Item</button>
+    <button class="btn" id="printBtn">Download / Print PDF</button>
+  </div>
+
+  <div class="sheet" id="sheet">
+    <div class="stamp" id="stamp">Export<br>Invoice</div>
+
+    <div class="top-row">
+      <h1 class="invoice-title">INVOICE</h1>
+      <div class="biz-block">
+        <div class="biz-name" contenteditable="true">RahulFX3D Studio</div>
+        <div class="biz-addr" contenteditable="true">Sector 5, Mansarovar, Jaipur, RJ 302020<br>+91 63780 13808<br>rahul@rahulfx3d.studio</div>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-block">
+        <div><span class="lbl">Invoice Number:</span> #<span contenteditable="true">1001</span></div>
+        <div><span class="lbl">Date:</span> <span contenteditable="true" id="dateField"></span></div>
+        <div><span class="lbl">Due Date:</span> <span contenteditable="true" id="dueField"></span></div>
+      </div>
+      <div class="meta-block right" id="ourTaxBlock">
+        <div><span class="lbl">IEC Code:</span> <span contenteditable="true">—</span></div>
+        <div><span class="lbl">SWIFT / BIC:</span> <span contenteditable="true">—</span></div>
+        <div><span class="lbl">IBAN / Acct No:</span> <span contenteditable="true">—</span></div>
+      </div>
+    </div>
+
+    <div class="parties-row">
+      <div class="party">
+        <h3>Bill To</h3>
+        <div class="line" contenteditable="true">Client Name / Brand</div>
+        <div class="line" contenteditable="true">Client Address, City, Country</div>
+        <div class="line" contenteditable="true">contact@brandemail.com</div>
+        <div class="gst-tag" id="clientTaxTag">Tax ID: —</div>
+      </div>
+      <div class="party right">
+        <h3>Payment Method</h3>
+        <div class="line" contenteditable="true">HDFC Bank Limited</div>
+        <div class="line" contenteditable="true">Rahul Meena</div>
+        <div class="line" contenteditable="true">Acct No: 50100412852230</div>
+        <div class="line" contenteditable="true">IFSC: HDFC0000054</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="col-desc">Description</th>
+          <th class="col-qty num">Qty</th>
+          <th class="col-price num">Price</th>
+          <th class="col-sub num">Subtotal</th>
+          <th class="col-del"></th>
+        </tr>
+      </thead>
+      <tbody id="rowsBody"></tbody>
+    </table>
+
+    <button class="add-row-btn" id="addRowBtnBottom">+ Add line item</button>
+
+    <div class="totals-wrap">
+      <div class="totals" id="totalsBlock">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <div class="footer-row">
+      <div class="terms">
+        <h4>Terms &amp; Conditions</h4>
+        <p contenteditable="true">Payment due within 30 days of the invoice date. Late payments may be subject to a 1.5% monthly fee. Please reference the invoice number with your payment.</p>
+      </div>
+      <div class="contact">
+        <div>For any questions, please contact</div>
+        <div contenteditable="true">rahul@rahulfx3d.studio</div>
+        <div class="who" contenteditable="true">Rahul Meena</div>
+        <div class="role" contenteditable="true">Director &amp; 3D CGI Artist</div>
+        <div class="sig-line">Authorized Signature</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="fs-nav.js"></script>
+  <script>
+  let currency = '$';
+  let invoiceType = 'international'; // or 'domestic'
+  let rowId = 0;
+
+  let rows = [
+    {id: rowId++, desc:'3D Product CGI Animation (Ombre Perfume)', qty:1, price:3120},
+    {id: rowId++, desc:'Social Media CGI Ad Hook (Aurelius Fragrance)', qty:1, price:1500},
+    {id: rowId++, desc:'3D Product Renders (Newaar Skincare)', qty:3, price:650},
+  ];
+
+  const rowsBody = document.getElementById('rowsBody');
+  const totalsBlock = document.getElementById('totalsBlock');
+  const sheet = document.getElementById('sheet');
+  const stamp = document.getElementById('stamp');
+  const ourTaxBlock = document.getElementById('ourTaxBlock');
+  const clientTaxTag = document.getElementById('clientTaxTag');
+
+  function fmt(n){
+    return currency + ' ' + n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+
+  function subtotalOf(r){ return (parseFloat(r.qty)||0) * (parseFloat(r.price)||0); }
+
+  function renderRows(){
+    rowsBody.innerHTML = '';
+    rows.forEach(r=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="col-desc" contenteditable="true" data-field="desc" data-id="${r.id}">${r.desc}</td>
+        <td class="col-qty num" contenteditable="true" data-field="qty" data-id="${r.id}">${r.qty}</td>
+        <td class="col-price num" contenteditable="true" data-field="price" data-id="${r.id}">${r.price}</td>
+        <td class="col-sub num" id="sub-${r.id}">${fmt(subtotalOf(r))}</td>
+        <td class="col-del"><button class="del-btn" data-id="${r.id}" title="Remove row">✕</button></td>
+      `;
+      rowsBody.appendChild(tr);
+    });
+
+    rowsBody.querySelectorAll('[contenteditable]').forEach(el=>{
+      el.addEventListener('input', onCellEdit);
+    });
+    rowsBody.querySelectorAll('.del-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        rows = rows.filter(r=>r.id != btn.dataset.id);
+        renderRows();
+        renderTotals();
+      });
+    });
+  }
+
+  function onCellEdit(e){
+    const id = e.target.dataset.id;
+    const field = e.target.dataset.field;
+    const row = rows.find(r=>r.id == id);
+    if(!row) return;
+    let val = e.target.textContent.trim();
+    if(field==='qty' || field==='price'){
+      val = parseFloat(val.replace(/[^0-9.\-]/g,'')) || 0;
+    }
+    row[field] = val;
+    const subCell = document.getElementById('sub-'+id);
+    if(subCell) subCell.textContent = fmt(subtotalOf(row));
+    renderTotals();
+  }
+
+  function computeSubtotal(){
+    return rows.reduce((sum,r)=> sum + subtotalOf(r), 0);
+  }
+
+  function renderTotals(){
+    const subtotal = computeSubtotal();
+    let html = '';
+    html += `<div class="totals-line"><span class="lbl">Subtotal</span><span>${fmt(subtotal)}</span></div>`;
+
+    if(invoiceType === 'domestic'){
+      const cgst = subtotal * 0.09;
+      const sgst = subtotal * 0.09;
+      const grand = subtotal + cgst + sgst;
+      html += `<div class="totals-line"><span class="lbl">CGST (9%)</span><span>${fmt(cgst)}</span></div>`;
+      html += `<div class="totals-line"><span class="lbl">SGST (9%)</span><span>${fmt(sgst)}</span></div>`;
+      html += `<div class="totals-line grand"><span class="lbl">Grand Total</span><span>${fmt(grand)}</span></div>`;
+    } else {
+      html += `<div class="totals-line"><span class="lbl">Tax</span><span>${fmt(0)}</span></div>`;
+      html += `<div class="totals-line grand"><span class="lbl">Grand Total</span><span>${fmt(subtotal)}</span></div>`;
+      html += `<div class="export-note">Export of services — zero-rated under LUT, no GST applicable.</div>`;
+    }
+    totalsBlock.innerHTML = html;
+  }
+
+  function applyType(){
+    if(invoiceType==='domestic'){
+      sheet.classList.add('domestic');
+      stamp.innerHTML = 'GST<br>Invoice';
+      ourTaxBlock.innerHTML = `
+        <div><span class="lbl">GSTIN:</span> <span contenteditable="true">08AAAAA0000A1Z5</span></div>
+        <div><span class="lbl">PAN:</span> <span contenteditable="true">AAAAA0000A</span></div>
+        <div><span class="lbl">Place of Supply:</span> <span contenteditable="true">Rajasthan (08)</span></div>
+      `;
+      clientTaxTag.textContent = 'GSTIN: —';
+    } else {
+      sheet.classList.remove('domestic');
+      stamp.innerHTML = 'Export<br>Invoice';
+      ourTaxBlock.innerHTML = `
+        <div><span class="lbl">IEC Code:</span> <span contenteditable="true">—</span></div>
+        <div><span class="lbl">SWIFT / BIC:</span> <span contenteditable="true">—</span></div>
+        <div><span class="lbl">IBAN / Acct No:</span> <span contenteditable="true">—</span></div>
+      `;
+      clientTaxTag.textContent = 'Tax ID: —';
+    }
+    renderTotals();
+  }
+
+  document.getElementById('typeToggle').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    document.querySelectorAll('#typeToggle button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    invoiceType = btn.dataset.type;
+    applyType();
+  });
+
+  document.getElementById('currencySelect').addEventListener('change', (e)=>{
+    currency = e.target.value;
+    renderRows();
+    renderTotals();
+  });
+
+  function addRow(){
+    rows.push({id: rowId++, desc:'New 3D CGI Deliverable', qty:1, price:0});
+    renderRows();
+    renderTotals();
+  }
+  document.getElementById('addRowBtnTop').addEventListener('click', addRow);
+  document.getElementById('addRowBtnBottom').addEventListener('click', addRow);
+  document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+
+  // default dates
+  const today = new Date();
+  const due = new Date(today.getTime() + 30*24*60*60*1000);
+  const opts = {year:'numeric', month:'long', day:'numeric'};
+  document.getElementById('dateField').textContent = today.toLocaleDateString('en-US', opts);
+  document.getElementById('dueField').textContent = due.toLocaleDateString('en-US', opts);
+
+  renderRows();
+  applyType();
+  </script>
+
+</body>
+</html>
