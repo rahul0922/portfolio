@@ -1705,11 +1705,37 @@
                         </div>
                         
                         <!-- FAQ SECTION (DARK) -->
-                        <div class="row faq_row" style="margin-top: 90px; margin-bottom: 60px;">
-                            <div class="col-lg-8 col-12 offset-lg-2">
-                                <div class="faq_section_container">
-                                    <div class="section-accent-line text-center" style="color: var(--accent); margin-bottom: 12px;">FAQ &amp; Engagement</div>
-                                    <h2 class="text-center" style="font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: uppercase; margin-bottom: 40px; letter-spacing: -1px; font-size: clamp(28px, 4vw, 44px); color: var(--cream);">
+                        <style>
+                            .why_item_card {
+                                border-bottom: 1px solid rgba(255,255,255,0.06);
+                                padding-bottom: 18px;
+                                transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s ease;
+                            }
+                            .why_item_card:last-child {
+                                border-bottom: none;
+                                padding-bottom: 0;
+                            }
+                            .why_item_card:hover {
+                                transform: translate3d(6px, 0, 0);
+                            }
+                            .why_item_card h3 span {
+                                transition: all 0.3s ease;
+                            }
+                            .why_item_card:hover h3 span {
+                                background: var(--accent) !important;
+                                border-color: var(--accent) !important;
+                                color: #111 !important;
+                                box-shadow: 0 0 12px var(--accent);
+                            }
+                            .why_studio_container:hover {
+                                border-color: rgba(255, 95, 64, 0.25) !important;
+                            }
+                        </style>
+                        <div class="row faq_row" style="margin-top: 90px; margin-bottom: 60px; display: flex; flex-wrap: wrap;">
+                            <div class="col-lg-6 col-12" style="margin-bottom: 30px;">
+                                <div class="faq_section_container" style="height: 100%; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.08); padding: 40px; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+                                    <div class="section-accent-line text-left" style="color: var(--accent); margin-bottom: 12px;">FAQ &amp; Engagement</div>
+                                    <h2 style="font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: uppercase; margin-bottom: 40px; letter-spacing: -1px; font-size: clamp(28px, 3.5vw, 36px); color: var(--cream); text-align: left; line-height: 1.1;">
                                         Frequently Asked Questions
                                     </h2>
                                     <div class="faq_accordion">
@@ -1762,6 +1788,58 @@
                                             <div class="faq_content">
                                                 <p>We host drafts on interactive frame-accurate review pages (like Frame.io). You can click anywhere on the video timeline to leave comments or annotate adjustments, making remote collaboration seamless across timezones.</p>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Why RahulFX3D (Right) -->
+                            <div class="col-lg-6 col-12" style="margin-bottom: 30px;">
+                                <div class="faq_section_container why_studio_container" style="height: 100%; display: flex; flex-direction: column; justify-content: flex-start; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.08); padding: 40px; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.3); transition: border-color 0.4s ease;">
+                                    <div class="section-accent-line text-left" style="color: var(--accent); margin-bottom: 12px; font-family: var(--hud-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;">The Studio Difference</div>
+                                    <h2 style="font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: uppercase; margin-bottom: 35px; letter-spacing: -1px; font-size: clamp(24px, 3.5vw, 36px); color: var(--cream); text-align: left; line-height: 1.1;">
+                                        Why RahulFX3D instead of another studio?
+                                    </h2>
+                                    
+                                    <div class="why_grid" style="display: grid; gap: 20px;">
+                                        <!-- Item 1 -->
+                                        <div class="why_item_card">
+                                            <h3 style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: var(--cream); margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(255, 95, 64, 0.1); border: 1px solid rgba(255, 95, 64, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">01</span>
+                                                Direct Director Collaboration
+                                            </h3>
+                                            <p style="font-size: 14px; color: var(--cream-mute); margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                Bypassing account managers and middlemen. You work directly with founder &amp; 3D director Rahul Meena for immediate creative agility and zero communication delays.
+                                            </p>
+                                        </div>
+                                        <!-- Item 2 -->
+                                        <div class="why_item_card">
+                                            <h3 style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: var(--cream); margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(255, 95, 64, 0.1); border: 1px solid rgba(255, 95, 64, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">02</span>
+                                                Cinematic Standards (No Templates)
+                                            </h3>
+                                            <p style="font-size: 14px; color: var(--cream-mute); margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                No generic stock mockups. We simulate realistic liquid dynamics, cloth wrapping, and glass refractions tailored to your product using custom lighting rigs.
+                                            </p>
+                                        </div>
+                                        <!-- Item 3 -->
+                                        <div class="why_item_card">
+                                            <h3 style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: var(--cream); margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(255, 95, 64, 0.1); border: 1px solid rgba(255, 95, 64, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">03</span>
+                                                Engineered for Conversions
+                                            </h3>
+                                            <p style="font-size: 14px; color: var(--cream-mute); margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                Visuals are built around consumer psychology and product benefits—directly driving social ad CTRs and landing page conversion rates.
+                                            </p>
+                                        </div>
+                                        <!-- Item 4 -->
+                                        <div class="why_item_card">
+                                            <h3 style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: var(--cream); margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(255, 95, 64, 0.1); border: 1px solid rgba(255, 95, 64, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">04</span>
+                                                STEP/CAD Production Ingestion
+                                            </h3>
+                                            <p style="font-size: 14px; color: var(--cream-mute); margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                We ingest raw manufacturing STEP/IGES design blueprints directly, translating industrial data into polished cinematic renders with 100% precision.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -2034,18 +2112,44 @@
                             </form>
                         </div>
                     </div>
-                        <!-- FAQ SECTION -->
-                        <div class="row faq_row" style="margin-top: 90px; margin-bottom: 60px;">
-                            <div class="col-lg-8 col-12 offset-lg-2">
-                                <div class="faq_section_container faq_section_container__red" style="background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.06);">
-                                    <div class="section-accent-line text-center" style="color: var(--accent); margin-bottom: 12px;">FAQ &amp; Engagement</div>
-                                    <h2 class="text-center text-dark" style="font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: uppercase; margin-bottom: 40px; letter-spacing: -1px; font-size: clamp(28px, 4vw, 44px);">
+                        <!-- FAQ SECTION (RED) -->
+                        <style>
+                            .why_item_card_red {
+                                border-bottom: 1px solid rgba(0,0,0,0.06);
+                                padding-bottom: 18px;
+                                transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s ease;
+                            }
+                            .why_item_card_red:last-child {
+                                border-bottom: none;
+                                padding-bottom: 0;
+                            }
+                            .why_item_card_red:hover {
+                                transform: translate3d(6px, 0, 0);
+                            }
+                            .why_item_card_red h3 span {
+                                transition: all 0.3s ease;
+                            }
+                            .why_item_card_red:hover h3 span {
+                                background: var(--accent) !important;
+                                border-color: var(--accent) !important;
+                                color: #fff !important;
+                                box-shadow: 0 0 12px var(--accent);
+                            }
+                            .why_studio_container_red:hover {
+                                border-color: rgba(235, 89, 57, 0.25) !important;
+                            }
+                        </style>
+                        <div class="row faq_row" style="margin-top: 90px; margin-bottom: 60px; display: flex; flex-wrap: wrap;">
+                            <div class="col-lg-6 col-12" style="margin-bottom: 30px;">
+                                <div class="faq_section_container faq_section_container__red" style="height: 100%; background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.08); padding: 40px; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.05);">
+                                    <div class="section-accent-line text-left" style="color: var(--accent); margin-bottom: 12px;">FAQ &amp; Engagement</div>
+                                    <h2 class="text-dark" style="font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: uppercase; margin-bottom: 40px; letter-spacing: -1px; font-size: clamp(28px, 3.5vw, 36px); text-align: left; line-height: 1.1;">
                                         Frequently Asked Questions
                                     </h2>
                                     <div class="faq_accordion">
                                         <!-- Question 1 -->
                                         <div class="faq_item">
-                                            <button class="faq_trigger" aria-expanded="false">
+                                            <button class="faq_trigger text-dark" aria-expanded="false">
                                                 <span>Do you sign NDAs before receiving product designs?</span>
                                                 <span class="faq_icon"></span>
                                             </button>
@@ -2055,7 +2159,7 @@
                                         </div>
                                         <!-- Question 2 -->
                                         <div class="faq_item">
-                                            <button class="faq_trigger" aria-expanded="false">
+                                            <button class="faq_trigger text-dark" aria-expanded="false">
                                                 <span>Who owns the final intellectual property (IP) of the renders?</span>
                                                 <span class="faq_icon"></span>
                                             </button>
@@ -2065,7 +2169,7 @@
                                         </div>
                                         <!-- Question 3 -->
                                         <div class="faq_item">
-                                            <button class="faq_trigger" aria-expanded="false">
+                                            <button class="faq_trigger text-dark" aria-expanded="false">
                                                 <span>What 3D formats do you accept for product models?</span>
                                                 <span class="faq_icon"></span>
                                             </button>
@@ -2075,7 +2179,7 @@
                                         </div>
                                         <!-- Question 4 -->
                                         <div class="faq_item">
-                                            <button class="faq_trigger" aria-expanded="false">
+                                            <button class="faq_trigger text-dark" aria-expanded="false">
                                                 <span>What is your project payment structure?</span>
                                                 <span class="faq_icon"></span>
                                             </button>
@@ -2085,13 +2189,65 @@
                                         </div>
                                         <!-- Question 5 -->
                                         <div class="faq_item">
-                                            <button class="faq_trigger" aria-expanded="false">
+                                            <button class="faq_trigger text-dark" aria-expanded="false">
                                                 <span>How do we collaborate and review drafts?</span>
                                                 <span class="faq_icon"></span>
                                             </button>
                                             <div class="faq_content">
                                                 <p>We host drafts on interactive frame-accurate review pages (like Frame.io). You can click anywhere on the video timeline to leave comments or annotate adjustments, making remote collaboration seamless across timezones.</p>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Why RahulFX3D (Right) -->
+                            <div class="col-lg-6 col-12" style="margin-bottom: 30px;">
+                                <div class="faq_section_container faq_section_container__red why_studio_container_red" style="height: 100%; display: flex; flex-direction: column; justify-content: flex-start; background: rgba(0, 0, 0, 0.02); border: 1px solid rgba(0, 0, 0, 0.08); padding: 40px; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.05); transition: border-color 0.4s ease;">
+                                    <div class="section-accent-line text-left" style="color: var(--accent); margin-bottom: 12px; font-family: var(--hud-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;">The Studio Difference</div>
+                                    <h2 class="text-dark" style="font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: uppercase; margin-bottom: 35px; letter-spacing: -1px; font-size: clamp(24px, 3.5vw, 36px); text-align: left; line-height: 1.1;">
+                                        Why RahulFX3D instead of another studio?
+                                    </h2>
+                                    
+                                    <div class="why_grid" style="display: grid; gap: 20px;">
+                                        <!-- Item 1 -->
+                                        <div class="why_item_card_red">
+                                            <h3 class="text-dark" style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(235, 89, 57, 0.08); border: 1px solid rgba(235, 89, 57, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">01</span>
+                                                Direct Director Collaboration
+                                            </h3>
+                                            <p style="font-size: 14px; color: #555; margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                Bypassing account managers and middlemen. You work directly with founder &amp; 3D director Rahul Meena for immediate creative agility and zero communication delays.
+                                            </p>
+                                        </div>
+                                        <!-- Item 2 -->
+                                        <div class="why_item_card_red">
+                                            <h3 class="text-dark" style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(235, 89, 57, 0.08); border: 1px solid rgba(235, 89, 57, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">02</span>
+                                                Cinematic Standards (No Templates)
+                                            </h3>
+                                            <p style="font-size: 14px; color: #555; margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                No generic stock mockups. We simulate realistic liquid dynamics, cloth wrapping, and glass refractions tailored to your product using custom lighting rigs.
+                                            </p>
+                                        </div>
+                                        <!-- Item 3 -->
+                                        <div class="why_item_card_red">
+                                            <h3 class="text-dark" style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(235, 89, 57, 0.08); border: 1px solid rgba(235, 89, 57, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">03</span>
+                                                Engineered for Conversions
+                                            </h3>
+                                            <p style="font-size: 14px; color: #555; margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                Visuals are built around consumer psychology and product benefits—directly driving social ad CTRs and landing page conversion rates.
+                                            </p>
+                                        </div>
+                                        <!-- Item 4 -->
+                                        <div class="why_item_card_red">
+                                            <h3 class="text-dark" style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; margin: 0 0 8px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: -0.5px;">
+                                                <span style="background: rgba(235, 89, 57, 0.08); border: 1px solid rgba(235, 89, 57, 0.25); color: var(--accent); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-family: var(--hud-mono); font-weight: bold; min-width: 32px; text-align: center;">04</span>
+                                                STEP/CAD Production Ingestion
+                                            </h3>
+                                            <p style="font-size: 14px; color: #555; margin: 0; line-height: 1.6; font-weight: 300; padding-left: 44px;">
+                                                We ingest raw manufacturing STEP/IGES design blueprints directly, translating industrial data into polished cinematic renders with 100% precision.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
