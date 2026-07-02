@@ -1911,7 +1911,6 @@
 
         /* PRINT / EXPORT PDF */
         @media print {
-
             *,
             *::before,
             *::after {
@@ -1920,23 +1919,25 @@
             }
 
             :root {
-                --ink: #0d0d0d;
-                --dim: #555;
-                --bg: #fff;
-                --surf: #f8f8f6;
-                --raise: #f0ede8;
-                --line: #ddd;
-                --gold: #b8922e
+                --cream: #EFE8D8;
+                --paper: #F7F2E7;
+                --ink: #211D18;
+                --red: #C22032;
+                --line: #B9AF98;
+                --line-soft: #D8D0BC;
+                --muted: #75705F;
             }
 
             html {
                 color-scheme: light;
-                font-size: 14px
+                font-size: 13px;
+                background: #fff !important;
             }
 
             body {
-                background: #fff;
-                color: #0d0d0d
+                background: #fff !important;
+                color: #211D18 !important;
+                font-family: 'Courier New', Courier, monospace !important;
             }
 
             /* Hide UI elements */
@@ -1950,124 +1951,174 @@
             .role-badge,
             .theme-toggle,
             .portal-content:not(.unlocked),
-            .hero,
-            .sig-sec,
-            .psec,
-            .badge {
-                display: none !important
+            .hero-note,
+            .badge,
+            #embers-bg,
+            .ca,
+            .theme-toggle {
+                display: none !important;
             }
 
             /* Show only the active panel */
             .portal-content {
-                display: block !important
+                display: block !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
 
             .panel {
                 display: none !important;
-                padding-top: 0 !important;
-                min-height: auto !important
+                padding: 0 !important;
+                min-height: auto !important;
             }
 
             .panel.active {
-                display: block !important
+                display: block !important;
+                border: 3px double #211D18 !important;
+                background: #F7F2E7 !important; /* Clean paper background */
+                padding: 30px !important;
+                font-family: 'Courier New', Courier, monospace !important;
+                color: #211D18 !important;
+                box-shadow: none !important;
             }
 
             .wrap {
-                padding: 0;
-                max-width: 100%
+                padding: 0 !important;
+                max-width: 100% !important;
+                border: none !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+
+            /* Typography */
+            h1, h2, h3, h4, .hero h1 {
+                font-family: 'Courier New', Courier, monospace !important;
+                text-transform: uppercase !important;
+                color: #C22032 !important;
+                font-weight: bold !important;
+                margin-top: 10px !important;
+                margin-bottom: 10px !important;
             }
 
             /* Expand all contract clauses */
             .cb,
             .cb2 {
                 max-height: none !important;
-                padding-bottom: 14px !important;
-                overflow: visible !important
-            }
-
-            .ca {
-                display: none !important
+                padding-bottom: 12px !important;
+                overflow: visible !important;
+                color: #211D18 !important;
+                font-size: 11px !important;
+                line-height: 1.6 !important;
             }
 
             /* Clean up form fields for print */
             .g2 {
-                background: none;
-                border: 1px solid #ddd
+                background: none !important;
+                border: 1px solid #211D18 !important;
+                margin-bottom: 20px !important;
             }
 
             .f {
-                border-bottom: 1px solid #eee
+                border-bottom: 1px solid #211D18 !important;
+                padding: 10px 15px !important;
+            }
+
+            .f label {
+                color: #75705F !important;
+                font-weight: bold !important;
+                font-size: 10px !important;
             }
 
             .f input,
-            .f select {
-                border: none;
-                border-bottom: 1px solid #ccc;
-                font-size: .9rem
+            .f select,
+            .f textarea {
+                border: none !important;
+                border-bottom: 1px dashed #211D18 !important;
+                background: transparent !important;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 12px !important;
+                color: #211D18 !important;
+                padding: 2px 0 !important;
+                width: 100% !important;
             }
 
-            /* Invoice table */
-            table.it {
-                font-size: .85rem
+            /* Tables styling */
+            table, tr, td, th, table.it {
+                border: 1px solid #211D18 !important;
+                border-collapse: collapse !important;
+                font-family: 'Courier New', Courier, monospace !important;
+                color: #211D18 !important;
+                font-size: 11px !important;
+            }
+
+            th {
+                background: rgba(33, 29, 24, 0.05) !important;
+                padding: 8px 5px !important;
+                font-weight: bold !important;
+            }
+
+            td {
+                padding: 8px 5px !important;
             }
 
             .ni {
-                border: none;
-                border-bottom: 1px solid #ccc
+                border: none !important;
+                border-bottom: 1px dashed #211D18 !important;
             }
 
             /* Progress - expand all phases */
             .pht {
                 max-height: none !important;
-                overflow: visible !important
+                overflow: visible !important;
             }
 
             .pha {
-                display: none !important
+                display: none !important;
             }
 
             .ck {
-                border: 1.5px solid #999
+                border: 1.5px solid #211D18 !important;
             }
 
             .ck:checked {
-                background: var(--gold);
-                border-color: var(--gold)
+                background: #C22032 !important;
+                border-color: #C22032 !important;
             }
 
             /* Page settings */
             @page {
                 size: A4;
-                margin: 20mm 15mm 25mm 15mm;
+                margin: 15mm 15mm 15mm 15mm;
             }
 
             /* Printed header */
             .panel.active::before {
-                content: 'RahulFX3D Studio';
+                content: 'RAHULFX3D STUDIO  ::  CLIENT WORKSPACE  ::  CONFIDENTIAL';
                 display: block;
-                font-family: 'Nunito Sans', sans-serif;
-                font-size: 18pt;
-                font-weight: 800;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 9pt !important;
+                font-weight: bold !important;
                 letter-spacing: .08em;
                 text-transform: uppercase;
-                margin-bottom: 4px;
-                padding-bottom: 12px;
-                border-bottom: 2px solid var(--gold);
-                color: #0d0d0d;
+                margin-bottom: 20px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid #211D18 !important;
+                color: #211D18 !important;
             }
 
             /* Printed footer */
             .panel.active::after {
-                content: 'RahulFX3D Studio  ·  rahul@rahulfx3d.studio  ·  rahulfx3d.studio  ·  Confidential';
+                content: 'RAHULFX3D.STUDIO  ·  RAHUL@RAHULFX3D.STUDIO  ·  PRODUCTION AGREEMENT';
                 display: block;
                 text-align: center;
-                font-size: 8pt;
-                color: #999;
-                margin-top: 40px;
-                padding-top: 14px;
-                border-top: 1px solid #ddd;
-                font-family: 'DM Mono', monospace;
+                font-size: 8pt !important;
+                color: #75705F !important;
+                margin-top: 30px;
+                padding-top: 10px;
+                border-top: 1px solid #B9AF98 !important;
+                font-family: 'Courier New', Courier, monospace !important;
                 letter-spacing: .08em;
+                text-transform: uppercase;
             }
 
             /* Avoid page breaks in bad places */
@@ -2076,7 +2127,7 @@
             .tots,
             .brow,
             .g2 {
-                page-break-inside: avoid
+                page-break-inside: avoid !important;
             }
         }
 
@@ -2692,6 +2743,7 @@
             <div class="tabs">
                 <button class="tab active" onclick="go('contract',this)">📜 Contract</button>
                 <button class="tab" onclick="go('invoice',this)">🪙 Invoice</button>
+                <button class="tab" onclick="go('onboarding',this)">🚀 Onboarding</button>
                 <button class="tab" onclick="go('checklist',this)">🧭 Progress</button>
             </div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"
@@ -2873,6 +2925,76 @@
                     <div class="badge" id="sig-done">✓ &nbsp;Contract signed on <span id="sig-date"></span>. Both
                         parties
                         have agreed to the terms above.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONBOARDING -->
+        <div id="panel-onboarding" class="panel">
+            <div class="wrap er-border">
+                <div class="hero">
+                    <div class="eyebrow">Client Kickoff &amp; CGI Guidelines</div>
+                    <h1>Studio<br><em>Onboarding</em></h1>
+                    <p class="hero-note">Welcome to the workspace. Below is your onboarding blueprint and asset requirements checklist. Please review these details and download/print this sheet for reference.</p>
+                </div>
+
+                <div class="divider">CGI Production Pipeline <span>01</span></div>
+                <div class="offering-desc" style="font-family: inherit; font-size: 13px; line-height: 1.8; margin-bottom: 25px;">
+                    Our production follows a structured 5-stage pipeline to ensure maximum visual fidelity and smooth feedback loops.
+                </div>
+                
+                <table class="it" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--line);">
+                            <th style="text-align: left; padding: 10px 5px; font-size: 11px;">Phase</th>
+                            <th style="text-align: left; padding: 10px 5px; font-size: 11px;">Focus</th>
+                            <th style="text-align: left; padding: 10px 5px; font-size: 11px;">Client Action / Deliverable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--line);">
+                            <td style="padding: 12px 5px; font-weight: bold;">01. Concept &amp; Briefing</td>
+                            <td style="padding: 12px 5px;">Moodboards, storyboard block-outs, camera angles.</td>
+                            <td style="padding: 12px 5px;">Review moodboard &amp; approve creative direction.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--line);">
+                            <td style="padding: 12px 5px; font-weight: bold;">02. 3D Asset Prep</td>
+                            <td style="padding: 12px 5px;">Modeling products, package labels, texture mapping.</td>
+                            <td style="padding: 12px 5px;">Supply 3D STEP/OBJ models &amp; high-res label files.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--line);">
+                            <td style="padding: 12px 5px; font-weight: bold;">03. Lighting &amp; FX</td>
+                            <td style="padding: 12px 5px;">Liquid physics simulation, lighting setups, scene details.</td>
+                            <td style="padding: 12px 5px;">Review clay/gray-shaded draft renders.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--line);">
+                            <td style="padding: 12px 5px; font-weight: bold;">04. Draft Reviews</td>
+                            <td style="padding: 12px 5px;">Color-graded animatics, texture iterations.</td>
+                            <td style="padding: 12px 5px;">Provide timestamped change logs in review portal.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--line);">
+                            <td style="padding: 12px 5px; font-weight: bold;">05. Master Delivery</td>
+                            <td style="padding: 12px 5px;">Final rendering farm output, color grading, clean masters.</td>
+                            <td style="padding: 12px 5px;">Receive download link upon final invoice clearance.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="divider">Required Brand Assets <span>02</span></div>
+                <div class="g2" style="margin-bottom: 30px;">
+                    <div class="f"><label>3D Models</label><div class="val" style="padding: 8px 0; font-size: 13px;">CAD models in STEP, IGES, OBJ, or FBX format. If models are unavailable, we can model from physical dimensions.</div></div>
+                    <div class="f"><label>Graphics &amp; Labels</label><div class="val" style="padding: 8px 0; font-size: 13px;">High-resolution vector files (AI, EPS, or print-ready PDF) of packaging flat graphics, logos, and typographies.</div></div>
+                    <div class="f"><label>Brand Styleguide</label><div class="val" style="padding: 8px 0; font-size: 13px;">Color hex codes, fonts, references, or existing product photography to ensure realistic lighting matches.</div></div>
+                </div>
+
+                <div class="divider">Master Delivery Formats <span>03</span></div>
+                <div class="g2" style="margin-bottom: 40px;">
+                    <div class="f"><label>Animations</label><div class="val" style="padding: 8px 0; font-size: 13px;">Apple ProRes 422 HQ or H.264 (MP4) in 4K resolution, matched to specified distribution aspect ratios (e.g. 9:16 vertical &amp; 16:9 widescreen).</div></div>
+                    <div class="f"><label>Still Renders</label><div class="val" style="padding: 8px 0; font-size: 13px;">Lossless 16-bit PNG or EXR files in ACEScg or sRGB color space, optimized for print and e-commerce web channels.</div></div>
+                </div>
+
+                <div class="ar">
+                    <button class="btn bg" onclick="window.print()">↓ Export Onboarding Guide (PDF)</button>
                 </div>
             </div>
         </div>
