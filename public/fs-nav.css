@@ -482,3 +482,83 @@
     .fs-nav-overlay .fs-nav-item a { font-size: 2.3rem; }
     .fs-nav-footer { flex-direction: column; gap: 20px; align-items: flex-start; bottom: 30px; }
 }
+
+/* ==========================================================================
+   6. Project Switcher (Prev/Next Case Studies)
+   ========================================================================== */
+.project-switcher-section {
+    max-width: 1200px;
+    margin: 80px auto 40px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 10;
+}
+.switcher-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 0;
+    gap: 20px;
+}
+.switcher-btn {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.prev-project {
+    text-align: left;
+    align-items: flex-start;
+}
+.next-project {
+    text-align: right;
+    align-items: flex-end;
+}
+.switcher-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.switcher-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(16px, 2.5vw, 24px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--cream);
+    transition: color 0.3s ease;
+}
+.switcher-btn:hover {
+    transform: translateY(-3px);
+}
+.switcher-btn:hover .switcher-title {
+    color: var(--accent);
+}
+.switcher-divider {
+    width: 1px;
+    height: 60px;
+    background: var(--border);
+}
+@media (max-width: 768px) {
+    .switcher-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 30px;
+        padding: 30px 0;
+    }
+    .switcher-btn {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+    .switcher-divider {
+        width: 100%;
+        height: 1px;
+        background: var(--border);
+    }
+}
