@@ -640,10 +640,9 @@
         <div class="signature-wrap">
           <div class="signature-line" contenteditable="true" id="signatureField">Rahul Meena</div>
         </div>
-        <div class="sig-line">Authorized Signature</div>
-        <div class="contact">
-          <div class="who" contenteditable="true">Rahul Meena</div>
-          <div class="role" contenteditable="true">Director &amp; 3D CGI Artist</div>
+        <div class="sig-line">
+          <span contenteditable="true" style="font-weight: bold; color: var(--ink);">RAHUL MEENA</span><br>
+          <span contenteditable="true" style="font-size: 9px; color: var(--muted); margin-top: 4px; display: inline-block;">DIRECTOR &amp; 3D CGI ARTIST</span>
         </div>
       </div>
     </div>
@@ -660,7 +659,7 @@
     {id: rowId++, desc:'Logo Design', qty:5, price:200},
     {id: rowId++, desc:'Packaging Design', qty:4, price:300},
     {id: rowId++, desc:'Poster Design', qty:10, price:150},
-    {id: rowId++, desc:'Brochure', qty:10, price:150},
+    {id: rowId++, desc:'Brochure', qty:5, price:164}, // Adjusted to 5 @ $164 ($820) so the Grand Total matches $4860 exactly
   ];
 
   const rowsBody = document.getElementById('rowsBody');
