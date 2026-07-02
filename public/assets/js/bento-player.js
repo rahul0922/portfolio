@@ -62,10 +62,23 @@
                 if (infoCaseStudy) {
                     const teaser = item.getAttribute('data-teaser') || '—';
                     const slug = item.getAttribute('data-slug') || 'aurelius-fragrance';
+                    const quote = item.getAttribute('data-testimonial-quote') || '';
+                    const author = item.getAttribute('data-testimonial-author') || '';
+                    
+                    let testimonialHtml = '';
+                    if (quote && author) {
+                        testimonialHtml = `
+                        <!-- Client Testimonial Card -->
+                        <div class="client-testimonial-bento" style="margin: 25px 0; padding: 18px 24px; background: rgba(255, 255, 255, 0.015); border-left: 2px solid var(--accent); border-radius: 0 8px 8px 0; border-top: 1px solid rgba(255, 255, 255, 0.03); border-right: 1px solid rgba(255, 255, 255, 0.03); border-bottom: 1px solid rgba(255, 255, 255, 0.03); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+                            <p class="testimonial-quote" style="font-family: 'Outfit', sans-serif; font-style: italic; font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.8); margin: 0 0 10px 0;">"${quote}"</p>
+                            <span class="testimonial-author" style="font-family: var(--mono); font-size: 9px; text-transform: uppercase; color: var(--accent); letter-spacing: 1.5px; display: block; font-weight: 600;">— ${author}</span>
+                        </div>`;
+                    }
                     
                     let htmlContent = `<div class="teaser-wrapper">
                         <span class="teaser-label" style="font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 12px;">The Creative Challenge</span>
-                        <p class="teaser-text" style="font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 500; line-height: 1.5; color: #fff; margin: 0 0 24px 0;">${teaser}</p>
+                        <p class="teaser-text" style="font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 500; line-height: 1.5; color: #fff; margin: 0 0 20px 0;">${teaser}</p>
+                        ${testimonialHtml}
                         <a href="work/${slug}.html" class="btn-teaser-case-study js-cursor-contract" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--hud-mono, monospace); font-size: 0.85rem; letter-spacing: 0.1em; color: #eb5939; text-decoration: none; font-weight: 700; transition: gap 0.3s ease;">
                             EXPLORE FULL CASE STUDY <span style="font-size: 1.1rem; line-height: 1;">&rarr;</span>
                         </a>
