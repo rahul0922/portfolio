@@ -1,500 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurelius Fragrance | 3D Product Animation Case Study - RahulFX3D Studio</title>
-    <meta name="description" content="Read the case study on Aurelius Fragrance 3D animation by RahulFX3D Studio. Cinematic liquid and particle simulations achieving a 4.2% click-through rate.">
-    <meta name="keywords" content="Aurelius Fragrance, 3D animation, liquid simulation, product visualization, CGI, RahulFX3D, case study">
-    <meta property="og:title" content="Aurelius Fragrance | 3D Product Animation Case Study - RahulFX3D Studio">
-    <meta property="og:description" content="Cinematic liquid and particle simulations for Aurelius, doubling the industry average with a 4.2% CTR.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rahulfx3d.studio/work/aurelius-fragrance.html">
-    <link rel="icon" type="image/svg+xml" href="../assets/icons/logo.svg">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <title>newaar Skincare — RahulFX3D Studio</title>
+    <meta name="description" content="Cinematic 3D product animation showcasing the organic ingredients and luxurious texture of newaar Matcha Clay Mask.">
     
-    <!-- External Google Fonts -->
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="newaar Skincare — RahulFX3D Studio">
+    <meta property="og:description" content="Cinematic 3D product animation showcasing the organic ingredients and luxurious texture of newaar Matcha Clay Mask.">
+    <meta property="og:url" content="https://rahulfx3d.studio/work/newaar-skincare.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../app.css">
+    <link rel="stylesheet" href="../fs-nav.css">
+    
+    <!-- Outfit Font Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Outfit:wght@200;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../saas-styles.css">
-    <link rel="stylesheet" href="../fs-nav.css">
-
     <style>
-        @font-face {
-            font-family: 'Avant Garde';
-            font-style: normal;
-            font-weight: 700;
-            src: url('../assets/fonts/4dd591d8-4168-4263-b05b-7183ddaff1f4.woff2') format('woff2');
-        }
-
         :root {
-            --ink: #080809;
-            --cream: #ebdcb9;
-            --cream-mute: rgba(235, 220, 185, 0.42);
-            --accent: #eb5939;
-            --border: rgba(255, 255, 255, 0.08);
-            --mono: 'Courier New', Courier, monospace;
+            --bg-color: #0b0c10;
+            --accent: #ff5f40;
+            --cream: #f4ebd0;
+            --cream-mute: rgba(244, 235, 208, 0.6);
+            --border: rgba(244, 235, 208, 0.1);
+            --hud-mono: 'Space Mono', monospace;
         }
-
         body {
-            background-color: var(--ink);
+            background-color: var(--bg-color);
             color: var(--cream);
-            font-family: 'Nunito Sans', sans-serif;
-            min-height: 100vh;
+            font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
-            position: relative;
-            padding-top: 100px;
+            margin: 0;
+            padding: 0;
         }
-
-        /* 3D background glow orbs */
+        /* Glow Orbs & Film Grain */
         .bg-glow-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
             pointer-events: none;
-            z-index: 0;
             overflow: hidden;
         }
         .glow-orb {
             position: absolute;
-            width: 600px; height: 600px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(235, 89, 57, 0.05) 0%, rgba(235, 89, 57, 0) 70%);
-            filter: blur(80px);
+            filter: blur(140px);
+            opacity: 0.15;
         }
-        .orb-1 { top: -200px; left: -100px; }
-        .orb-2 { bottom: -200px; right: -100px; }
-
+        .orb-1 {
+            top: -20%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        }
+        .orb-2 {
+            bottom: -10%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, #3a506b 0%, transparent 70%);
+        }
         .grain-overlay {
             position: fixed;
-            inset: 0;
-            width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.0225'/%3E%3C/svg%3E");
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
             pointer-events: none;
-            z-index: 100;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.0225; /* 25% reduced grain */
         }
-
+        /* Case Study Layout */
         .case-study-hero {
+            padding: 140px 20px 40px;
             position: relative;
             z-index: 10;
-            max-width: 1200px;
-            margin: 40px auto 80px;
-            padding: 0 24px;
-            text-align: center;
         }
-
-        .eyebrow {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-family: 'Outfit', 'Avant Garde', sans-serif;
-            font-size: clamp(36px, 6vw, 76px);
+        .case-study-hero h1 {
+            font-size: clamp(32px, 5vw, 64px);
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -1px;
+            margin-top: 10px;
+            color: var(--cream);
+        }
+        .eyebrow {
+            font-family: var(--hud-mono);
+            font-size: 11px;
+            color: var(--accent);
             text-transform: uppercase;
-            line-height: 1.0;
-            margin-bottom: 40px;
+            letter-spacing: 3px;
         }
-
-        .video-wrapper {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            aspect-ratio: 9/16;
-            max-width: 450px;
-            margin: 0 auto;
-            box-shadow: 0 20px 80px rgba(0,0,0,0.6);
-            background: #000;
-            width: 100%;
-        }
-
-        .video-wrapper video {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Split Layout Design */
         .case-study-split-layout {
             display: flex;
-            flex-direction: column;
-            gap: 40px;
             max-width: 1200px;
-            margin: 0 auto 80px;
-            padding: 0 24px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
+            gap: 60px;
             position: relative;
             z-index: 10;
         }
         .case-study-video-col {
+            flex: 1.1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .video-wrapper {
             width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: #111;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .case-study-info-col {
-            width: 100%;
+            flex: 0.9;
         }
-
-        @media (min-width: 992px) {
-            .case-study-split-layout {
-                flex-direction: row;
-                align-items: start;
-                gap: 50px;
-            }
-            .case-study-video-col {
-                width: 450px;
-                flex-shrink: 0;
-            }
-            .case-study-info-col {
-                flex-grow: 1;
-            }
-            .video-wrapper {
-                position: sticky;
-                top: 120px;
-            }
-        }
-
-        /* Bento Grid Case Study Info */
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            position: relative;
-            z-index: 10;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
-
         .bento-card {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(244, 235, 208, 0.02);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: clamp(20px, 3vw, 30px);
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
         }
-
         .col-span-2 {
             grid-column: span 2;
         }
-
-        .col-span-3 {
-            grid-column: span 3;
-        }
-
         .card-title {
-            font-family: var(--mono);
+            font-family: var(--hud-mono);
             font-size: 10px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
+            letter-spacing: 2px;
             color: var(--accent);
+            text-transform: uppercase;
             margin-bottom: 20px;
-            font-weight: 600;
+            display: block;
         }
-
-        /* Stats List */
+        /* Spec Sheet Meta List */
         .meta-list {
             list-style: none;
+            padding: 0;
+            margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 15px;
         }
         .meta-item {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(244, 235, 208, 0.05);
             padding-bottom: 8px;
+            font-size: 14px;
+        }
+        .meta-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
         }
         .meta-label {
-            font-family: var(--mono);
-            font-size: 10px;
-            text-transform: uppercase;
             color: var(--cream-mute);
+            font-family: var(--hud-mono);
+            font-size: 11px;
+            text-transform: uppercase;
         }
         .meta-val {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        /* Narrative Text */
-        .narrative {
-            font-size: 15px;
-            line-height: 1.8;
-            font-weight: 300;
-            color: var(--cream-mute);
-        }
-        .narrative p {
-            margin-bottom: 20px;
-        }
-        .narrative p:last-child {
-            margin-bottom: 0;
-        }
-        .narrative strong {
+            font-weight: 500;
             color: var(--cream);
-            font-weight: 600;
         }
-
-        /* ROI Metric */
+        /* ROI block */
         .roi-block {
-            align-items: center;
-            justify-content: center;
             text-align: center;
+            align-items: center;
         }
         .roi-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(48px, 6vw, 84px);
+            font-size: clamp(36px, 4vw, 54px);
             font-weight: 700;
             color: var(--cream);
             line-height: 1;
             margin-bottom: 10px;
         }
         .roi-label {
-            font-family: var(--mono);
-            font-size: 9px;
-            letter-spacing: 0.12em;
+            font-size: 11px;
+            color: var(--cream-mute);
             text-transform: uppercase;
-            color: var(--accent);
+            letter-spacing: 1px;
             line-height: 1.4;
         }
-
-        /* Quote block */
+        /* Testimonial & Narrative */
         .quote-text {
-            font-size: 16px;
+            font-size: clamp(16px, 2vw, 20px);
+            line-height: 1.5;
             font-style: italic;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            margin: 0 0 15px 0;
             color: var(--cream);
+            font-weight: 400;
         }
         .quote-author {
-            font-family: var(--mono);
-            font-size: 8px;
-            letter-spacing: 0.15em;
+            font-family: var(--hud-mono);
+            font-size: 10px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--accent);
         }
-
+        .narrative p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--cream-mute);
+            margin: 0 0 15px 0;
+        }
+        .narrative p strong {
+            color: var(--cream);
+            font-family: var(--hud-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .narrative p:last-child {
+            margin-bottom: 0;
+        }
         /* Back Button */
         .back-btn-container {
-            max-width: 1200px;
-            margin: 0 auto 30px;
-            padding: 0 24px;
             position: relative;
             z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 40px 0;
         }
         .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.1em;
+            font-family: var(--hud-mono);
+            font-size: 11px;
             text-transform: uppercase;
             color: var(--cream-mute);
             text-decoration: none;
-            transition: color 0.3s ease;
+            letter-spacing: 2px;
+            transition: color 0.3s;
         }
         .back-btn:hover {
             color: var(--accent);
         }
-
-        /* Redesigned Premium CTA Button */
-        .btn-aesthetic-cta {
-            display: inline-flex;
+        /* Fixed Side Nav Arrows */
+        .side-nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px 36px;
-            font-size: 0.9rem;
-            background: linear-gradient(135deg, #eb5939 0%, #ff7b5a 100%);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50px;
-            color: #fff;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
+            background: rgba(244, 235, 208, 0.01);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            color: var(--cream-mute);
             text-decoration: none;
-            box-shadow: 0 8px 30px rgba(235, 89, 57, 0.3);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            z-index: 100;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .btn-aesthetic-cta::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #ff7b5a 0%, #eb5939 100%);
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.4s ease;
-        }
-        .btn-aesthetic-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(235, 89, 57, 0.5);
-            border-color: rgba(255,255,255,0.25);
-        }
-        .btn-aesthetic-cta:hover::after {
-            opacity: 1;
-        }
-
-        /* CTA section */
-        .cta-section {
-            text-align: center;
-            max-width: 800px;
-            margin: 100px auto 140px;
-            padding: 0 24px;
-            position: relative;
-            z-index: 10;
-        }
-        .cta-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-        .cta-subtitle {
-            font-size: 14px;
-            color: var(--cream-mute);
-            margin-bottom: 40px;
-        }
-
-        /* Value Proposition & Workflow Section Styles */
-        .case-study-extra-sections {
-            max-width: 1200px;
-            margin: 100px auto 40px;
-            padding: 0 24px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .section-header-centered {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .section-header-centered .subtitle-mono {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.2em;
+        .side-nav-arrow:hover {
             color: var(--accent);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 12px;
+            border-color: var(--accent);
+            background: rgba(244, 235, 208, 0.05);
         }
-        .section-header-centered h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(24px, 4vw, 36px);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
-            margin: 0;
+        .side-nav-prev {
+            left: 30px;
         }
-
-        /* Pillars Grid */
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 100px;
+        .side-nav-next {
+            right: 30px;
         }
-        .pillar-card {
-            background: rgba(255,255,255,0.01);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 35px 30px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: border-color 0.3s ease, transform 0.3s ease;
-        }
-        .pillar-card:hover {
-            border-color: rgba(235, 89, 57, 0.25);
-            transform: translateY(-2px);
-        }
-        .pillar-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-        .pillar-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            color: var(--cream);
-        }
-        .pillar-desc {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--cream-mute);
-            font-weight: 300;
-        }
-
-        /* Workflow Steps */
-        .workflow-sequence {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 16px;
-            margin-bottom: 80px;
-        }
-        .workflow-step {
-            background: rgba(255,255,255,0.01);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 25px 20px;
-            position: relative;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .step-num {
-            font-family: 'Outfit', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--accent);
-            opacity: 0.8;
-            margin-bottom: 10px;
-            display: block;
-        }
-        .step-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            color: var(--cream);
-        }
-        .step-desc {
-            font-size: 12px;
-            line-height: 1.5;
-            color: var(--cream-mute);
-            font-weight: 300;
-        }
-
-        @media (max-width: 991px) {
-            .pillars-grid {
-                grid-template-columns: 1fr;
-            }
-            .workflow-sequence {
-                grid-template-columns: 1fr;
-                gap: 20px;
+        /* Responsive adaptations */
+        @media(max-width: 1300px) {
+            .side-nav-arrow {
+                display: none;
             }
         }
-
-        @media (max-width: 768px) {
+        @media(max-width: 991px) {
+            .case-study-split-layout {
+                flex-direction: column;
+                padding: 0 20px 60px;
+                gap: 40px;
+            }
+            .case-study-video-col {
+                width: 100%;
+            }
+            .video-wrapper {
+                max-width: 450px;
+                margin: 0 auto;
+            }
+        }
+        @media(max-width: 576px) {
             .bento-grid {
                 grid-template-columns: 1fr;
             }
-            .col-span-2, .col-span-3 {
+            .col-span-2 {
                 grid-column: span 1;
             }
-            body {
-                padding-top: 80px;
+            .back-btn-container {
+                padding: 20px 20px 0;
+            }
+            .case-study-hero {
+                padding: 100px 20px 20px;
             }
         }
     </style>
@@ -508,10 +338,10 @@
     <div class="grain-overlay"></div>
 
     <!-- FIXED SIDE NAVIGATION ARROWS -->
-    <a href="newaar-skincare.html" class="side-nav-arrow side-nav-prev" aria-label="Previous Project: newaar Skincare">
+    <a href="mechanical-keyboard.html" class="side-nav-arrow side-nav-prev" aria-label="Previous Project: Mechanical Keyboard">
         <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/></svg>
     </a>
-    <a href="dualsense-ps5-controller.html" class="side-nav-arrow side-nav-next" aria-label="Next Project: DualSense PS5 Controller">
+    <a href="aurelius-fragrance.html" class="side-nav-arrow side-nav-next" aria-label="Next Project: Aurelius Fragrance">
         <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/></svg>
     </a>
 
@@ -568,21 +398,21 @@
 
     <!-- HERO SECTION -->
     <section class="case-study-hero" style="margin-bottom: 40px; text-align: center;">
-        <span class="eyebrow">Case Study — 3D Animation</span>
-        <h1 style="margin-bottom: 0;">Aurelius Fragrance</h1>
+        <span class="eyebrow">Case Study — Product Viz</span>
+        <h1 style="margin-bottom: 0;">newaar Skincare</h1>
     </section>
-
+ 
     <!-- DUAL-COLUMN CONTENT LAYOUT -->
     <div class="case-study-split-layout">
         <!-- Left Column: Portrait Video -->
         <div class="case-study-video-col">
             <div class="video-wrapper">
-                <video autoplay muted playsinline loop poster="../assets/images/thumb-3d-animation-734.webp">
-                    <source src="../assets/images/Video-734.mp4" type="video/mp4">
+                <video autoplay muted playsinline loop>
+                    <source src="../assets/images/Video-787.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
-
+ 
         <!-- Right Column: Case Study Details -->
         <div class="case-study-info-col">
             <section class="bento-grid">
@@ -592,50 +422,50 @@
                     <ul class="meta-list">
                         <li class="meta-item">
                             <span class="meta-label">Client</span>
-                            <span class="meta-val">Aurelius</span>
+                            <span class="meta-val">newaar Beauty</span>
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Country</span>
-                            <span class="meta-val">UK</span>
+                            <span class="meta-val">France</span>
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Duration</span>
-                            <span class="meta-val">4 Weeks</span>
+                            <span class="meta-val">3 Weeks</span>
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Budget</span>
-                            <span class="meta-val">$2,340</span>
+                            <span class="meta-val">$2,200</span>
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Tools</span>
-                            <span class="meta-val">Blender, Cinema 4D, Redshift, After Effects</span>
+                            <span class="meta-val">Cinema 4D, Redshift, After Effects</span>
                         </li>
                     </ul>
                 </div>
-
+ 
                 <!-- ROI Card -->
                 <div class="bento-card roi-block">
                     <span class="card-title">Measured Impact</span>
-                    <div class="roi-value">4.2%</div>
-                    <span class="roi-label">Click-Through Rate (CTR)<br>on Facebook Video Ads</span>
+                    <div class="roi-value">+38%</div>
+                    <span class="roi-label">Increase in Direct Sales Conversion<br>During Campaign Launch Week</span>
                 </div>
-
-                <!-- Narrative Card -->
-                <div class="bento-card col-span-2">
-                    <span class="card-title">Narrative & Strategy</span>
-                    <div class="narrative">
-                        <p><strong>The Problem:</strong> Aurelius wanted a premium 3D campaign to stand out from generic fragrance advertisements.</p>
-                        <p><strong>The Solution:</strong> Created slow-motion liquid animations and particle simulations interacting with the bottle geometry.</p>
-                    </div>
-                </div>
-
+ 
                 <!-- Testimonial Card -->
                 <div class="bento-card col-span-2">
                     <span class="card-title">Client Feedback</span>
                     <blockquote class="quote-text">
-                        "The liquid physics simulations Rahul created were stunning and directly drove our Q4 fragrance campaign sales."
+                        "The texture simulation and organic lighting detail made our matcha mask jar feel incredibly premium and tactile."
                     </blockquote>
-                    <span class="quote-author">Christian Aurelius — Founder, Aurelius</span>
+                    <span class="quote-author">Aline Laurent — Brand Manager, newaar Beauty</span>
+                </div>
+ 
+                <!-- Narrative Card -->
+                <div class="bento-card col-span-2">
+                    <span class="card-title">Narrative & Strategy</span>
+                    <div class="narrative">
+                        <p><strong>The Problem:</strong> newaar Beauty needed a premium product animation to launch their organic matcha moisturizing clay mask.</p>
+                        <p><strong>The Solution:</strong> Simulated thick, luxurious clay texture movements and rendered with warm natural lighting to emphasize organic ingredients.</p>
+                    </div>
                 </div>
             </section>
         </div>
@@ -703,14 +533,14 @@
     <!-- PROJECT SWITCHER NAVIGATION -->
     <section class="project-switcher-section">
         <div class="switcher-container">
-            <a href="newaar-skincare.html" class="switcher-btn prev-project">
+            <a href="mechanical-keyboard.html" class="switcher-btn prev-project">
                 <span class="switcher-label">Previous Project</span>
-                <span class="switcher-title">newaar Skincare</span>
+                <span class="switcher-title">Mechanical Keyboard</span>
             </a>
             <div class="switcher-divider"></div>
-            <a href="dualsense-ps5-controller.html" class="switcher-btn next-project">
+            <a href="aurelius-fragrance.html" class="switcher-btn next-project">
                 <span class="switcher-label">Next Project</span>
-                <span class="switcher-title">DualSense PS5 Controller</span>
+                <span class="switcher-title">Aurelius Fragrance</span>
             </a>
         </div>
     </section>
@@ -719,7 +549,7 @@
     <section class="cta-section">
         <h2 class="cta-title">HAVE A PRODUCT LAUNCH COMING UP?</h2>
         <p class="cta-subtitle">Let's craft a cinematic product film that turns scrollers into buyers.</p>
-        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20Aurelius%20Fragrance%20Inspiration" class="btn-aesthetic-cta">
+        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20newaar%20Skincare%20Inspiration" class="btn-aesthetic-cta">
             Book a Strategy Call
         </a>
     </section>
