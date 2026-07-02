@@ -3761,6 +3761,47 @@
                 </div>
             `;
             grid.appendChild(suiteCard);
+
+            const templatesCard = document.createElement('div');
+            templatesCard.className = 'client-card er-border';
+            templatesCard.style.borderColor = 'var(--gold)';
+            templatesCard.style.cursor = 'pointer';
+            templatesCard.onclick = () => {
+                const tempClient = { 
+                    id: 'templates', 
+                    name: 'Studio PDF Templates', 
+                    company: 'RAHULFX3D STUDIO', 
+                    password: '', 
+                    project: 'Master PDF Document Templates' 
+                };
+                openClient(tempClient);
+                // Dynamically trigger the pricing tab as default preview
+                const tabs = document.querySelectorAll('.tabs .tab');
+                let found = false;
+                tabs.forEach(t => {
+                    if (t.textContent.includes('Pricing')) {
+                        go('pricing', t);
+                        found = true;
+                    }
+                });
+                if (!found && tabs[3]) {
+                    go('pricing', tabs[3]);
+                }
+            };
+            templatesCard.innerHTML = `
+                <div class="client-card-header">
+                    <span class="card-id" style="color: var(--gold);">TOOL_03</span>
+                    <span class="card-pass-pill" style="background: rgba(235,89,57,0.15); color: var(--gold);">ADMIN</span>
+                </div>
+                <div class="client-card-identity" style="padding-bottom: 20px;">
+                    <div class="card-title-label" style="color: var(--gold);">ADMIN UTILITY</div>
+                    <h3 class="card-name" style="color: var(--gold); margin-top: 5px;">Studio PDF Templates</h3>
+                    <div style="font-size: .68rem; color: var(--dim); margin-top: 10px; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.5;">
+                        Preview, print, and export master Pricing sheets, Offboarding blueprints, and Studio Profiles.
+                    </div>
+                </div>
+            `;
+            grid.appendChild(templatesCard);
         }
 
         function renderSidebarCard(client) {
