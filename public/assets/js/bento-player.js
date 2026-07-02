@@ -211,23 +211,15 @@
         // --- Card Click Selection & Fullscreen Trigger ---
         cardsDark.forEach((card, index) => {
             card.addEventListener('click', (e) => {
-                if (e.target.closest('.filmstrip-card-play')) return; // handled by play modal logic
-                
-                // If already active, click to view bigger/fullscreen
-                if (card.classList.contains('is-active')) {
+                if (e.target.closest('.filmstrip-card-play')) {
                     const src = card.getAttribute('data-src');
                     if (src) {
                         openVideoModal(src);
-                        return;
                     }
+                    return;
                 }
-                
-                highlightCard(index);
-                updateInfoBar(card);
-                scrollToCard(index);
-                if (window.UXSound && typeof window.UXSound.playClick === 'function') {
-                    window.UXSound.playClick();
-                }
+                const slug = card.getAttribute('data-slug') || 'aurelius-fragrance';
+                window.location.href = `work/${slug}.html`;
             });
         });
 
@@ -235,22 +227,15 @@
         if (cardsRed) {
             cardsRed.forEach((card, index) => {
                 card.addEventListener('click', (e) => {
-                    if (e.target.closest('.filmstrip-card-play')) return;
-                    
-                    if (card.classList.contains('is-active')) {
+                    if (e.target.closest('.filmstrip-card-play')) {
                         const src = card.getAttribute('data-src');
                         if (src) {
                             openVideoModal(src);
-                            return;
                         }
+                        return;
                     }
-                    
-                    highlightCard(index);
-                    if (cardsDark[index]) updateInfoBar(cardsDark[index]);
-                    scrollToCard(index);
-                    if (window.UXSound && typeof window.UXSound.playClick === 'function') {
-                        window.UXSound.playClick();
-                    }
+                    const slug = card.getAttribute('data-slug') || 'aurelius-fragrance';
+                    window.location.href = `work/${slug}.html`;
                 });
             });
         }
