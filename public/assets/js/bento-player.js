@@ -60,18 +60,17 @@
                 infoTools.textContent = item.getAttribute('data-tools') || '—';
 
                 if (infoCaseStudy) {
-                    const problem = item.getAttribute('data-problem') || '—';
-                    const solution = item.getAttribute('data-solution') || '—';
-                    const quote = item.getAttribute('data-testimonial-quote');
-                    const author = item.getAttribute('data-testimonial-author');
+                    const teaser = item.getAttribute('data-teaser') || '—';
+                    const slug = item.getAttribute('data-slug') || 'aurelius-fragrance';
                     
-                    let htmlContent = `<strong>Problem:</strong> ${problem}<br><br><strong>Solution:</strong> ${solution}`;
-                    if (quote && author) {
-                        htmlContent += `<div class="case-study-testimonial-block" style="margin-top: 20px; border-left: 2px solid #eb5939; padding-left: 15px; opacity: 0.85;">
-                            <p class="mb-1 desc case-study-testimonial-quote" style="font-style: italic; font-size: 0.95rem;">"${quote}"</p>
-                            <span class="case-study-testimonial-author" style="font-family: var(--hud-mono, monospace); font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);">${author}</span>
-                        </div>`;
-                    }
+                    let htmlContent = `<div class="teaser-wrapper">
+                        <span class="teaser-label" style="font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 12px;">The Creative Challenge</span>
+                        <p class="teaser-text" style="font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 500; line-height: 1.5; color: #fff; margin: 0 0 24px 0;">${teaser}</p>
+                        <a href="work/${slug}.html" class="btn-teaser-case-study js-cursor-contract" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--hud-mono, monospace); font-size: 0.85rem; letter-spacing: 0.1em; color: #eb5939; text-decoration: none; font-weight: 700; transition: gap 0.3s ease;">
+                            EXPLORE FULL CASE STUDY <span style="font-size: 1.1rem; line-height: 1;">&rarr;</span>
+                        </a>
+                    </div>`;
+                    
                     infoCaseStudy.innerHTML = htmlContent;
 
                     // Update editorial stats
@@ -87,7 +86,6 @@
                     // Update Case Study link href dynamically
                     const btnViewCaseStudy = document.getElementById('btnViewCaseStudy');
                     if (btnViewCaseStudy) {
-                        const slug = item.getAttribute('data-slug') || 'aurelius-fragrance';
                         btnViewCaseStudy.setAttribute('href', `work/${slug}.html`);
                     }
                 }
