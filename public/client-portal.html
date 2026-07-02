@@ -3344,6 +3344,47 @@
             add.style.cursor = 'pointer';
             add.onclick = () => showAddClientModal();
             grid.appendChild(add);
+
+            // Add Admin Tool cards (Invoice Generator & Admin Suite)
+            const invCard = document.createElement('div');
+            invCard.className = 'client-card er-border';
+            invCard.style.borderColor = 'var(--gold)';
+            invCard.style.cursor = 'pointer';
+            invCard.onclick = () => window.location.href = 'invoice.html';
+            invCard.innerHTML = `
+                <div class="client-card-header">
+                    <span class="card-id" style="color: var(--gold);">TOOL_01</span>
+                    <span class="card-pass-pill" style="background: rgba(235,89,57,0.15); color: var(--gold);">ADMIN</span>
+                </div>
+                <div class="client-card-identity" style="padding-bottom: 20px;">
+                    <div class="card-title-label" style="color: var(--gold);">ADMIN UTILITY</div>
+                    <h3 class="card-name" style="color: var(--gold); margin-top: 5px;">Invoice Generator</h3>
+                    <div style="font-size: .68rem; color: var(--dim); margin-top: 10px; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.5;">
+                        Create, calculate, and export high-end client invoices matching the physical print layout.
+                    </div>
+                </div>
+            `;
+            grid.appendChild(invCard);
+
+            const suiteCard = document.createElement('div');
+            suiteCard.className = 'client-card er-border';
+            suiteCard.style.borderColor = 'var(--gold)';
+            suiteCard.style.cursor = 'pointer';
+            suiteCard.onclick = () => window.location.href = 'admin-dashboard.html';
+            suiteCard.innerHTML = `
+                <div class="client-card-header">
+                    <span class="card-id" style="color: var(--gold);">TOOL_02</span>
+                    <span class="card-pass-pill" style="background: rgba(235,89,57,0.15); color: var(--gold);">ADMIN</span>
+                </div>
+                <div class="client-card-identity" style="padding-bottom: 20px;">
+                    <div class="card-title-label" style="color: var(--gold);">ADMIN UTILITY</div>
+                    <h3 class="card-name" style="color: var(--gold); margin-top: 5px;">Studio Admin Suite</h3>
+                    <div style="font-size: .68rem; color: var(--dim); margin-top: 10px; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.5;">
+                        Access creative brief/proposal builder (SOW), review feedbacks, and budget margins.
+                    </div>
+                </div>
+            `;
+            grid.appendChild(suiteCard);
         }
 
         function renderSidebarCard(client) {
