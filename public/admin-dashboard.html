@@ -765,11 +765,7 @@
     document.getElementById('propDate').textContent = today.toLocaleDateString('en-US', opts).toUpperCase();
 
     // Client & Project Manager Logic (Linked to client-portal.html database!)
-    const DEFAULT_CLIENTS = [
-      { id: 'client001', name: 'Aurelius Fragrance', company: 'Aurelius Luxury', password: 'aurelius-cg3', project: 'Aurelius Fragrance CGI Ad', progress: 65, assets: 40, render: 80 },
-      { id: 'client002', name: 'Ombre Perfume', company: 'Ombre Co', password: 'ombre-lux', project: 'Ombre Perfume Simulation', progress: 40, assets: 30, render: 50 },
-      { id: 'client003', name: 'Newaar Skincare', company: 'Newaar Labs', password: 'newaar-glow', project: 'Newaar Skincare Render Campaign', progress: 90, assets: 85, render: 95 }
-    ];
+    const DEFAULT_CLIENTS = [];
 
     function getClients() {
       const data = localStorage.getItem('portal-clients');
