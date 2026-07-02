@@ -109,9 +109,10 @@
             border: 1px solid var(--border);
             aspect-ratio: 9/16;
             max-width: 450px;
-            margin: 0 auto 80px;
+            margin: 0 auto;
             box-shadow: 0 20px 80px rgba(0,0,0,0.6);
             background: #000;
+            width: 100%;
         }
 
         .video-wrapper video {
@@ -120,14 +121,48 @@
             display: block;
         }
 
-        /* Bento Grid Case Study Info */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+        /* Split Layout Design */
+        .case-study-split-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             max-width: 1200px;
             margin: 0 auto 80px;
             padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+        .case-study-video-col {
+            width: 100%;
+        }
+        .case-study-info-col {
+            width: 100%;
+        }
+
+        @media (min-width: 992px) {
+            .case-study-split-layout {
+                flex-direction: row;
+                align-items: start;
+                gap: 50px;
+            }
+            .case-study-video-col {
+                width: 450px;
+                flex-shrink: 0;
+            }
+            .case-study-info-col {
+                flex-grow: 1;
+            }
+            .video-wrapper {
+                position: sticky;
+                top: 120px;
+            }
+        }
+
+        /* Bento Grid Case Study Info */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
             position: relative;
             z-index: 10;
         }
@@ -338,71 +373,79 @@
     </div>
 
     <!-- HERO SECTION -->
-    <section class="case-study-hero">
+    <section class="case-study-hero" style="margin-bottom: 40px; text-align: center;">
         <span class="eyebrow">Case Study — Product Visualization</span>
-        <h1>Aero Headphones</h1>
-        
-        <div class="video-wrapper">
-            <video autoplay muted playsinline loop poster="../assets/images/thumb-558.webp">
-                <source src="../assets/images/Video-558.mp4" type="video/mp4">
-            </video>
-        </div>
+        <h1 style="margin-bottom: 0;">Aero Headphones</h1>
     </section>
 
-    <!-- BENTO DETAILS GRID -->
-    <section class="bento-grid">
-        <!-- Stats Card -->
-        <div class="bento-card">
-            <span class="card-title">PROJECT SPEC SHEET</span>
-            <ul class="meta-list">
-                <li class="meta-item">
-                    <span class="meta-label">Client</span>
-                    <span class="meta-val">Sonic Labs</span>
-                </li>
-                <li class="meta-item">
-                    <span class="meta-label">Country</span>
-                    <span class="meta-val">Germany</span>
-                </li>
-                <li class="meta-item">
-                    <span class="meta-label">Duration</span>
-                    <span class="meta-val">4 Weeks</span>
-                </li>
-                <li class="meta-item">
-                    <span class="meta-label">Budget</span>
-                    <span class="meta-val">$3,640</span>
-                </li>
-                <li class="meta-item">
-                    <span class="meta-label">Tools</span>
-                    <span class="meta-val">Cinema 4D, Redshift, After Effects</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Narrative Card -->
-        <div class="bento-card col-span-2">
-            <span class="card-title">Narrative & Strategy</span>
-            <div class="narrative">
-                <p><strong>The Problem:</strong> Sonic Labs needed premium 3D visuals to showcase the noise-canceling ear cushions and folding design of their headphones.</p>
-                <p><strong>The Solution:</strong> Simulated realistic fabric/leather meshes and rendered close-up views of the steel headband and speaker grills.</p>
+    <!-- DUAL-COLUMN CONTENT LAYOUT -->
+    <div class="case-study-split-layout">
+        <!-- Left Column: Portrait Video -->
+        <div class="case-study-video-col">
+            <div class="video-wrapper">
+                <video autoplay muted playsinline loop poster="../assets/images/thumb-558.webp">
+                    <source src="../assets/images/Video-558.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
 
-        <!-- ROI Card -->
-        <div class="bento-card roi-block">
-            <span class="card-title">Measured Impact</span>
-            <div class="roi-value">+35%</div>
-            <span class="roi-label">Increase in Add-To-Cart Rate<br>During Q4 Launch Campaign</span>
-        </div>
+        <!-- Right Column: Case Study Details -->
+        <div class="case-study-info-col">
+            <section class="bento-grid">
+                <!-- Stats Card -->
+                <div class="bento-card">
+                    <span class="card-title">PROJECT SPEC SHEET</span>
+                    <ul class="meta-list">
+                        <li class="meta-item">
+                            <span class="meta-label">Client</span>
+                            <span class="meta-val">Sonic Labs</span>
+                        </li>
+                        <li class="meta-item">
+                            <span class="meta-label">Country</span>
+                            <span class="meta-val">Germany</span>
+                        </li>
+                        <li class="meta-item">
+                            <span class="meta-label">Duration</span>
+                            <span class="meta-val">4 Weeks</span>
+                        </li>
+                        <li class="meta-item">
+                            <span class="meta-label">Budget</span>
+                            <span class="meta-val">$3,640</span>
+                        </li>
+                        <li class="meta-item">
+                            <span class="meta-label">Tools</span>
+                            <span class="meta-val">Cinema 4D, Redshift, After Effects</span>
+                        </li>
+                    </ul>
+                </div>
 
-        <!-- Testimonial Card -->
-        <div class="bento-card col-span-2">
-            <span class="card-title">Client Feedback</span>
-            <blockquote class="quote-text">
-                "The CGI work helped us show off the internal noise-canceling tech features perfectly in our social ads."
-            </blockquote>
-            <span class="quote-author">Sarah Jenkins — Product Director, Sonic Labs</span>
+                <!-- ROI Card -->
+                <div class="bento-card roi-block">
+                    <span class="card-title">Measured Impact</span>
+                    <div class="roi-value">+35%</div>
+                    <span class="roi-label">Increase in Add-To-Cart Rate<br>During Q4 Launch Campaign</span>
+                </div>
+
+                <!-- Narrative Card -->
+                <div class="bento-card col-span-2">
+                    <span class="card-title">Narrative & Strategy</span>
+                    <div class="narrative">
+                        <p><strong>The Problem:</strong> Sonic Labs needed premium 3D visuals to showcase the noise-canceling ear cushions and folding design of their headphones.</p>
+                        <p><strong>The Solution:</strong> Simulated realistic fabric/leather meshes and rendered close-up views of the steel headband and speaker grills.</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial Card -->
+                <div class="bento-card col-span-2">
+                    <span class="card-title">Client Feedback</span>
+                    <blockquote class="quote-text">
+                        "The CGI work helped us show off the internal noise-canceling tech features perfectly in our social ads."
+                    </blockquote>
+                    <span class="quote-author">Sarah Jenkins — Product Director, Sonic Labs</span>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
 
     <!-- CALL TO ACTION -->
     <section class="cta-section">
