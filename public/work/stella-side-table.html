@@ -107,10 +107,11 @@
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
-            aspect-ratio: 16/9;
+            aspect-ratio: 9/16;
+            max-width: 450px;
+            margin: 0 auto 80px;
             box-shadow: 0 20px 80px rgba(0,0,0,0.6);
             background: #000;
-            margin-bottom: 80px;
         }
 
         .video-wrapper video {
@@ -418,6 +419,38 @@
             &copy; 2026 RahulFX3D Studio. All Rights Reserved.
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.querySelector('.video-wrapper video');
+            const wrapper = document.querySelector('.video-wrapper');
+            
+            function adjustAspect() {
+                const w = video.videoWidth;
+                const h = video.videoHeight;
+                if (w && h) {
+                    const ratio = w / h;
+                    if (ratio > 1.0) {
+                        // Landscape (16:9)
+                        wrapper.style.aspectRatio = '16/9';
+                        wrapper.style.maxWidth = '100%';
+                    } else {
+                        // Portrait (9:16)
+                        wrapper.style.aspectRatio = '9/16';
+                        wrapper.style.maxWidth = '450px';
+                    }
+                }
+            }
+
+            if (video) {
+                if (video.readyState >= 1) {
+                    adjustAspect();
+                } else {
+                    video.addEventListener('loadedmetadata', adjustAspect);
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
