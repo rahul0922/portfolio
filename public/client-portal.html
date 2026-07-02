@@ -2376,8 +2376,8 @@
         /* Glowing Sigil Styles */
         .sigil-container {
             position: absolute;
-            width: 480px;
-            height: 480px;
+            width: min(480px, 90vw);
+            height: min(480px, 90vw);
             z-index: 1;
             pointer-events: none;
             opacity: 0.18;
@@ -2436,7 +2436,7 @@
             font-family: 'Cinzel Decorative', serif;
             font-size: clamp(1.6rem, 3.5vw, 2.2rem);
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.4;
             letter-spacing: .02em;
             text-transform: uppercase;
             color: #fff;
