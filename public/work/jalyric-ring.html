@@ -520,13 +520,37 @@
                 <div class="fs-nav-pill"></div>
                 <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../index.html" onclick="window.location.href='../index.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Home</span> <span class="header_menu_item_link header_menu_item_link__active">Home</span></span></a></li>
                 <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../about.html" onclick="window.location.href='../about.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">About Rahul</span> <span class="header_menu_item_link header_menu_item_link__active">About Rahul</span></span></a></li>
-                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../index.html#work" onclick="window.location.href='../index.html#work';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Work</span> <span class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract is-active"><a href="../index.html#work" onclick="window.location.href='../index.html#work';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Work</span> <span class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
                 <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../index.html#pricing-estimator" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Pricing</span> <span class="header_menu_item_link header_menu_item_link__active">Pricing</span></span></a></li>
                 <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../saas-animation.html" onclick="window.location.href='../saas-animation.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">SaaS</span> <span class="header_menu_item_link header_menu_item_link__active">SaaS</span></span></a></li>
                 <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../client-portal.html" onclick="window.location.href='../client-portal.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Portal</span> <span class="header_menu_item_link header_menu_item_link__active">Portal</span></span></a></li>
             </ul>
         </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="fs-menu-toggle" aria-label="Toggle Menu">
+            <span class="fs-menu-icon"></span>
+        </button>
     </header>
+
+    <div class="fs-nav-overlay">
+        <nav class="fs-nav-menu">
+            <ul class="fs-nav-list">
+                <li class="fs-nav-item"><a href="../index.html" data-text="Home">Home</a></li>
+                <li class="fs-nav-item"><a href="../about.html" data-text="About Rahul">About Rahul</a></li>
+                <li class="fs-nav-item is-active"><a href="../index.html#work" data-text="Work">Work</a></li>
+                <li class="fs-nav-item"><a href="../saas-animation.html" data-text="SaaS Animation">SaaS Animation</a></li>
+                <li class="fs-nav-item"><a href="../client-portal.html" data-text="Client Portal">Client Portal</a></li>
+            </ul>
+        </nav>
+        <div class="fs-nav-footer">
+            <a href="mailto:hello@rahulfx3d.studio">hello@rahulfx3d.studio</a>
+            <div class="fs-nav-socials">
+                <a href="#">Instagram</a>
+                <a href="#">Behance</a>
+            </div>
+        </div>
+    </div>
 
     <div class="back-btn-container">
         <a href="../index.html#work" class="back-btn">
@@ -716,5 +740,6 @@
         });
     </script>
 
+    <script src="../fs-nav.js"></script>
 </body>
 </html>
