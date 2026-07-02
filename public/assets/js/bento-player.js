@@ -692,6 +692,9 @@
             if (source) baseRate *= 1.1;
             if (speed === 'rush') baseRate *= 1.15;
 
+            // Apply 20% price increase requested by user
+            baseRate *= 1.20;
+
             const finalPrice = Math.round(baseRate);
             const formattedPrice = `$${finalPrice.toLocaleString()}`;
 

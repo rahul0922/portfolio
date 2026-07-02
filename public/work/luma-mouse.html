@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jalyric Ring | 3D Animation Case Study - RahulFX3D Studio</title>
-    <meta name="description" content="Read the case study on Jalyric Ring luxury 3D jewelry animation by RahulFX3D Studio. Advanced light dispersion renders achieving a 3.8x ROAS.">
-    <meta name="keywords" content="Jalyric Ring, 3D animation, jewelry rendering, Cinema 4D, Octane, CGI, RahulFX3D, case study">
-    <meta property="og:title" content="Jalyric Ring | 3D Animation Case Study - RahulFX3D Studio">
-    <meta property="og:description" content="Luxury CGI and diamond dispersion shaders for Jalyric, driving a 3.8x return on ad spend (ROAS).">
+    <title>Luma Mouse | 3D Product Animation Case Study - RahulFX3D Studio</title>
+    <meta name="description" content="Read the case study on Luma Mouse 3D product visualization by RahulFX3D Studio. High-fidelity hardware detail rendering achieving a +48% click rate.">
+    <meta name="keywords" content="Luma Mouse, 3D product rendering, hardware CGI, Cinema 4D, Redshift, CGI, RahulFX3D, case study">
+    <meta property="og:title" content="Luma Mouse | 3D Animation Case Study - RahulFX3D Studio">
+    <meta property="og:description" content="Cinematic hardware detail and lighting simulations for Luma Mouse, boosting engagement and pre-orders by 48%.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rahulfx3d.studio/work/jalyric-ring.html">
+    <meta property="og:url" content="https://rahulfx3d.studio/work/luma-mouse.html">
     <link rel="icon" type="image/svg+xml" href="../assets/icons/logo.svg">
     
     <!-- External Google Fonts -->
@@ -497,6 +497,60 @@
                 padding-top: 80px;
             }
         }
+
+        /* 16:9 Landscape Layout Styles */
+        .case-study-split-layout.is-16-9 {
+            flex-direction: column !important;
+            gap: 40px;
+            max-width: 1200px;
+        }
+        .is-16-9 .case-study-video-col {
+            width: 100% !important;
+        }
+        .is-16-9 .video-wrapper {
+            aspect-ratio: 16/9 !important;
+            max-width: 100% !important;
+            border-radius: 16px;
+            overflow: hidden;
+            height: auto !important;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+        }
+        .is-16-9 .case-study-info-col {
+            width: 100% !important;
+        }
+
+        @media (min-width: 992px) {
+            .is-16-9 .bento-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+            .is-16-9 .bento-card.col-span-3-desktop {
+                grid-column: span 3 !important;
+            }
+            .is-16-9 .bento-card.col-span-1-desktop {
+                grid-column: span 1 !important;
+            }
+            .is-16-9 .bento-card.col-span-2-desktop {
+                grid-column: span 2 !important;
+            }
+        }
+        @media (max-width: 991px) and (min-width: 769px) {
+            .is-16-9 .bento-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            .is-16-9 .bento-card.col-span-3-desktop {
+                grid-column: span 2 !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .is-16-9 .bento-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .is-16-9 .bento-card.col-span-3-desktop,
+            .is-16-9 .bento-card.col-span-1-desktop,
+            .is-16-9 .bento-card.col-span-2-desktop {
+                grid-column: span 1 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -508,10 +562,10 @@
     <div class="grain-overlay"></div>
 
     <!-- FIXED SIDE NAVIGATION ARROWS -->
-    <a href="aero-headphones.html" class="side-nav-arrow side-nav-prev" aria-label="Previous Project: Aero Headphones">
+    <a href="jalyric-ring.html" class="side-nav-arrow side-nav-prev" aria-label="Previous Project: Jalyric Ring">
         <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/></svg>
     </a>
-    <a href="luma-mouse.html" class="side-nav-arrow side-nav-next" aria-label="Next Project: Luma Mouse">
+    <a href="ombre-perfume.html" class="side-nav-arrow side-nav-next" aria-label="Next Project: Ombre Perfume">
         <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/></svg>
     </a>
 
@@ -568,35 +622,35 @@
 
     <!-- HERO SECTION -->
     <section class="case-study-hero" style="margin-bottom: 40px; text-align: center;">
-        <span class="eyebrow">Case Study — 3D Animation</span>
-        <h1 style="margin-bottom: 0;">Jalyric Ring</h1>
+        <span class="eyebrow">Case Study — Product Viz</span>
+        <h1 style="margin-bottom: 0;">Luma Mouse</h1>
     </section>
-
+ 
     <!-- DUAL-COLUMN CONTENT LAYOUT -->
-    <div class="case-study-split-layout">
+    <div class="case-study-split-layout is-16-9">
         <!-- Left Column: Portrait Video -->
         <div class="case-study-video-col">
             <div class="video-wrapper">
-                <video autoplay muted playsinline loop poster="../assets/images/thumb-656.webp">
-                    <source src="../assets/images/Video-656.mp4" type="video/mp4">
+                <video autoplay muted playsinline loop>
+                    <source src="../assets/images/Video-46.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
-
+ 
         <!-- Right Column: Case Study Details -->
         <div class="case-study-info-col">
             <section class="bento-grid">
                 <!-- Stats Card -->
-                <div class="bento-card">
+                <div class="bento-card col-span-1-desktop">
                     <span class="card-title">PROJECT SPEC SHEET</span>
                     <ul class="meta-list">
                         <li class="meta-item">
                             <span class="meta-label">Client</span>
-                            <span class="meta-val">Jalyric</span>
+                            <span class="meta-val">Luma</span>
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Country</span>
-                            <span class="meta-val">France</span>
+                            <span class="meta-val">USA</span>
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Duration</span>
@@ -604,38 +658,38 @@
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Budget</span>
-                            <span class="meta-val">$1,850</span>
+                            <span class="meta-val">$2,140</span>
                         </li>
                         <li class="meta-item">
                             <span class="meta-label">Tools</span>
-                            <span class="meta-val">Cinema 4D, Octane Render, After Effects</span>
+                            <span class="meta-val">Cinema 4D, Redshift, After Effects</span>
                         </li>
                     </ul>
                 </div>
-
+ 
                 <!-- ROI Card -->
-                <div class="bento-card roi-block">
+                <div class="bento-card roi-block col-span-1-desktop">
                     <span class="card-title">Measured Impact</span>
-                    <div class="roi-value">3.8x</div>
-                    <span class="roi-label">Return On Ad Spend (ROAS)<br>on Paid Social Channels</span>
+                    <div class="roi-value">+48%</div>
+                    <span class="roi-label">Increase in Page Engagement &amp;<br>Product Pre-Order Clicks</span>
+                </div>
+ 
+                <!-- Testimonial Card -->
+                <div class="bento-card col-span-1-desktop">
+                    <span class="card-title">Client Feedback</span>
+                    <blockquote class="quote-text">
+                        "Rahul's command over lighting and product refractions brought our hardware details to life with pure cinema quality."
+                    </blockquote>
+                    <span class="quote-author">Adrien Laurent — Design Director, Luma</span>
                 </div>
 
                 <!-- Narrative Card -->
-                <div class="bento-card col-span-2">
+                <div class="bento-card col-span-3-desktop">
                     <span class="card-title">Narrative & Strategy</span>
                     <div class="narrative">
-                        <p><strong>The Problem:</strong> Jalyric needed a luxury CGI showcase of their signature diamond ring highlighting setting details and facets.</p>
-                        <p><strong>The Solution:</strong> Rendered photorealistic closeups of the diamond setting with advanced light dispersion shaders and polished gold band reflections.</p>
+                        <p><strong>The Problem:</strong> Luma needed an editorial 3D showcase to highlight the premium ergonomics and tactile feel of their new precision mouse.</p>
+                        <p><strong>The Solution:</strong> Simulated realistic light rays passing through complex glass lenses and interacting with volumetric particle smoke fields in Redshift.</p>
                     </div>
-                </div>
-
-                <!-- Testimonial Card -->
-                <div class="bento-card col-span-2">
-                    <span class="card-title">Client Feedback</span>
-                    <blockquote class="quote-text">
-                        "Our diamond facets have never looked this brilliant on screen. Rahul's lighting setup is second to none."
-                    </blockquote>
-                    <span class="quote-author">Jean-Louis Jalyric — Creative Director, Jalyric</span>
                 </div>
             </section>
         </div>
@@ -703,23 +757,23 @@
     <!-- PROJECT SWITCHER NAVIGATION -->
     <section class="project-switcher-section">
         <div class="switcher-container">
-            <a href="aero-headphones.html" class="switcher-btn prev-project">
+            <a href="jalyric-ring.html" class="switcher-btn prev-project">
                 <span class="switcher-label">Previous Project</span>
-                <span class="switcher-title">Aero Headphones</span>
+                <span class="switcher-title">Jalyric Ring</span>
             </a>
             <div class="switcher-divider"></div>
-            <a href="luma-mouse.html" class="switcher-btn next-project">
+            <a href="ombre-perfume.html" class="switcher-btn next-project">
                 <span class="switcher-label">Next Project</span>
-                <span class="switcher-title">Luma Mouse</span>
+                <span class="switcher-title">Ombre Perfume</span>
             </a>
         </div>
     </section>
 
     <!-- CALL TO ACTION -->
     <section class="cta-section">
-        <h2 class="cta-title">LAUNCHING A LUXURY CAMPAIGN?</h2>
+        <h2 class="cta-title">HAVE A PRODUCT LAUNCH COMING UP?</h2>
         <p class="cta-subtitle">Let's craft a cinematic product film that turns scrollers into buyers.</p>
-        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20Jalyric%20Ring%20Inspiration" class="btn-aesthetic-cta">
+        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20Aurelius%20Fragrance%20Inspiration" class="btn-aesthetic-cta">
             Book a Strategy Call
         </a>
     </section>
