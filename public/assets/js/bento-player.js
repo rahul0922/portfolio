@@ -83,6 +83,13 @@
                     
                     if (hudROI) hudROI.innerHTML = roiVal;
                     if (hudLabel) hudLabel.innerHTML = roiLbl;
+
+                    // Update Case Study link href dynamically
+                    const btnViewCaseStudy = document.getElementById('btnViewCaseStudy');
+                    if (btnViewCaseStudy) {
+                        const slug = item.getAttribute('data-slug') || 'aurelius-fragrance';
+                        btnViewCaseStudy.setAttribute('href', `work/${slug}.html`);
+                    }
                 }
 
                 // Fade in

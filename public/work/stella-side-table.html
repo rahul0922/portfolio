@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stella Side Table | 3D Animation Case Study - RahulFX3D Studio</title>
+    <meta name="description" content="Read the case study on Stella Side Table 3D animation by RahulFX3D Studio. Beautiful wood sweeps rendering and boosting pre-order conversions by 2.4x.">
+    <meta name="keywords" content="Stella Side Table, 3D animation, furniture rendering, Blender Cycles, CGI, RahulFX3D, case study">
+    <meta property="og:title" content="Stella Side Table | 3D Animation Case Study - RahulFX3D Studio">
+    <meta property="og:description" content="Cinematic orbital sweeps and wood textures for Stella Furniture, driving a 2.4x higher conversion rate.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rahulfx3d.studio/work/stella-side-table.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/logo.svg">
+    
+    <!-- External Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Outfit:wght@200;400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../saas-styles.css">
+    <link rel="stylesheet" href="../fs-nav.css">
+
+    <style>
+        @font-face {
+            font-family: 'Avant Garde';
+            font-style: normal;
+            font-weight: 700;
+            src: url('../assets/fonts/4dd591d8-4168-4263-b05b-7183ddaff1f4.woff2') format('woff2');
+        }
+
+        :root {
+            --ink: #080809;
+            --cream: #ebdcb9;
+            --cream-mute: rgba(235, 220, 185, 0.42);
+            --accent: #eb5939;
+            --border: rgba(255, 255, 255, 0.08);
+            --mono: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--ink);
+            color: var(--cream);
+            font-family: 'Nunito Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 100px;
+        }
+
+        /* 3D background glow orbs */
+        .bg-glow-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .glow-orb {
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(235, 89, 57, 0.05) 0%, rgba(235, 89, 57, 0) 70%);
+            filter: blur(80px);
+        }
+        .orb-1 { top: -200px; left: -100px; }
+        .orb-2 { bottom: -200px; right: -100px; }
+
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .case-study-hero {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 40px auto 80px;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Outfit', 'Avant Garde', sans-serif;
+            font-size: clamp(36px, 6vw, 76px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            line-height: 1.0;
+            margin-bottom: 40px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            aspect-ratio: 16/9;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+            background: #000;
+            margin-bottom: 80px;
+        }
+
+        .video-wrapper video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Bento Grid Case Study Info */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .col-span-2 {
+            grid-column: span 2;
+        }
+
+        .col-span-3 {
+            grid-column: span 3;
+        }
+
+        .card-title {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Stats List */
+        .meta-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            padding-bottom: 8px;
+        }
+        .meta-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--cream-mute);
+        }
+        .meta-val {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Narrative Text */
+        .narrative {
+            font-size: 15px;
+            line-height: 1.8;
+            font-weight: 300;
+            color: var(--cream-mute);
+        }
+        .narrative p {
+            margin-bottom: 20px;
+        }
+        .narrative p:last-child {
+            margin-bottom: 0;
+        }
+        .narrative strong {
+            color: var(--cream);
+            font-weight: 600;
+        }
+
+        /* ROI Metric */
+        .roi-block {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .roi-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(48px, 6vw, 84px);
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .roi-label {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            line-height: 1.4;
+        }
+
+        /* Quote block */
+        .quote-text {
+            font-size: 16px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--cream);
+        }
+        .quote-author {
+            font-family: var(--mono);
+            font-size: 8px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* Back Button */
+        .back-btn-container {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cream-mute);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .back-btn:hover {
+            color: var(--accent);
+        }
+
+        /* CTA section */
+        .cta-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 100px auto 140px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+        .cta-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .cta-subtitle {
+            font-size: 14px;
+            color: var(--cream-mute);
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .col-span-2, .col-span-3 {
+                grid-column: span 1;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow-container">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    <div class="grain-overlay"></div>
+
+    <!-- HEADER -->
+    <header class="header js-header">
+        <div class="header_logo js-header_logo fs-logo">
+            <a class="link-logo" aria-label="Home page" href="../index.html">
+                <img class="svg" src="../assets/icons/logo.svg" alt="logo">
+            </a>
+        </div>
+        
+        <nav class="fs-nav-desktop">
+            <ul class="header_menu_list ul__reset fs-nav-links">
+                <div class="fs-nav-pill"></div>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../index.html" onclick="window.location.href='../index.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Home</span> <span class="header_menu_item_link header_menu_item_link__active">Home</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../about.html" onclick="window.location.href='../about.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">About Rahul</span> <span class="header_menu_item_link header_menu_item_link__active">About Rahul</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../index.html#work" onclick="window.location.href='../index.html#work';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Work</span> <span class="header_menu_item_link header_menu_item_link__active">Work</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../index.html#pricing-estimator" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Pricing</span> <span class="header_menu_item_link header_menu_item_link__active">Pricing</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../saas-animation.html" onclick="window.location.href='../saas-animation.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">SaaS</span> <span class="header_menu_item_link header_menu_item_link__active">SaaS</span></span></a></li>
+                <li class="header_menu_item fs-nav-item js-cursor-contract"><a href="../client-portal.html" onclick="window.location.href='../client-portal.html';return false;" class="desc text-uppercase"><span class="header_menu_item_inner"><span class="header_menu_item_link header_menu_item_link__deep">Portal</span> <span class="header_menu_item_link header_menu_item_link__active">Portal</span></span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="back-btn-container">
+        <a href="../index.html#work" class="back-btn">
+            &larr; Back to Portfolio
+        </a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="case-study-hero">
+        <span class="eyebrow">Case Study — 3D Animation</span>
+        <h1>Stella Side Table</h1>
+        
+        <div class="video-wrapper">
+            <video autoplay muted playsinline loop poster="../assets/images/thumb-10.webp">
+                <source src="../assets/images/Video-10.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- BENTO DETAILS GRID -->
+    <section class="bento-grid">
+        <!-- Stats Card -->
+        <div class="bento-card">
+            <span class="card-title">PROJECT SPEC SHEET</span>
+            <ul class="meta-list">
+                <li class="meta-item">
+                    <span class="meta-label">Client</span>
+                    <span class="meta-val">Stella Furniture</span>
+                </li>
+                <li class="meta-item">
+                    <span class="meta-label">Country</span>
+                    <span class="meta-val">USA</span>
+                </li>
+                <li class="meta-item">
+                    <span class="meta-label">Duration</span>
+                    <span class="meta-val">2 Weeks</span>
+                </li>
+                <li class="meta-item">
+                    <span class="meta-label">Budget</span>
+                    <span class="meta-val">$2,080</span>
+                </li>
+                <li class="meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-val">Blender, Cycles, After Effects</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Narrative Card -->
+        <div class="bento-card col-span-2">
+            <span class="card-title">Narrative & Strategy</span>
+            <div class="narrative">
+                <p><strong>The Problem:</strong> Stella Furniture needed a minimalist 3D animation to highlight the natural wood grains and joins of their new side table.</p>
+                <p><strong>The Solution:</strong> Created realistic procedural wood textures and rendered slow-motion orbital camera sweeps in Blender Cycles.</p>
+            </div>
+        </div>
+
+        <!-- ROI Card -->
+        <div class="bento-card roi-block">
+            <span class="card-title">Measured Impact</span>
+            <div class="roi-value">2.4x</div>
+            <span class="roi-label">Higher Conversion Rate (CVR)<br>vs. Previous Static Assets</span>
+        </div>
+
+        <!-- Testimonial Card -->
+        <div class="bento-card col-span-2">
+            <span class="card-title">Client Feedback</span>
+            <blockquote class="quote-text">
+                "Rahul delivered cinematic-grade animation that brought our design details to life and boosted pre-orders."
+            </blockquote>
+            <span class="quote-author">Marcus Vance — Founder, Stella Furniture</span>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+        <h2 class="cta-title">LAUNCHING A DESIGN COLLECTION?</h2>
+        <p class="cta-subtitle">Let's craft a cinematic product film that turns scrollers into buyers.</p>
+        <a href="mailto:rahul@rahulfx3d.studio?subject=Inquiry:%20Stella%20Furniture%20Inspiration" class="btn-aesthetic" style="display: inline-block;">
+            <span>Book a Strategy Call</span>
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding: 60px 0 30px; border-top: 1px solid var(--border); text-align: center;">
+        <div class="desc" style="font-size: 10px; color: var(--cream-mute); text-transform: uppercase; letter-spacing: 1px;">
+            &copy; 2026 RahulFX3D Studio. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
