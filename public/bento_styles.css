@@ -313,6 +313,50 @@
     margin-left: 3px;
 }
 
+/* CARD CONTROLS OVERLAY (PLAY/PAUSE & SOUND TOGGLES) */
+.filmstrip-card-controls {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    gap: 8px;
+    z-index: 15;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-5px);
+}
+.filmstrip-card:hover .filmstrip-card-controls {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+.card-ctrl-btn {
+    background: rgba(10, 10, 10, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+}
+.card-ctrl-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: scale(1.1);
+}
+.card-ctrl-btn svg {
+    pointer-events: none;
+    display: block;
+}
+
 /* LASER LINE (orange accent that sweeps in on hover) */
 .filmstrip-card::after {
     content: '';

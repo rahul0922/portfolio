@@ -265,18 +265,117 @@
             });
         }
 
-        // --- Hover Play/Pause Synchronization ---
+        // --- Hover Play/Pause & Dynamic Controls setup ---
+        function buildControls(container, thisVideo, peerVideo) {
+            if (!container) return;
+            const ctrl = document.createElement('div');
+            ctrl.className = 'filmstrip-card-controls';
+            ctrl.innerHTML = `
+                <button class="card-ctrl-btn js-card-play-pause" title="Play/Pause">
+                    <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" style="display:none;"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button class="card-ctrl-btn js-card-mute" title="Toggle Sound">
+                    <svg class="icon-mute" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                    <svg class="icon-unmute" viewBox="0 0 24 24" width="14" height="14" style="display:none;"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                </button>
+            `;
+            container.appendChild(ctrl);
+
+            const playPauseBtn = ctrl.querySelector('.js-card-play-pause');
+            const muteBtn = ctrl.querySelector('.js-card-mute');
+
+            const pauseIcon = playPauseBtn.querySelector('.icon-pause');
+            const playIcon = playPauseBtn.querySelector('.icon-play');
+            const muteIcon = muteBtn.querySelector('.icon-mute');
+            const unmuteIcon = muteBtn.querySelector('.icon-unmute');
+
+            playPauseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const makePaused = !thisVideo.paused;
+                if (makePaused) {
+                    thisVideo.pause();
+                    if (peerVideo) peerVideo.pause();
+                    pauseIcon.style.display = 'none';
+                    playIcon.style.display = 'block';
+                    
+                    const peerCtrl = peerVideo ? peerVideo.parentElement.querySelector('.filmstrip-card-controls') : null;
+                    if (peerCtrl) {
+                        peerCtrl.querySelector('.icon-pause').style.display = 'none';
+                        peerCtrl.querySelector('.icon-play').style.display = 'block';
+                    }
+                } else {
+                    thisVideo.play().catch(() => {});
+                    if (peerVideo) peerVideo.play().catch(() => {});
+                    pauseIcon.style.display = 'block';
+                    playIcon.style.display = 'none';
+                    
+                    const peerCtrl = peerVideo ? peerVideo.parentElement.querySelector('.filmstrip-card-controls') : null;
+                    if (peerCtrl) {
+                        peerCtrl.querySelector('.icon-pause').style.display = 'block';
+                        peerCtrl.querySelector('.icon-play').style.display = 'none';
+                    }
+                }
+                if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                    window.UXSound.playClick();
+                }
+            });
+
+            muteBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const makeMuted = !thisVideo.muted;
+                if (makeMuted) {
+                    thisVideo.muted = true;
+                    if (peerVideo) peerVideo.muted = true;
+                    muteIcon.style.display = 'block';
+                    unmuteIcon.style.display = 'none';
+                    
+                    const peerCtrl = peerVideo ? peerVideo.parentElement.querySelector('.filmstrip-card-controls') : null;
+                    if (peerCtrl) {
+                        peerCtrl.querySelector('.icon-mute').style.display = 'block';
+                        peerCtrl.querySelector('.icon-unmute').style.display = 'none';
+                    }
+                } else {
+                    thisVideo.muted = false;
+                    if (peerVideo) peerVideo.muted = false;
+                    muteIcon.style.display = 'none';
+                    unmuteIcon.style.display = 'block';
+                    
+                    const peerCtrl = peerVideo ? peerVideo.parentElement.querySelector('.filmstrip-card-controls') : null;
+                    if (peerCtrl) {
+                        peerCtrl.querySelector('.icon-mute').style.display = 'none';
+                        peerCtrl.querySelector('.icon-unmute').style.display = 'block';
+                    }
+                }
+                if (window.UXSound && typeof window.UXSound.playClick === 'function') {
+                    window.UXSound.playClick();
+                }
+            });
+
+            container.addEventListener('mouseleave', () => {
+                thisVideo.muted = true;
+                if (peerVideo) peerVideo.muted = true;
+                muteIcon.style.display = 'block';
+                unmuteIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                playIcon.style.display = 'none';
+            });
+        }
+
         cardsDark.forEach((card, index) => {
             const videoDark = card.querySelector('video');
             const cardRed = cardsRed[index];
             const videoRed = cardRed ? cardRed.querySelector('video') : null;
 
-            card.addEventListener('mouseenter', () => {
+            if (videoDark) buildControls(card, videoDark, videoRed);
+            if (videoRed) buildControls(cardRed, videoRed, videoDark);
+
+            const handleEnter = () => {
                 if (videoDark) videoDark.play().catch(() => {});
                 if (videoRed) videoRed.play().catch(() => {});
-            });
+            };
 
-            card.addEventListener('mouseleave', () => {
+            const handleLeave = () => {
                 if (videoDark) {
                     videoDark.pause();
                     videoDark.currentTime = 0;
@@ -285,7 +384,15 @@
                     videoRed.pause();
                     videoRed.currentTime = 0;
                 }
-            });
+            };
+
+            card.addEventListener('mouseenter', handleEnter);
+            card.addEventListener('mouseleave', handleLeave);
+
+            if (cardRed) {
+                cardRed.addEventListener('mouseenter', handleEnter);
+                cardRed.addEventListener('mouseleave', handleLeave);
+            }
         });
 
         // --- Full-Res Video Modal Overlay Player ---
